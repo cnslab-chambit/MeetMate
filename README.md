@@ -39,6 +39,17 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
      사용자의 db와 위치에 따른 정보를 설계하여 프론트엔드로 보내주는 작업(백엔드)
  - 12~14주차 - 배포하는 작업을 통해 서로 발생하는 문제들을 해결하여 성공적으로 배포하는 작업(프론트 & 백)
  - 14~15주차 - 마무리
+
+## 디자인(예상)
+ ### Logo
+   <img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
+   
+ ### Web
+   <img src="https://user-images.githubusercontent.com/91197026/221325477-bfef578b-7895-46d4-86d2-f730b272b5fe.png" width="600" height="400"/>
+   
+ ### App
+   <img src="https://user-images.githubusercontent.com/91197026/221325486-e0c259e0-5fb5-44b2-82dc-fcf9a61615d0.png" width="200" height="400"/>
+
 ## 팀원
 최원석 ( c0c0pang )
 
