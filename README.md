@@ -51,10 +51,7 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    <img src="https://user-images.githubusercontent.com/91197026/221325486-e0c259e0-5fb5-44b2-82dc-fcf9a61615d0.png" width="200" height="400"/>
 
 ## 팀원
-최원석 ( c0c0pang )
-
-신권일 ( shin5774 )
-
-정준형 ( jungjunhyung99 )
-
-이영원 ( dlduddnjs198 )
+- [최원석](https://github.com/c0c0pang)
+- [신권일](https://github.com/shin5774)
+- [정준형](https://github.com/jungjunhyung99)
+- [이영원](https://github.com/dlduddnjs198)
