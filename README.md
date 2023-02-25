@@ -1,4 +1,6 @@
-# 유저간 위치기반 약속장소 선정 도움 서비스
+# MeetMate: 유저간 위치기반 약속장소 선정 도움 서비스
+
+<img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
 
 ## 프로젝트 개요
 ### 1. 최종결과물
@@ -41,8 +43,6 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
  - 14~15주차 - 마무리
 
 ## 디자인(예상)
- ### Logo
-   <img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
    
  ### Web
    <img src="https://user-images.githubusercontent.com/91197026/221325477-bfef578b-7895-46d4-86d2-f730b272b5fe.png" width="600" height="400"/>
