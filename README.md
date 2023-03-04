@@ -25,7 +25,7 @@
 ### 3) api 공개 활용 능력과 웹 개발과 프로그래밍 실력을 향상시킵니다. 
 api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해 api 사용 방법에 대한 지식과 구조를 학습할 수 있습니다. 웹 next.js spring 개발은 와 이라는 라이브러리를 학습하기 이전에 javascript와 java 라는 언어를 학습하는 과정이 필요하기에 기본적인 언어에 대한 학습을 해야합니다. 그렇기에 프로젝트를 진행하면서 자연스럽게 웹 개발에 필요한 지식과 프로그래밍 실력을 동시에 향상 시킬 수 니습니다.
 ## 예상 시스템 개요도
-![image](https://user-images.githubusercontent.com/75845111/221204658-82e7590a-bddc-4a5d-9e23-0184674a0dee.png)
+![image](https://user-images.githubusercontent.com/91197026/222876640-7233898d-b072-4278-840b-4dc42289b505.png)
 
 ## To-do List
 
@@ -43,12 +43,12 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
  - 14~15주차 - 마무리
 
 ## 디자인(예상)
-   
+
  ### Web
-   <img src="https://user-images.githubusercontent.com/91197026/221325477-bfef578b-7895-46d4-86d2-f730b272b5fe.png" width="600" height="400"/>
-   
+   <img src="https://user-images.githubusercontent.com/91197026/222876611-6b0b6eb2-45fd-437c-9c9f-e7403c80ef5f.png" width="600" height="400"/>
+
  ### App
-   <img src="https://user-images.githubusercontent.com/91197026/221325486-e0c259e0-5fb5-44b2-82dc-fcf9a61615d0.png" width="200" height="400"/>
+   <img src="https://user-images.githubusercontent.com/91197026/222876592-955eb8aa-c797-49ac-991d-b4eff8a2508f.png" width="200" height="400"/>
 
 ## 팀원
 - [최원석](https://github.com/c0c0pang)
