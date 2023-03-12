@@ -32,13 +32,43 @@ const Header = styled.div`
   } */
 `;
 
+const Nav = styled.div`
+display:flex;
+flex-direction: column;
+width:100%;
+background-color: #367BF6;
+height:12vh;
+justify-content: center;
+align-items: center;
+`;
+
+const NavLogo = styled.div`
+display:flex;
+color: white;
+font-size: 2rem;
+font-weight: 700;
+`;
+
+const NavMenu = styled.div`
+display: flex;
+position: absolute;
+right:0;
+padding-top: 1rem;
+padding-right: 1rem;
+`;
+
 export default function App({ Component, pageProps }: AppProps) {
 
   
   return (
     <QueryClientProvider client={queryClient}>
       <Container>
-       
+      <Nav>
+			  <div style={{display:"flex", color: "white"}}>
+			  <NavLogo><span>Meet Mate</span></NavLogo>
+			  <NavMenu>menu</NavMenu>
+			</div>
+		  </Nav>
       <Component {...pageProps} />
       </Container>
       <ReactQueryDevtools initialIsOpen={false} />
