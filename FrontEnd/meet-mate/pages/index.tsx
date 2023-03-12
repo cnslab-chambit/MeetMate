@@ -20,7 +20,7 @@ declare global {
     latitude: number;
     longitude: number;
   }
-  
+
   const Map = (): React.ReactElement | null => {
     const [Places, setPlaces] = useState<any>([]);
 	let markers: any[] = [];
@@ -168,7 +168,7 @@ declare global {
       <div style={{width:"100%"}}>
         <div id='map' ref={containerRef} style={{
               width: "100%",
-              height: "80vh"
+              height: "60vh"
           }}>
         </div>
         <div>
