@@ -5,7 +5,6 @@ import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import React, { FC, useState, useEffect, useRef, useCallback } from 'react';
 import Script from 'next/script'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -29,9 +28,6 @@ declare global {
 	const [pos, setPos] = useState(); //경도 위도
 	const containerRef = useRef<HTMLDivElement>(null); // 지도 ref
 	const [isMobile, setIsMobile] = useState(false);
-	const mobile = useMediaQuery({
-	  query: "(max-width:767px)"
-	});
 	//map불러오기
 	const initMap = useCallback(() => {
 		if (containerRef.current) {
@@ -146,15 +142,6 @@ declare global {
 			initMap();
 		}
 	}, [initMap]);
-	
-	useEffect(()=>{	// mobile 쿼리로 인해 값이 바뀔 때 수행
-		console.log(mobile);
-		if(mobile) {
-		  setIsMobile(true)
-		  console.log(isMobile);
-		};
-	  },[mobile]);
-	
 
 
     return (
