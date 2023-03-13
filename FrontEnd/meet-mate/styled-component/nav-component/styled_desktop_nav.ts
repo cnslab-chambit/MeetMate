@@ -1,0 +1,43 @@
+import styled from "styled-components";
+export const NavDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #FFD1E1 0%, rgba(240, 58, 121, 0) 100%);
+    /* background-color: red; */
+    height: 170px;
+    gap: 10px;
+`
+export const NavTitle = styled.h1`
+    padding: 10px;
+    font-family: 'FredokaOne';
+`
+export const NavIconDiv = styled.div`
+    display: flex;
+    /* padding: 10px; */
+    padding-left: 20px;
+    padding-right: 20px;    
+`
+export const NavIconText = styled.h3`
+    font-family: 'GmarketSansBD';
+    text-align: center;
+`
+export const IconTextDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 25%;
+    height: 80px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    :hover{
+        background-color: #F03A79;
+        transition: 0.3s ease;
+        color: white;
+        path{
+            transition: 0.3s ease;
+            fill: white;
+        }
+    }
+`
