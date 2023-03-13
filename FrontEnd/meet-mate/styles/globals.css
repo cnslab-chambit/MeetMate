@@ -19,3 +19,8 @@
   src: url(../public/fonts/GmarketSansMedium.otf);
   font-weight: 800;
 }
+@font-face {
+  font-family: 'FredokaOne';
+  src: url(../public/fonts/FredokaOne-Regular.ttf);
+  font-weight: 400;
+}
