@@ -23,7 +23,7 @@ display:flex;
 flex-direction: column;
 width:100%;
 background-color: #367BF6;
-height:12vh;
+height:100%;
 justify-content: center;
 align-items: center;
 `;

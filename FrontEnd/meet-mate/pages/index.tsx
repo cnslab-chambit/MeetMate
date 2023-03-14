@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import React, { FC, useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components'
 import { Map,MapMarker } from 'react-kakao-maps-sdk'
-
+const inter = Inter({ subsets: ['latin'] })
 export default function Home(){
 	return(
 		<>
