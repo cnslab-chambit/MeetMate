@@ -23,7 +23,7 @@ export default function Main () {
     return( 
     <Container>
         {List.map((list,index) => 
-        <LocationBox>
+        <LocationBox key={index}>
             {index}
         </LocationBox>
         )}

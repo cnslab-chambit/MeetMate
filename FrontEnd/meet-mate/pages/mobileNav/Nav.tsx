@@ -1,4 +1,4 @@
-import {Container,NavLogo,Navigation,NavMenu} from "../styled-component/nav-component/nav_styled";
+import {Container,NavLogo,Navigation,NavMenu} from "../../styles/styled-component/nav-component/nav_styled";
 
 function Nav(){
     return (
