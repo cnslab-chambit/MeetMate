@@ -4,19 +4,10 @@ import PlaceIcon from '../public/images/place.svg';
 import MapIcon from '../public/images/map.svg';
 import BusIcon from '../public/images/bus.svg';
 import SubwayIcon from '../public/images/subway.svg'
+import {pageState} from '../atom/atoms'
+import { useRecoilState } from 'recoil';
 function Nav() {
-  interface deskTop{
-    place:boolean,
-    map:boolean,
-    bus:boolean,
-    subway:boolean
-  }
-  const [inputs,setInputs] = useState<deskTop>({
-    place:true,
-    map:false,
-    bus:false,
-    subway:false
-  })
+  const [inputs,setInputs] = useRecoilState(pageState);
   const {place,map,bus,subway} = inputs
   const onTogle =(name:string)=>{
     setInputs({
