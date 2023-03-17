@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 export const NavDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@ export const NavIconText = styled.h3`
     font-family: 'GmarketSansBD';
     text-align: center;
 `
-export const IconTextDiv = styled.div`
+export const IconTextDiv = styled.button<{ active: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,21 @@ export const IconTextDiv = styled.div`
     height: 80px;
     cursor: pointer;
     transition: 0.3s ease;
-    :hover{
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+
+    
+    ${(props) => props.active && css`
+        background-color: #F03A79;
+        color: white;
+        path{
+            fill: white;
+        }
+    `}
+    &:hover{
         background-color: #F03A79;
         transition: 0.3s ease;
         color: white;
