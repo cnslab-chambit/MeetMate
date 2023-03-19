@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+html{
+  font-size: 62.5%;
+}
+
 @font-face{
   font-family: 'GmarketSansBD';
   src: url(../public/fonts/GmarketSansBold.otf);
