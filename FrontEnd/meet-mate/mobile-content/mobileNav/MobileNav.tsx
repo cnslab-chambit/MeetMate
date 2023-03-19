@@ -12,6 +12,7 @@ import MapIcon from '../../public/images/map.svg';
 import BusIcon from '../../public/images/bus.svg';
 import SubwayIcon from '../../public/images/subway.svg'
 import SearchIcon from '../../public/images/search.svg';
+import Menu from '../../public/images/menu.svg';
 import { useRouter } from 'next/router'
 import { IMarkers, markerAtom } from '../atom'
 import { useRecoilState } from 'recoil'
@@ -65,7 +66,7 @@ export default function Home() {
           setMarkers(markers);
           console.log(markers);
           setMarkerRecoil(markers);
-          router.push("/mobileLocation/search");
+          router.push("/mobile/search");
         }
       })
   };
@@ -76,8 +77,8 @@ export default function Home() {
   return (
     <Navigation>
       <NavDiv>
-        <NavLogo onClick={()=>router.push("/mobileLocation")}>Meet Mate</NavLogo>
-        <NavMenu>menu</NavMenu>
+        <NavLogo onClick={()=>router.push("/mobile")}>Meet Mate</NavLogo>
+        <NavMenu><Menu/></NavMenu>
       </NavDiv>
       <NavSearchDiv>
         <NavForm
@@ -91,7 +92,7 @@ export default function Home() {
       </NavSearchDiv>
       <NavIconContainer>
       <NavIconDiv>
-        <IconTextDiv isActive={router.asPath === "/mobileLocation/promise"} onClick={() => router.push("/mobileLocation/promise")}>
+        <IconTextDiv isActive={router.asPath === "/mobile/promise"} onClick={() => router.push("/mobile/promise")}>
           <PlaceIcon fill="black"/>
           <NavIconText>약속 잡기</NavIconText>
         </IconTextDiv>

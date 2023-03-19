@@ -60,6 +60,7 @@ align-items: center;
 
 export const NavLogo = styled.div`
 display:flex;
+margin: 0 auto;
 color: white;
 font-size: 3rem;
 font-family: 'GmarketSansBD';
@@ -103,8 +104,11 @@ export const NavInput = styled.input`
 `;
 
 export const NavDiv = styled.div`
+  position:relative;
+  width: 100%;
   color: white;
   display: flex;
+  align-items: center;
 `;
 
 export const NavIconContainer = styled.div`
