@@ -10,6 +10,7 @@ export const NavDiv = styled.div`
 export const NavTitle = styled.h1`
     padding: 10px;
     font-family: 'FredokaOne';
+    font-size: 20px;
 `
 export const NavIconDiv = styled.div`
     display: flex;
