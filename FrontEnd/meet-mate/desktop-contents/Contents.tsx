@@ -1,4 +1,4 @@
-import { ContentPageDiv } from '@/styled-component/content-coponent/styled_content'
+import { ContentPageDiv } from '@/styled-component/content-component/styled_content'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import {pageState} from '../atom/atoms'

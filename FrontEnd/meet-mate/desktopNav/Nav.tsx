@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavIconDiv, NavIconText, IconTextDiv, NavDiv, NavTitle } from '../styled-component/nav-component/styled_desktop_nav';
 import PlaceIcon from '../public/images/place.svg';
 import MapIcon from '../public/images/map.svg';
 import BusIcon from '../public/images/bus.svg';
 import SubwayIcon from '../public/images/subway.svg'
-import {pageState} from '../atom/atoms'
+import { pageState } from '../atom/atoms'
 import { useRecoilState } from 'recoil';
 function Nav() {
-  const [inputs,setInputs] = useRecoilState(pageState);
-  const {place,map,bus,subway} = inputs
-  const onTogle =(name:string)=>{
+  const [inputs, setInputs] = useRecoilState(pageState);
+  const { place, map, bus, subway } = inputs
+  const onTogle = (name: string) => {
     setInputs({
       place: name === 'place' ? true : false,
       map: name === 'map' ? true : false,
@@ -21,25 +21,24 @@ function Nav() {
     <NavDiv>
       <NavTitle>Meet Mate</NavTitle>
       <NavIconDiv>
-        <IconTextDiv onClick={()=>onTogle('place')} active={place}>
-          <PlaceIcon fill="black"/>
+        <IconTextDiv onClick={() => onTogle('place')} active={place}>
+          <PlaceIcon fill="black" />
           <NavIconText>약속 잡기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv onClick={()=>onTogle('map')} active={map}>
-          <MapIcon fill="black"/>
+        <IconTextDiv onClick={() => onTogle('map')} active={map}>
+          <MapIcon fill="black" />
           <NavIconText>길 찾기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv onClick={()=>onTogle('bus')} active={bus}>
-          <BusIcon fill="black"/>
+        <IconTextDiv onClick={() => onTogle('bus')} active={bus}>
+          <BusIcon fill="black" />
           <NavIconText>버스</NavIconText>
         </IconTextDiv>
-        <IconTextDiv onClick={()=>onTogle('subway')} active={subway}>
-          <SubwayIcon fill="black"/>
+        <IconTextDiv onClick={() => onTogle('subway')} active={subway}>
+          <SubwayIcon fill="black" />
           <NavIconText>전철</NavIconText>
         </IconTextDiv>
       </NavIconDiv>
     </NavDiv>
-
   )
 }
 
