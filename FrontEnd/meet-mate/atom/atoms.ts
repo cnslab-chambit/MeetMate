@@ -1,11 +1,6 @@
 import { atom } from "recoil";
-interface deskTop{
-    place:boolean,
-    map:boolean,
-    bus:boolean,
-    subway:boolean
-  }
-export const pageState = atom<deskTop>({
+import { desktop, place } from "@/interface/desktop_intergace";
+export const pageState = atom<desktop>({
     key: 'pageState',
     default: {
         place:true,
@@ -13,4 +8,21 @@ export const pageState = atom<deskTop>({
         bus:false,
         subway:false
     }  
+})
+export const placeState = atom<place[]>({
+    key:'placeState',
+    default: [
+        {
+          id: 0,
+          current: '1번째 장소'
+        },
+        {
+          id: 1,
+          current: '2번째 장소'
+        },
+      ]
+});
+export const countState = atom<number>({
+  key:'countState',
+  default: 0
 })
