@@ -12,9 +12,10 @@ export const Container = styled.div`
 export const NavIconDiv = styled.div`
     display: flex;
     /* padding: 10px; */
-    padding-left: 20px;
-    padding-right: 20px;    
+    padding-left: 6rem;
+    padding-right: 6rem; 
 `;
+
 
 export const NavIconText = styled.h3`
     font-family: 'GmarketSansBD';
@@ -26,16 +27,19 @@ export const IconTextDiv = styled.div<{isActive:boolean}>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     gap: 5px;
     width: 25%;
     height: 80px;
+    
     cursor: pointer;
     background-color: ${(props) => props.isActive ? "#ffffff" : ""};
     transition: 0.3s ease;
-    color: ${(props) => props.isActive ? "#666666" : ""};
+    color: ${(props) => props.isActive ? "#666666" : "white"};
     path{
             transition: 0.3s ease;
-            fill: ${(props) => props.isActive ? "#00A3FF" : ""};
+            fill: ${(props) => props.isActive ? "#00A3FF" : "white"};
         }
     :hover{
         background-color: #00A3FF;
@@ -58,11 +62,17 @@ justify-content: center;
 align-items: center;
 `;
 
+export const NavColDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  fill: white;  
+`
+
 export const NavLogo = styled.div`
 display:flex;
 margin: 0 auto;
 color: white;
-font-size: 3rem;
+font-size: 2rem;
 font-family: 'GmarketSansBD';
 margin-top: 1rem;
 font-weight: 700;
@@ -83,6 +93,7 @@ export const NavSearchDiv = styled.label`
     border: none;
     padding: 0 15px;
     height: 4rem;
+    border-radius: 1rem;
   }
   button {
     position: absolute;
@@ -90,6 +101,25 @@ export const NavSearchDiv = styled.label`
     right: 2rem;
   }
 `;
+
+export const NavSearchDiv2 = styled(NavSearchDiv)`
+  
+  button {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+  }
+  div{
+    display: flex;
+    align-items: center;
+    font-family: 'GmarketSansBD';
+    font-size: 2rem;
+    height: 4rem;
+    width: 50rem;
+    color: #666666;
+    margin-bottom: 2rem;
+    background-color: white;
+    }`
 
 export const NavForm = styled.form`
   display  : flex;
@@ -101,6 +131,7 @@ export const NavForm = styled.form`
 export const NavInput = styled.input`
   width: 50rem;
   height: 3rem;
+  font-size: 2rem;
 `;
 
 export const NavDiv = styled.div`
@@ -121,3 +152,9 @@ export const NavButton = styled.button`
   border:none;
   cursor: pointer;
 `;
+
+export const NavBasicDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

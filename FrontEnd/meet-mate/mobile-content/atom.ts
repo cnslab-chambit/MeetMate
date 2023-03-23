@@ -16,6 +16,7 @@ export interface IMarkers{
   }
 
   export interface IEachLocation {
+    id: number;
     location: string;
     place_name: string;
     x: string;
