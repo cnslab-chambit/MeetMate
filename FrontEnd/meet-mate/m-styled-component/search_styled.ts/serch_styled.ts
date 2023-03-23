@@ -66,8 +66,10 @@ export const PromiseDiv = styled.div`
     font-family: 'GmarketSansBD';
     font-size: 2rem;
     height: 4rem;
-    width: 30rem;
+    width: 50rem;
     color: #666666;
+    border-radius: 1rem;
+    padding-left: 1rem;
     margin-top: 2rem;
     border: 0.15rem solid;
     &:focus{
