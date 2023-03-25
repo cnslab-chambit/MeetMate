@@ -64,7 +64,7 @@ export const PromiseDiv = styled.div`
     display: flex;
     align-items: center;
     font-family: 'GmarketSansBD';
-    font-size: 2rem;
+    font-size: 1.5rem;
     height: 4rem;
     width: 50rem;
     color: #666666;
@@ -89,10 +89,11 @@ export const LocationDiv = styled.div`
     display:flex;
     flex-direction: column;
     font-size: 3rem;
+    padding: 1rem;
     border-bottom: 2px solid #9e9d9d;
     cursor: pointer;
     &:hover{
-        background-color: #51bbf8;
+        background-color: #367BF6;
         transition: 0.3s ease;
         color: white;
         path{
