@@ -5,8 +5,8 @@ import Menu from "../../public/images/menu.svg";
 import SearchIcon from "../../public/images/search.svg";
 import MapIcon from "../../public/images/map2.svg";
 import XIcon from "../../public/images/X.svg";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { IMarkers, markerAtom } from "../atom";
 
 function SearchNav() {
@@ -14,12 +14,15 @@ function SearchNav() {
     const [place, setPlace] = useState("");
     const [markers, setMarkers] = useState<any[]>([]);
     const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
+    const markerReset = useResetRecoilState(markerAtom);
+    
     const router = useRouter();
     const handleSubmit = (e:any) => {
       e.preventDefault();
-      setPlace(keyword);
-      if(place === null) return;
-       
+      // setPlace(keyword);
+      // if(place === null) return;
+
+
       // const container = document.getElementById("map");
       // const options = {
       //   center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -29,14 +32,16 @@ function SearchNav() {
       // setMap(tempMap);
       
         const ps = new kakao.maps.services.Places();
-  
+        if(ps === undefined || ps === null) return;
         ps.keywordSearch(keyword,(data: IMarkers[], status: any, _pagination: any ) => {
+          console.log(e.target.value);
+          console.log(kakao.maps.services.Status.OK);
           if(status === kakao.maps.services.Status.OK){
             let bounds = new kakao.maps.LatLngBounds();
             let markers = [];
   
             for(let i = 0; i < data.length; i++){
-              console.log(data[i]);
+              
               markers.push({
                 address_name: data[i].address_name,
                 category_group_code: data[i].category_group_code,
@@ -54,25 +59,40 @@ function SearchNav() {
               bounds.extend(new kakao.maps.LatLng(parseFloat(data[i].y) ,parseFloat(data[i].x)));
             }
             setMarkers(markers);
-            console.log(markers);
+            
             setMarkerRecoil(markers);
             router.push("/mobile/search");
           }
         })
     };
+
+    const onXIconClicked = () => {
+      setMarkerRecoil([]);
+      router.back();
+    }
   
     const onChange = (e:any) => {
       setKeyword(e.target.value);
+      if(e.target.value.length > 1){
+        handleSubmit(e);
+      }
+      else if(e.target.value.length === 0){
+        markerReset();
+      }
+    };
+
+    const moveOtherPage = (path: string) => {
+      router.push(path);
     };
 
     return (
         <Navigation>
           <NavDiv>
-            <NavLogo onClick={()=>router.push("/mobile")}>Meet Mate</NavLogo>
+            <NavLogo onClick={() => moveOtherPage("/mobile")}>Meet Mate</NavLogo>
             <NavMenu><Menu/></NavMenu>
           </NavDiv>
           <NavBasicDiv>
-            <NavColDiv>
+            <NavColDiv onClick={() => moveOtherPage("/mobile")}>
                 <MapIcon/>
                 지도
             </NavColDiv>
@@ -87,8 +107,7 @@ function SearchNav() {
                 </NavForm>
             </NavSearchDiv>
             <NavColDiv>
-                <XIcon/>
-                
+                <XIcon onClick={onXIconClicked}/>
             </NavColDiv>
           </NavBasicDiv>         
         </Navigation>

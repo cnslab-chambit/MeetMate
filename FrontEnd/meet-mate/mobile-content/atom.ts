@@ -16,7 +16,7 @@ export interface IMarkers{
   }
 
   export interface IEachLocation {
-    id: number;
+    id: string;
     location: string;
     place_name: string;
     x: string;
@@ -38,7 +38,7 @@ export interface IMarkers{
         distance: "",
         id: "",
         phone: "",
-        place_name: "",
+        place_name: "장소 찾기",
         place_url: "",
         road_address_name:"",
         x: "127.058270608867",
@@ -46,7 +46,18 @@ export interface IMarkers{
     }
   });
 
-  export const locationAtom = atom<IEachLocation[]>({
+  export const locationAtom = atom<IEachLocation>({
     key: "eachLocation",
-    default: []
+      default: {
+      id: "",
+      location: "",
+      place_name: "",
+      x: "",
+      y: ""
+    }
+  });
+
+  export const locNameAtom = atom<String>({
+    key: "locName",
+    default: "장소 찾기"
   });

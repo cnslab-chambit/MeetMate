@@ -14,8 +14,8 @@ import SubwayIcon from '../../public/images/subway.svg'
 import SearchIcon from '../../public/images/search.svg';
 import Menu from '../../public/images/menu.svg';
 import { useRouter } from 'next/router'
-import { IMarkers, markerAtom } from '../atom'
-import { useRecoilState } from 'recoil'
+import { IMarkers, locNameAtom, mapAtom, markerAtom } from '../atom'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { PromiseDiv } from '@/m-styled-component/search_styled.ts/serch_styled'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +25,9 @@ export default function Home() {
   const [place, setPlace] = useState("");
   const [markers, setMarkers] = useState<any[]>([]);
   const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
+  const [mapRecoil,setMapRecoil] = useRecoilState<IMarkers>(mapAtom);
+  const resetMap = useResetRecoilState(mapAtom);
+  const resetMarker = useResetRecoilState(markerAtom);
   const router = useRouter();
   const handleSubmit = (e:any) => {
     e.preventDefault();
@@ -75,6 +78,13 @@ export default function Home() {
   const onChange = (e:any) => {
     setKeyword(e.target.value);
   };
+
+  const moveRouter = (path: string) => {
+    resetMap();
+    resetMarker();
+    router.push(path);
+  };
+
   return (
     <Navigation>
       <NavDiv>
@@ -83,7 +93,7 @@ export default function Home() {
       </NavDiv>
 
       <NavSearchDiv2>
-          <PromiseDiv onClick={() => router.push("/mobile/search")}>장소 찾기</PromiseDiv>
+          <PromiseDiv onClick={() => router.push("/mobile/search")}>{mapRecoil.place_name}</PromiseDiv>
           <NavButton>
           <SearchIcon/>
           </NavButton>
@@ -91,19 +101,19 @@ export default function Home() {
       
       <NavIconContainer>
       <NavIconDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/promise"} onClick={() => router.push("/mobile/promise")}>
+        <IconTextDiv isActive={router.asPath === "/mobile/promise"} onClick={() => moveRouter("/mobile/promise")}>
           <PlaceIcon fill="black"/>
           <NavIconText>약속 잡기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/road"} onClick={() => router.push("/mobile/road")}>
+        <IconTextDiv isActive={router.asPath === "/mobile/road"} onClick={() => moveRouter("/mobile/road")}>
           <MapIcon fill="black"/>
           <NavIconText>길 찾기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/bus"} onClick={() => router.push("/mobile/bus")}>
+        <IconTextDiv isActive={router.asPath === "/mobile/bus"} onClick={() => moveRouter("/mobile/bus")}>
           <BusIcon fill="black"/>
           <NavIconText>버스</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/subway"} onClick={() => router.push("/mobile/subway")}>
+        <IconTextDiv isActive={router.asPath === "/mobile/subway"} onClick={() => moveRouter("/mobile/subway")}>
           <SubwayIcon fill="black"/>
           <NavIconText>전철</NavIconText>
         </IconTextDiv>

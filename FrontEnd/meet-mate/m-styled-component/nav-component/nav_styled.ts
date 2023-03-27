@@ -65,7 +65,10 @@ align-items: center;
 export const NavColDiv = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: center;
   fill: white;  
+  color: white;
+  cursor: pointer;
 `
 
 export const NavLogo = styled.div`
@@ -88,6 +91,7 @@ padding-right: 1rem;
 `;
 
 export const NavSearchDiv = styled.label`
+  
   position: relative;
   input {
     border: none;
@@ -107,7 +111,7 @@ export const NavSearchDiv2 = styled(NavSearchDiv)`
   button {
     position: absolute;
     top: 3rem;
-    right: 3rem;
+    right: 2rem;
   }
   div{
     display: flex;
@@ -129,9 +133,10 @@ export const NavForm = styled.form`
   `;
 
 export const NavInput = styled.input`
+  font-family: 'GmarketSansBD';
   width: 50rem;
   height: 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 export const NavDiv = styled.div`
