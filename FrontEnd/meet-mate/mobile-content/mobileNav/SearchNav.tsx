@@ -61,7 +61,6 @@ function SearchNav() {
             setMarkers(markers);
             
             setMarkerRecoil(markers);
-            router.push("/mobile/search");
           }
         })
     };

@@ -1,10 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
+
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import { Map,MapMarker } from 'react-kakao-maps-sdk'
 import { NavButton, NavDiv, NavForm, NavIconContainer, Navigation, NavInput, NavLogo, NavMenu, NavSearchDiv, NavSearchDiv2 } from '@/m-styled-component/nav-component/nav_styled'
-import styled from 'styled-components'
 import { useEffect, useRef, useState } from 'react'
 import { IconTextDiv, NavIconDiv, NavIconText } from '@/m-styled-component/nav-component/nav_styled'
 import PlaceIcon from '../../public/images/place.svg';
@@ -29,55 +25,6 @@ export default function Home() {
   const resetMap = useResetRecoilState(mapAtom);
   const resetMarker = useResetRecoilState(markerAtom);
   const router = useRouter();
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-    setPlace(keyword);
-    if(place === null) return;
-     
-    // const container = document.getElementById("map");
-    // const options = {
-    //   center: new kakao.maps.LatLng(33.450701, 126.570667),
-    //   level: 3,
-    // };
-    // const tempMap = new kakao.maps.Map(container as any,options);
-    // setMap(tempMap);
-    
-      const ps = new kakao.maps.services.Places();
-
-      ps.keywordSearch(keyword,(data: IMarkers[], status: any, _pagination: any ) => {
-        if(status === kakao.maps.services.Status.OK){
-          let bounds = new kakao.maps.LatLngBounds();
-          let markers = [];
-
-          for(let i = 0; i < data.length; i++){
-            console.log(data[i]);
-            markers.push({
-              address_name: data[i].address_name,
-              category_group_code: data[i].category_group_code,
-              category_group_name: data[i].category_group_name,
-              category_name: data[i].category_name,
-              distance: data[i].distance,
-              id: data[i].id,
-              phone: data[i].phone,
-              place_name: data[i].place_name,
-              place_url: data[i].place_url,
-              road_address_name: data[i].road_address_name,
-              x: data[i].x,
-              y: data[i].y
-            });
-            bounds.extend(new kakao.maps.LatLng(parseFloat(data[i].y) ,parseFloat(data[i].x)));
-          }
-          setMarkers(markers);
-          console.log(markers);
-          setMarkerRecoil(markers);
-          router.push("/mobile/search");
-        }
-      })
-  };
-
-  const onChange = (e:any) => {
-    setKeyword(e.target.value);
-  };
 
   const moveRouter = (path: string) => {
     resetMap();
