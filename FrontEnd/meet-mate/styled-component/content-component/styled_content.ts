@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
 
 export const ContentPageDiv = styled.div`
-    padding: 10px;
-    overflow-y: scroll;
-    height: 100vh;
+    overflow: hidden;
+    max-height: 100vh;
 `
-export const ContentInputDiv = styled.div`
+export const ContentInputDiv = styled.div<{ active: boolean }>`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap:  ${(props) => props.active ? '10px' : '2px'} ;
 `
-export const ContentInput = styled.input<{active:boolean}>`
+export const ContentInput = styled.input<{ active: boolean }>`
     width: 345px;
     height: 49px;
     padding: 10px;
@@ -18,14 +18,13 @@ export const ContentInput = styled.input<{active:boolean}>`
     font-weight: bold;
     border-radius: 3px;
     outline: none;  
-    border: ${(props)=> props.active ? 'none' :'1.5px solid #3E3E3E' };
+    border: ${(props) => props.active ? 'none' : '1.5px solid #3E3E3E'};
 `
-export const ContentInputButton = styled.input`
-    width: 104px;
-    height: 49px;
+export const ContentInputButton = styled.input<{ _width: string, _heigth: string }>`
+    width: ${(props) => props._width};
+    height: ${(props) => props._heigth};
     background-color: transparent;
     cursor: pointer;
-    /* border: 1.5px solid #3E3E3E; */
     background-color: #E1E1E1;
     border: none;
     border-radius: 3px;
