@@ -75,6 +75,12 @@ export const PromiseDiv = styled.div`
     &:focus{
         color: black;
     }
+
+    button{
+        width: 10vw;
+        height: 10vh;
+    }
+    
 `;
 
 

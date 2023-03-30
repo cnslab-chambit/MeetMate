@@ -123,7 +123,19 @@ export const NavSearchDiv2 = styled(NavSearchDiv)`
     color: #666666;
     margin-bottom: 2rem;
     background-color: white;
-    }`
+    }
+  `;
+
+export const NavSearchDiv3 = styled.label`
+  display:flex;
+  position: relative;
+  svg {
+    position: absolute;
+    top: 2.7rem;
+    right: 1rem;
+  }
+`;
+
 
 export const NavForm = styled.form`
   display  : flex;

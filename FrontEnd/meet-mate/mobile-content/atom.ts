@@ -23,6 +23,12 @@ export interface IMarkers{
     y: string;
   }
 
+  
+  export interface Iplace{
+    id:number,
+    current:string
+  }
+
   export const markerAtom = atom<IMarkers[]>({
     key: "markerAtom",
     default: []
@@ -61,3 +67,25 @@ export interface IMarkers{
     key: "locName",
     default: "장소 찾기"
   });
+
+  
+
+
+  export const placeState = atom<Iplace[]>({
+  key:'placeState',
+  default: [
+      {
+        id: 0,
+        current: '1번째 장소'
+      },
+      {
+        id: 1,
+        current: '2번째 장소'
+      },
+    ]
+  });
+  
+  export const countState = atom<number>({
+  key:'countState',
+  default: 0
+  })
