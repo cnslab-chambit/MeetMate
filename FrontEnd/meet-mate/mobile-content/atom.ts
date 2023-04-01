@@ -52,24 +52,15 @@ export interface IMarkers{
     }
   });
 
-  export const locationAtom = atom<IEachLocation>({
+  export const locationAtom = atom<IEachLocation[]>({
     key: "eachLocation",
-      default: {
-      id: "",
-      location: "",
-      place_name: "",
-      x: "",
-      y: ""
-    }
+    default: []
   });
 
   export const locNameAtom = atom<String>({
     key: "locName",
     default: "장소 찾기"
   });
-
-  
-
 
   export const placeState = atom<Iplace[]>({
   key:'placeState',
@@ -84,7 +75,7 @@ export interface IMarkers{
       },
     ]
   });
-  
+
   export const countState = atom<number>({
   key:'countState',
   default: 0

@@ -46,7 +46,6 @@ function Promise() {
                         <PromiseDiv key={element.id}>
                             {element.current}
                         </PromiseDiv>
-                        
                         <CancelIcon onClick={()=>onDelete(element.id)}/>
                         </NavSearchDiv3>
                     ):(

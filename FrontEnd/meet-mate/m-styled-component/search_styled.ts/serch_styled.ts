@@ -66,7 +66,7 @@ export const PromiseDiv = styled.div`
     font-family: 'GmarketSansBD';
     font-size: 1.5rem;
     height: 4rem;
-    width: 50rem;
+    width: 35rem;
     color: #666666;
     border-radius: 1rem;
     padding-left: 1rem;
@@ -74,11 +74,6 @@ export const PromiseDiv = styled.div`
     border: 0.15rem solid;
     &:focus{
         color: black;
-    }
-
-    button{
-        width: 10vw;
-        height: 10vh;
     }
     
 `;
