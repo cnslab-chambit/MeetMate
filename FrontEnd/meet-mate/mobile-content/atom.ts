@@ -52,6 +52,12 @@ export interface IMarkers{
     }
   });
 
+  export const loadAtom = atom<IMarkers[]>({
+    key: "loadAtom",
+    default:[]
+  });
+
+
   export const locationAtom = atom<IEachLocation[]>({
     key: "eachLocation",
     default: []

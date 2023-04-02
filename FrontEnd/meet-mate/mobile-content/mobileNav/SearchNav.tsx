@@ -19,23 +19,10 @@ function SearchNav() {
     const router = useRouter();
     const handleSubmit = (e:any) => {
       e.preventDefault();
-      // setPlace(keyword);
-      // if(place === null) return;
-
-
-      // const container = document.getElementById("map");
-      // const options = {
-      //   center: new kakao.maps.LatLng(33.450701, 126.570667),
-      //   level: 3,
-      // };
-      // const tempMap = new kakao.maps.Map(container as any,options);
-      // setMap(tempMap);
       
-        const ps = new kakao.maps.services.Places();
+        let ps = new kakao.maps.services.Places();
         if(ps === undefined || ps === null) return;
         ps.keywordSearch(keyword,(data: IMarkers[], status: any, _pagination: any ) => {
-          console.log(e.target.value);
-          console.log(kakao.maps.services.Status.OK);
           if(status === kakao.maps.services.Status.OK){
             let bounds = new kakao.maps.LatLngBounds();
             let markers = [];
@@ -72,12 +59,6 @@ function SearchNav() {
   
     const onChange = (e:any) => {
       setKeyword(e.target.value);
-      if(e.target.value.length > 1){
-        handleSubmit(e);
-      }
-      else if(e.target.value.length === 0){
-        markerReset();
-      }
     };
 
     const moveOtherPage = (path: string) => {
