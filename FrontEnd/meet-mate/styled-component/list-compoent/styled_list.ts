@@ -25,6 +25,10 @@ export const NameTextDiv = styled.div`
 export const TitleNameText = styled.h2`
     font-size: 18px;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
     :hover{
         color: #F03A79;
     }
