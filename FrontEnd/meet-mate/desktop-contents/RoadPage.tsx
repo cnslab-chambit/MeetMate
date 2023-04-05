@@ -12,18 +12,20 @@ import {
   RoadForm
 } from '@/styled-component/content-component/styled_road'
 import CrossIcon from '../public/images/cross.svg'
-import { useRecoilState } from 'recoil'
-import { markerAtom, roadState } from '@/atom/atoms'
-import { useQuery } from 'react-query'
-import { Test } from '../apis/apiStorage'
-import { Search } from '@/apis/naverApi'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { inputState, markerAtom, roadState, searchState } from '@/atom/atoms'
+import { roadLine, roadSearch } from '../apis/apiStorage'
 import { IMarkers } from '@/interface/desktop_intergace'
 import SearchList from '@/desktop-search-list/SearchList'
+
 function MapPage() {
   const [road, setRoad] = useRecoilState(roadState)
   const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
   const [markers, setMarkers] = useState<any[]>([]);
   const { start, end } = road
+  const setInputCheck = useSetRecoilState(inputState)
+  const [search, seSearch] = useRecoilState(searchState)
+
   const onChange = (e: any) => {
     const { name, value } = e.target
     setRoad({
@@ -36,15 +38,25 @@ function MapPage() {
       start: '',
       end: ''
     })
+    seSearch({
+      start_point: { lat: search.end_point.lat, lng: search.end_point.lng, img: search.start_point.img },
+      end_point: { lat: search.start_point.lat, lng: search.start_point.lng, img: search.end_point.img }
+    })
   }
   const onCross = () => {
     setRoad({
       start: end,
       end: start
     })
+    seSearch({
+      start_point: { lat: search.end_point.lat, lng: search.end_point.lng, img: search.start_point.img },
+      end_point: { lat: search.start_point.lat, lng: search.start_point.lng, img: search.end_point.img }
+    })
   }
-  const onSearch = () => {
-    console.log(Search(start))
+  const onSearch = async () => {
+    const rodaData = await roadSearch(search)
+    console.log(rodaData.result)
+    roadLine(rodaData.result.path[0].info.mapObj)
   }
   const handleSubmit = (e: any, keyword: string) => {
     e.preventDefault();
@@ -80,6 +92,7 @@ function MapPage() {
         setMarkerRecoil(markers);
       }
     })
+    e.target.name === 'start' ? setInputCheck(true) : setInputCheck(false)
   }
   console.log(markerRecoil, markers)
   console.log(start, end)
@@ -87,10 +100,10 @@ function MapPage() {
     <RoadDiv>
       <CrossInputDiv>
         <ContentInputDiv active={false}>
-          <RoadForm onSubmit={(e) => handleSubmit(e, start)}>
+          <RoadForm name='start' onSubmit={(e) => { handleSubmit(e, start); }}>
             <ContentInput active={false} name='start' value={start} onChange={onChange} placeholder='출발 장소' />
           </RoadForm>
-          <RoadForm onSubmit={(e) => handleSubmit(e, end)}>
+          <RoadForm name='end' onSubmit={(e) => { handleSubmit(e, end); }}>
             <ContentInput active={false} name='end' value={end} onChange={onChange} placeholder='도착 장소' />
           </RoadForm>
         </ContentInputDiv>
