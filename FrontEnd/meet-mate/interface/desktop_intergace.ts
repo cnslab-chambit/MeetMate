@@ -35,3 +35,15 @@ export interface IMarkers {
     x: string;
     y: string;
 }
+
+export interface serach {
+    start_point: { lat: string, lng: string, img: string }
+    end_point: { lat: string, lng: string, img: string }
+
+}
+
+export interface market {
+    lat: number
+    lng: number
+    img: string
+}
