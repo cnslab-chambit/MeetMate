@@ -2,6 +2,14 @@
 
 <img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
 
+## 프로젝트 실행
+   ```
+      cd FrontEnd
+      cd meet-mate
+      npm i
+      npm run dev
+   ```
+   
 ## 프로젝트 개요
 ### 1. 최종결과물
 
