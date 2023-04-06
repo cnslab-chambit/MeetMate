@@ -53,7 +53,7 @@ const drawPolyLine = (lane: any) => {
       if(type == 1){
         return {
           strokeWeight: 5,
-          strokeColor: "#fffb00",
+          strokeColor: "#0084ff",
           strokeOpacity:0.7,
           strokeStyle: "solid"
         };
@@ -68,7 +68,7 @@ const drawPolyLine = (lane: any) => {
       }
       else{
         return {
-          strokeColor: "#f368d9",
+          strokeColor: "#f811ce",
           strokeWeight: 5,
         }
       }
@@ -109,8 +109,6 @@ const drawPolyLine = (lane: any) => {
       position={{lat: parseFloat(load.y), lng: parseFloat(load.x)}}/>
     )}
 
-      <MapMarker position={{ lat: parseFloat(mapRecoil.y), lng: parseFloat(mapRecoil.x) }}>
-      </MapMarker>
     </Map>
 
     </>
