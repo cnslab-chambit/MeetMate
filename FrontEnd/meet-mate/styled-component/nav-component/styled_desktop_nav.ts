@@ -3,8 +3,6 @@ export const NavDiv = styled.div`
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, #FFD1E1 0%, rgba(240, 58, 121, 0) 100%);
-    /* background-color: red; */
-    height: 170px;
     gap: 10px;
 `
 export const NavTitle = styled.h1`
@@ -38,7 +36,6 @@ export const IconTextDiv = styled.button<{ active: boolean }>`
     appearance: none;
     background-color: transparent;
 
-    
     ${(props) => props.active && css`
         background-color: #F03A79;
         color: white;

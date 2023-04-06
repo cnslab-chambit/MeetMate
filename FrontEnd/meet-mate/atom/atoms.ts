@@ -4,7 +4,9 @@ import {
   place,
   road,
   event,
-  IMarkers
+  IMarkers,
+  serach,
+  market
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -74,3 +76,29 @@ export const mapAtom = atom<IMarkers>({
     y: "37.6192404638865",
   }
 });
+
+export const searchState = atom<serach>({
+  key: 'searchState',
+  default: {
+    start_point: { lat: "", lng: "", img: "" },
+    end_point: { lat: "", lng: "", img: "" }
+  }
+})
+
+export const inputState = atom<boolean>({
+  key: 'inputState',
+  default: true
+})
+export const clickState = atom<number>({
+  key: 'clickState',
+  default: 0
+})
+
+export const markerState = atom<market>({
+  key: 'markerState',
+  default: {
+    lat: 37.6192404638865,
+    lng: 127.058270608867,
+    img: "/images/default.svg"
+  }
+})
