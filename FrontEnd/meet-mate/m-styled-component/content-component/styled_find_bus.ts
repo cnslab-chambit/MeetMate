@@ -28,3 +28,12 @@ export const FlexBox = styled.div`
     font-size: 1.5rem;
     font-weight: 400;
 `;
+
+export const FlexBoxCol = styled.div`
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+`;

@@ -1,5 +1,5 @@
 import { NavBasicDiv, NavButton, NavColDiv, NavDiv, NavForm, Navigation, NavInput, NavLogo, NavMenu, NavSearchDiv, NavSearchDiv2 } from "@/m-styled-component/nav-component/nav_styled";
-import { PromiseDiv } from "@/m-styled-component/search_styled.ts/serch_styled";
+import { PromiseDiv } from "@/m-styled-component/search-component/serch_styled";
 import { useRouter } from "next/router";
 import Menu from "../../public/images/menu.svg";
 import SearchIcon from "../../public/images/search.svg";

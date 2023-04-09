@@ -1,15 +1,41 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SubwayIcon from "../public/images/subway.svg";
 import BusIcon from "../public/images/bus.svg";
 import WalkIcon from "../public/images/Walk.svg";
-import { RangeContainer, RangeText, SvgConatiner,Range } from "@/m-styled-component/road-compontnt/road_styled";
+import { useEffect, useState } from "react";
 
-function Gauge(props: any) {
-    let ratio = Math.round(((props.sectionWidth) as number / (props.totalWidth) as number) * 100)
+
+const WayContainer = styled.div`
+    display: flex;
+    width: 100%;
+    font-size: 1.5rem;
+`;
+
+const IconDiv = styled.div<{color: string}>`
+    display: flex;
+    width: 20%;
+    svg{
+        fill: ${(props) => `${props.color}`};
+        width: 30px;
+        height: 30px;
+    }
+`;
+
+const printName = (type : any, subway: any, bus: any) => {
+    if(type === 3){
+        return;
+    }
+    else if(type === 1){
+        return `${subway}`;
+    }
+    else if(type === 2){
+        return `${bus}`;
+    }
+}
+
+function Way(props: any) {
     const trafficType = props.trafficType;
-    const section = props.sectionWidth;
-    const [color, setColor] = useState("gray");
+    const [color,setColor] = useState("gray");
 
     useEffect(() => {
         if(trafficType === 3){
@@ -79,32 +105,25 @@ function Gauge(props: any) {
 
         }
     },[]);
-
-    return (
-    <RangeContainer
-    ratio={section === 0 ? 0 :ratio < 12 ? 12 : ratio}>
-        
-        {section > 0 ? 
-        <Range
-        ratio={ratio as number}
-        trafficType={props.trafficType as number}
-        subwayColor={color}
-        >
-            <div style={{display:"flex"}}>
-            <SvgConatiner subwayColor={color}>
-            <svg viewBox="0 0 50 50">
-            {trafficType === 1 ? <SubwayIcon/> : trafficType === 2 ? <BusIcon/> : <WalkIcon/>}
-            </svg>
-            </SvgConatiner>
-            <RangeText>
-            {section !== 0 ? `${section}분` : null}
-            </RangeText>
-            </div>
-            
-        </Range>
-        :null}
-    </RangeContainer>
+    
+    
+    return(
+        <div>
+        {trafficType !== 3 ?
+            <WayContainer>
+                <IconDiv
+                color={color}
+                >
+                    <svg viewBox="0 0 50 50">
+                        {trafficType === 1 ? <SubwayIcon/> : trafficType === 2 ? <BusIcon/> : <WalkIcon/>}
+                    </svg>
+                </IconDiv>
+                {printName(trafficType, props?.subwayName, props?.busNo)}
+            </WayContainer>
+            : null
+        }
+    </div>
     )
 }
 
-export default Gauge;
+export default Way;

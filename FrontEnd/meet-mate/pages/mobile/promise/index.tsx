@@ -1,5 +1,5 @@
 import PlaceDialog from "@/mobile-content/Dialog";
-import { ButtonDiv, LogoDiv, LogoMent, PromiseButton, PromiseButton2, PromiseContainer, PromiseDiv, PromiseInput } from "@/m-styled-component/search_styled.ts/serch_styled";
+import { ButtonDiv, LogoDiv, LogoMent, PromiseButton, PromiseButton2, PromiseContainer, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
 import { countState, placeState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";

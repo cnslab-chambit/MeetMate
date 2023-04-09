@@ -85,4 +85,10 @@ export interface IMarkers{
   export const countState = atom<number>({
   key:'countState',
   default: 0
+  });
+
+  export const trafficState = atom<any>({
+    key: 'trafficState',
+    default: {}
+    
   })

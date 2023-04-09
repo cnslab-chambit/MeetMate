@@ -12,7 +12,7 @@ import Menu from '../../public/images/menu.svg';
 import { useRouter } from 'next/router'
 import { IMarkers, locNameAtom, mapAtom, markerAtom } from '../atom'
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
-import { PromiseDiv } from '@/m-styled-component/search_styled.ts/serch_styled'
+import { PromiseDiv } from '@/m-styled-component/search-component/serch_styled'
 
 const inter = Inter({ subsets: ['latin'] })
 

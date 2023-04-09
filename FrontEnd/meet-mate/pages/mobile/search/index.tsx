@@ -1,4 +1,4 @@
-import { LocationContainer, LocationDiv, LocationName } from "@/m-styled-component/search_styled.ts/serch_styled";
+import { LocationContainer, LocationDiv, LocationName } from "@/m-styled-component/search-component/serch_styled";
 import { IMarkers, mapAtom, markerAtom } from "@/mobile-content/atom";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
