@@ -1,6 +1,7 @@
 import { Boldpg, FlexBox, FlexBoxCol, TimeBox, TransferBox } from "@/m-styled-component/content-component/styled_find_bus";
 import { HandleButton } from "@/m-styled-component/content-component/styled_place";
 import { NavForm, NavSearchDiv2 } from "@/m-styled-component/nav-component/nav_styled";
+import { BaseBar, WayBar } from "@/m-styled-component/road-compontnt/road_styled";
 import { LogoDiv, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
 import Gauge from "@/mobile-content/Gauge";
 import Way from "@/mobile-content/Way";
@@ -10,20 +11,6 @@ import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
-const WayBar = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const BaseBar = styled.div`
-    display: flex;
-    height: 20px;
-    width: 50rem;
-    border-radius: 10rem;
-    background-color: #dad7d7;
-    margin-right: 15%;		// 페이지에서 원하는 부분만큼 자유롭게 설정
-    margin-left: 15%;
-`;
 
 function Input() {
     const date = new Date();   
