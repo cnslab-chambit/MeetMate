@@ -1,3 +1,4 @@
+/*global kakao*/ 
 import React, { useEffect, useState } from 'react'
 import {
   ContentInputDiv,
@@ -11,6 +12,7 @@ import { useRecoilState } from 'recoil';
 import { countState, placeState } from '@/atom/atoms';
 import CancelIcon from '../public/images/cancel.svg'
 function PlacePage() {
+  
   const [count, setCount] = useRecoilState(countState);
   const [open, setOpen] = useState<boolean>(false);
   const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
@@ -19,7 +21,6 @@ function PlacePage() {
       console.log(element.id,target)
         return element.id !== target
     })
-    
     setPlaceAdd(newPlaces)
   }
   useEffect(() => {
@@ -38,7 +39,7 @@ function PlacePage() {
   return (
     <ContentInputForm>
       {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
-      <ContentInputDiv>
+      <ContentInputDiv active={true}>
         {placeAdd.map((element, index: any) => {
           return index > 1 ? (
             <ContentInputIconDiv>
@@ -50,8 +51,8 @@ function PlacePage() {
           );
         })}
       </ContentInputDiv>
-      <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} ></ContentInputButton>
-      <ContentInputButton type='button' value='장소 찾기'></ContentInputButton>
+      <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} _width='104px' _heigth='49px'/>
+      <ContentInputButton type='button' value='장소 찾기' _width='104px' _heigth='49px'/>
     </ContentInputForm>
   )
 }

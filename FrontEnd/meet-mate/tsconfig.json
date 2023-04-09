@@ -14,14 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": [
-      "kakao.maps.d.ts"
-    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "m-styled-component/search-component"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "apis/apiStorage.js","m-styled-component/search-component"],
   "exclude": ["node_modules"]
 }
