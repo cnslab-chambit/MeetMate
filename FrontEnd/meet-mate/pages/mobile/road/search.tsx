@@ -1,18 +1,22 @@
 import { LocationContainer, LocationDiv, LocationName } from "@/m-styled-component/search-component/serch_styled";
-import { IMarkers, mapAtom, markerAtom } from "@/mobile-content/atom";
+import { IMarkers, loadAtom, mapAtom, markerAtom } from "@/mobile-content/atom";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
-function Home() {
+function Search() {
     const router = useRouter();
     const [markerRecoil,setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom)
-    const mapRecoil = useSetRecoilState<IMarkers>(mapAtom);
+    const [loadRecoil,setLoadRecoil] = useRecoilState<IMarkers[]>(loadAtom);
     const onDivClicked = (data: IMarkers) => {
-        mapRecoil(data);
-        router.push("/mobile");
+        setLoadRecoil((prev) => [...prev, data]);
+        router.push("/mobile/road");
     };
+
+    useEffect(() => {
+
+    },[markerRecoil])
 
     return (
         <LocationContainer>
@@ -28,4 +32,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Search;
