@@ -13,19 +13,21 @@ import {
 } from '@/styled-component/content-component/styled_road'
 import CrossIcon from '../public/images/cross.svg'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { inputState, markerAtom, roadState, searchState } from '@/atom/atoms'
-import { roadLine, roadSearch } from '../apis/apiStorage'
+import { inputState, markerAtom, roadDataState, roadSearchState, roadState, searchState } from '@/atom/atoms'
+import { roadLineApi, roadSearchApi } from '../apis/apiStorage'
 import { IMarkers } from '@/interface/desktop_intergace'
 import SearchList from '@/desktop-search-list/SearchList'
+import PublicTransportList from '@/desktop-search-list/PublicTransportList'
 
 function MapPage() {
   const [road, setRoad] = useRecoilState(roadState)
   const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
   const [markers, setMarkers] = useState<any[]>([]);
+  const [roadList, setRoadList] = useRecoilState(roadSearchState)
   const { start, end } = road
   const setInputCheck = useSetRecoilState(inputState)
-  const [search, seSearch] = useRecoilState(searchState)
-
+  const [search, setSearch] = useRecoilState(searchState)
+  const setRoadData = useSetRecoilState(roadDataState)
   const onChange = (e: any) => {
     const { name, value } = e.target
     setRoad({
@@ -38,7 +40,7 @@ function MapPage() {
       start: '',
       end: ''
     })
-    seSearch({
+    setSearch({
       start_point: { lat: search.end_point.lat, lng: search.end_point.lng, img: search.start_point.img },
       end_point: { lat: search.start_point.lat, lng: search.start_point.lng, img: search.end_point.img }
     })
@@ -48,15 +50,20 @@ function MapPage() {
       start: end,
       end: start
     })
-    seSearch({
+    setSearch({
       start_point: { lat: search.end_point.lat, lng: search.end_point.lng, img: search.start_point.img },
       end_point: { lat: search.start_point.lat, lng: search.start_point.lng, img: search.end_point.img }
     })
   }
   const onSearch = async () => {
-    const rodaData = await roadSearch(search)
-    console.log(rodaData.result)
-    roadLine(rodaData.result.path[0].info.mapObj)
+    const rodaData = await roadSearchApi(search)
+    // roadLineApi(rodaData.result.path[0].info.mapObj)
+    if (rodaData?.error?.msg) {
+      alert('장소를 다시 확인해주세요')
+      return
+    }
+    setRoadData(rodaData.result)
+    setRoadList(true)
   }
   const handleSubmit = (e: any, keyword: string) => {
     e.preventDefault();
@@ -92,6 +99,7 @@ function MapPage() {
         setMarkerRecoil(markers);
       }
     })
+    setRoadList(false)
     e.target.name === 'start' ? setInputCheck(true) : setInputCheck(false)
   }
   console.log(markerRecoil, markers)
@@ -115,7 +123,7 @@ function MapPage() {
         <ContentInputButton type='button' onClick={onReset} value='다시 입력' _width='80px' _heigth='35px' />
         <ContentInputButton type='button' onClick={onSearch} value='길찾기' _width='80px' _heigth='35px' />
       </RoadButtonDiv>
-      <SearchList />
+      {roadList ? (<PublicTransportList />) : (<SearchList />)}
     </RoadDiv>
   )
 }
