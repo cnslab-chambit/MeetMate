@@ -12,7 +12,6 @@ export const ListInformationCard = styled.div`
     flex-direction: column;
     padding: 7px;
     gap: 5px;
-    border-radius: 5px;
     :hover{
         background-color: rgba(255, 209, 225, 0.46);
     }
