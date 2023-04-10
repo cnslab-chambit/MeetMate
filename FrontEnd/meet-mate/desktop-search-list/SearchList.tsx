@@ -8,8 +8,7 @@ import {
     NameTextDiv,
     RoadNameText,
     TitleNameText,
-
-} from '@/styled-component/list-compoent/styled_list';
+} from '@/styled-component/list-compoent/styled_keyword_list';
 import React from 'react'
 import { useRecoilState } from 'recoil';
 
