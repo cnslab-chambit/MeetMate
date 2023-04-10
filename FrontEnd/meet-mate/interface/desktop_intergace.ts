@@ -47,3 +47,35 @@ export interface market {
     lng: number
     img: string
 }
+
+export interface roadStruct {
+    busCount: number
+    endRadius: number
+    outTrafficCheck: number
+    path: []
+    pointDistance: number
+    searchType: number
+    startRadius: number
+    subwayBusCount: number
+    subwayCount: number
+}
+
+export interface transport {
+    bus: boolean
+    subway: boolean
+    subwaybus: boolean
+}
+export interface pathType {
+    subwayType: {
+        info: [],
+        subPath: []
+    },
+    busType: {
+        info: [],
+        subPath: []
+    },
+    subwaybusType: {
+        info: [],
+        subPath: []
+    }
+}

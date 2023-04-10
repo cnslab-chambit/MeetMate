@@ -6,7 +6,10 @@ import {
   event,
   IMarkers,
   serach,
-  market
+  market,
+  roadStruct,
+  transport,
+  pathType
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -101,4 +104,54 @@ export const markerState = atom<market>({
     lng: 127.058270608867,
     img: "/images/default.svg"
   }
+})
+
+export const roadDataState = atom<roadStruct>({
+  key: 'roadDataState',
+  default: {
+    busCount: 0,
+    endRadius: 0,
+    outTrafficCheck: 0,
+    path: [],
+    pointDistance: 0,
+    searchType: 0,
+    startRadius: 0,
+    subwayBusCount: 0,
+    subwayCount: 0,
+  }
+})
+export const roadSearchState = atom<boolean>({
+  key: 'roadSearchState',
+  default: false
+})
+export const transportState = atom<transport>({
+  key: 'transportState',
+  default: {
+    subway: true,
+    bus: false,
+    subwaybus: false,
+  }
+})
+export const subwayTypeState = atom<object>({
+  key: 'subwayTypeState',
+  default: {
+    info: [],
+    subPath: []
+  },
+})
+
+export const busTypeState = atom<object>({
+  key: 'busTypeState',
+  default: {
+    info: [],
+    subPath: []
+  },
+})
+
+export const subwaybusTypeState = atom<object>({
+  key: 'subwaybusTypeState',
+  default: {
+    info: [],
+    subPath: []
+  },
 })
