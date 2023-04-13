@@ -17,6 +17,7 @@ function Nav() {
       subway: name === 'subway' ? true : false,
     });
   }
+  
   return (
     <NavDiv>
       <NavTitle>Meet Mate</NavTitle>

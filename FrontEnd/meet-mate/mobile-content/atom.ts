@@ -29,6 +29,13 @@ export interface IMarkers{
     current:string
   }
 
+  export interface IMobile{
+    place: boolean;
+    map: boolean;
+    bus: boolean;
+    subway: boolean;
+  }
+
   export const markerAtom = atom<IMarkers[]>({
     key: "markerAtom",
     default: []
@@ -52,11 +59,30 @@ export interface IMarkers{
     }
   });
 
+  
+
   export const loadAtom = atom<IMarkers[]>({
     key: "loadAtom",
-    default:[]
+    default:[{
+      address_name: "",
+      category_group_code: "",
+      category_group_name: "",
+      category_name: "",
+      distance: "",
+      id: "",
+      phone: "",
+      place_name: "장소를 입력해주세요",
+      place_url: "",
+      road_address_name:"",
+      x: "127.058270608867",
+      y: "37.6192404638865",
+  }]
   });
 
+  export const divNumAtom = atom<String>({
+    key: "divNumAtom",
+    default: "0"
+  });
 
   export const locationAtom = atom<IEachLocation[]>({
     key: "eachLocation",
@@ -90,5 +116,20 @@ export interface IMarkers{
   export const trafficState = atom<any>({
     key: 'trafficState',
     default: {}
-    
+  });
+
+  export const searchAtom = atom<any>({
+    key: "searchAtom",
+    default: "",
   })
+
+  export const pageState = atom<IMobile>({
+    key: 'pageState',
+    default: {
+      place: false,
+      map: false,
+      bus: false,
+      subway: false
+    }
+  })
+  

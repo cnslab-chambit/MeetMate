@@ -1,6 +1,6 @@
 
 import { Inter } from 'next/font/google'
-import { NavButton, NavDiv, NavForm, NavIconContainer, Navigation, NavInput, NavLogo, NavMenu, NavSearchDiv, NavSearchDiv2 } from '@/m-styled-component/nav-component/nav_styled'
+import { NavButton, NavDiv, NavForm, NavIconContainer, Navigation, NavInput, NavLogo, NavSearchDiv, NavSearchDiv2 } from '@/m-styled-component/nav-component/nav_styled'
 import { useEffect, useRef, useState } from 'react'
 import { IconTextDiv, NavIconDiv, NavIconText } from '@/m-styled-component/nav-component/nav_styled'
 import PlaceIcon from '../../public/images/place.svg';
@@ -8,19 +8,27 @@ import MapIcon from '../../public/images/map.svg';
 import BusIcon from '../../public/images/bus.svg';
 import SubwayIcon from '../../public/images/subway.svg'
 import SearchIcon from '../../public/images/search.svg';
-import Menu from '../../public/images/menu.svg';
 import { useRouter } from 'next/router'
-import { IMarkers, locNameAtom, mapAtom, markerAtom } from '../atom'
+import { IMarkers, locNameAtom, mapAtom, markerAtom, pageState } from '../atom'
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { PromiseDiv } from '@/m-styled-component/search-component/serch_styled'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [keyword, setKeyword] = useState("");
-  const [place, setPlace] = useState("");
-  const [markers, setMarkers] = useState<any[]>([]);
-  const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
+  const [inputs, setInputs] = useRecoilState(pageState);
+  const {place, map, bus, subway} = inputs;
+  
+  const onTogle = (path:string,name: string) => {
+    setInputs({
+      place: name === 'place' ? true : false,
+      map: name === 'map' ? true : false,
+      bus: name === 'bus' ? true : false,
+      subway: name === 'subway' ? true : false,
+    });
+    router.push(path);
+  }
+
   const [mapRecoil,setMapRecoil] = useRecoilState<IMarkers>(mapAtom);
   const resetMap = useResetRecoilState(mapAtom);
   const resetMarker = useResetRecoilState(markerAtom);
@@ -35,8 +43,7 @@ export default function Home() {
   return (
     <Navigation>
       <NavDiv>
-        <NavLogo onClick={()=>router.push("/mobile")}>Meet Mate</NavLogo>
-        <NavMenu><Menu/></NavMenu>
+        <NavLogo onClick={()=> router.push("/mobile")}>Meet Mate</NavLogo>
       </NavDiv>
 
       <NavSearchDiv2>
@@ -48,19 +55,19 @@ export default function Home() {
       
       <NavIconContainer>
       <NavIconDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/promise"} onClick={() => moveRouter("/mobile/promise")}>
+        <IconTextDiv isActive={place} onClick={()=> onTogle("/mobile/promise","place")}>
           <PlaceIcon fill="black"/>
           <NavIconText>약속 잡기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/road"} onClick={() => moveRouter("/mobile/road")}>
+        <IconTextDiv isActive={map} onClick={()=> onTogle("/mobile/road","map")}>
           <MapIcon fill="black"/>
           <NavIconText>길 찾기</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/bus"} onClick={() => moveRouter("/mobile/bus")}>
+        <IconTextDiv isActive={bus} onClick={()=> onTogle("/mobile/bus","bus")}>
           <BusIcon fill="black"/>
           <NavIconText>버스</NavIconText>
         </IconTextDiv>
-        <IconTextDiv isActive={router.asPath === "/mobile/subway"} onClick={() => moveRouter("/mobile/subway")}>
+        <IconTextDiv isActive={subway} onClick={()=> onTogle("/mobile/subway","subway")}>
           <SubwayIcon fill="black"/>
           <NavIconText>전철</NavIconText>
         </IconTextDiv>

@@ -12,6 +12,7 @@ function Gauge(props: any) {
     const [color, setColor] = useState("gray");
 
     useEffect(() => {
+        setColor("none");
         if(trafficType === 3){
             setColor("#c8c7c7");
         }
@@ -27,7 +28,7 @@ function Gauge(props: any) {
                 setColor("#2560e8");
             }else if(props.buswayCode === 12){
                 setColor("#74a813");
-            }
+            }           
             
         }else if(trafficType === 1){
             //지하철
