@@ -74,17 +74,19 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
  ### App
    <img src="https://user-images.githubusercontent.com/91197026/222876592-955eb8aa-c797-49ac-991d-b4eff8a2508f.png" width="200" height="400"/>
    
-   -약속잡기
-   <img src="https://user-images.githubusercontent.com/55770796/233769075-7b47611d-52f7-4479-a693-5d8e9adecff8.png" width="200" height="400">
+   - 약속잡기
+   <img src="https://user-images.githubusercontent.com/55770796/233769722-32b0dba7-18e1-4eff-9db2-90cdcdfd9653.png" width="200" height="400">
+
    
-   -길찾기
-   <img width="137" alt="길찾기" src="https://user-images.githubusercontent.com/55770796/233769388-cea14260-d6d9-4bd5-a13d-1d736d8b9d6d.png">
+   - 길찾기
+   <img src="https://user-images.githubusercontent.com/55770796/233769730-ea795a19-29cf-4a22-9343-e801214fcbe9.png" width="200" height="400">
+   <img src="https://user-images.githubusercontent.com/55770796/233769768-1c82abc2-4204-4c06-824e-ba5912f868ee.png" width="200" height="400">
+
    
-   -버스
-   <img src="https://user-images.githubusercontent.com/55770796/233769364-f8e3c80b-747b-4608-be77-11d6be4bd6ad.png"
-   width="200" height="400">
-   
-   -지하철
+   - 버스
+   <img src="https://user-images.githubusercontent.com/55770796/233769755-a3c983a0-27c2-4202-a1ae-338357d631d4.png" width="200" height="400">
+
+   - 지하철
    <img src="https://user-images.githubusercontent.com/55770796/233769397-72a5a4c7-06b4-4627-9af8-1a763d1a9708.png"
    width="200" height="400">
    
