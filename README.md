@@ -85,8 +85,11 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    width="200" height="400">
    
    -지하철
-   <img width="137" alt="지하철 1" src="https://user-images.githubusercontent.com/55770796/233769397-72a5a4c7-06b4-4627-9af8-1a763d1a9708.png">
-   <img width="134" alt="지하철2" src="https://user-images.githubusercontent.com/55770796/233769399-5987b4fa-136a-4e8a-a86f-ebf4edcfdfe6.png">
+   <img src="https://user-images.githubusercontent.com/55770796/233769397-72a5a4c7-06b4-4627-9af8-1a763d1a9708.png"
+   width="200" height="400">
+   
+   <img src="https://user-images.githubusercontent.com/55770796/233769399-5987b4fa-136a-4e8a-a86f-ebf4edcfdfe6.png"
+    width="200" height="400">
 
 
 ## 팀원
