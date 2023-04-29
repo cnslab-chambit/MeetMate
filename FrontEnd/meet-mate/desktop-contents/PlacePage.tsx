@@ -1,4 +1,4 @@
-/*global kakao*/ 
+/*global kakao*/
 import React, { useEffect, useState } from 'react'
 import {
   ContentInputDiv,
@@ -6,29 +6,31 @@ import {
   ContentInputButton,
   ContentInputForm,
   ContentInputIconDiv,
+  ContentPlaceDiv,
+  ContentInputButtonDiv,
 } from '@/styled-component/content-component/styled_content'
 import PlaceDialog from '@/dialog/PlaceDialog';
 import { useRecoilState } from 'recoil';
 import { countState, placeState } from '@/atom/atoms';
 import CancelIcon from '../public/images/cancel.svg'
 function PlacePage() {
-  
+
   const [count, setCount] = useRecoilState(countState);
   const [open, setOpen] = useState<boolean>(false);
   const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
-  const onDelete = (target:number) =>{
-    const newPlaces = placeAdd.filter((element)=>{
-      console.log(element.id,target)
-        return element.id !== target
+  const onDelete = (target: number) => {
+    const newPlaces = placeAdd.filter((element) => {
+      console.log(element.id, target)
+      return element.id !== target
     })
     setPlaceAdd(newPlaces)
   }
   useEffect(() => {
     const newPlaces = [];
-    for (let i = placeAdd.length; i < placeAdd.length + (+count); i++) {
+    for (let i = placeAdd[placeAdd.length - 1].id + 1; i <= placeAdd[placeAdd.length - 1].id + (+count); i++) {
       const newPlace = {
         id: i,
-        current: `${i + 1}번째 장소`,
+        current: `${i}번째 장소`,
       };
       newPlaces.push(newPlace);
     }
@@ -37,23 +39,27 @@ function PlacePage() {
   }, [count])
 
   return (
-    <ContentInputForm>
-      {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
-      <ContentInputDiv active={true}>
-        {placeAdd.map((element, index: any) => {
-          return index > 1 ? (
-            <ContentInputIconDiv>
-              <ContentInput active={true} placeholder={element.current} key={element.id}></ContentInput>
-                <CancelIcon onClick={()=>onDelete(element.id)}/>
-            </ContentInputIconDiv>
-          ) : (
-            <ContentInput active={false} placeholder={element.current} key={element.id}></ContentInput>
-          );
-        })}
-      </ContentInputDiv>
-      <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} _width='104px' _heigth='49px'/>
-      <ContentInputButton type='button' value='장소 찾기' _width='104px' _heigth='49px'/>
-    </ContentInputForm>
+    <ContentPlaceDiv>
+      <ContentInputForm>
+        {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
+        <ContentInputDiv active={true}>
+          {placeAdd.map((element, index: any) => {
+            return index > 1 ? (
+              <ContentInputIconDiv>
+                <ContentInput active={true} placeholder={element.current} key={element.id}></ContentInput>
+                <CancelIcon onClick={() => onDelete(element.id)} />
+              </ContentInputIconDiv>
+            ) : (
+              <ContentInput active={false} placeholder={element.current} key={element.id}></ContentInput>
+            );
+          })}
+        </ContentInputDiv>
+      </ContentInputForm>
+      <ContentInputButtonDiv>
+        <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} _width='104px' _heigth='49px' />
+        <ContentInputButton type='button' value='장소 찾기' _width='104px' _heigth='49px' />
+      </ContentInputButtonDiv>
+    </ContentPlaceDiv>
   )
 }
 
