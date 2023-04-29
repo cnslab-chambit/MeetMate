@@ -8,11 +8,11 @@ import TransportCard from './TransportCard'
 
 function PublicTransportList() {
     const [roadData] = useRecoilState(roadDataState)
-    const [inputs, setInputs] = useRecoilState(transportState);
-    const { bus, subway, subwaybus } = inputs
+    const [trans, setTrans] = useRecoilState(transportState);
+    const { bus, subway, subwaybus } = trans
     console.log(roadData)
     const onTogle = (name: string) => {
-        setInputs({
+        setTrans({
             subway: name === 'subway' ? true : false,
             bus: name === 'bus' ? true : false,
             subwaybus: name === 'bussubway' ? true : false
@@ -25,7 +25,7 @@ function PublicTransportList() {
                 <TransportTypeTextDiv active={bus} onClick={() => onTogle('bus')}>버스 {roadData.busCount}</TransportTypeTextDiv>
                 <TransportTypeTextDiv active={subwaybus} onClick={() => onTogle('bussubway')}>버스+전철 {roadData.subwayBusCount}</TransportTypeTextDiv>
             </TransportTypeDiv>
-            <TransportCard></TransportCard>
+            <TransportCard />
         </>
     )
 }
