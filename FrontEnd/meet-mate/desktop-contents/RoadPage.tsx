@@ -54,10 +54,10 @@ function MapPage() {
       start_point: { lat: search.end_point.lat, lng: search.end_point.lng, img: search.start_point.img },
       end_point: { lat: search.start_point.lat, lng: search.start_point.lng, img: search.end_point.img }
     })
+    onSearch()
   }
   const onSearch = async () => {
     const rodaData = await roadSearchApi(search)
-    // roadLineApi(rodaData.result.path[0].info.mapObj)
     if (rodaData?.error?.msg) {
       alert('장소를 다시 확인해주세요')
       return
@@ -73,7 +73,6 @@ function MapPage() {
       console.log(e.target.value);
       console.log(kakao.maps.services.Status.OK);
       if (status === kakao.maps.services.Status.OK) {
-        let bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
         for (let i = 0; i < data.length; i++) {
@@ -92,10 +91,8 @@ function MapPage() {
             x: data[i].x,
             y: data[i].y
           });
-          bounds.extend(new kakao.maps.LatLng(parseFloat(data[i].y), parseFloat(data[i].x)));
         }
         setMarkers(markers);
-
         setMarkerRecoil(markers);
       }
     })
@@ -120,8 +117,8 @@ function MapPage() {
         </CrossIconDiv>
       </CrossInputDiv>
       <RoadButtonDiv>
-        <ContentInputButton type='button' onClick={onReset} value='다시 입력' _width='80px' _heigth='35px' />
-        <ContentInputButton type='button' onClick={onSearch} value='길찾기' _width='80px' _heigth='35px' />
+        <ContentInputButton type='button' onClick={onReset} value='다시 입력' _width='80px' _heigth='45px' />
+        <ContentInputButton type='button' onClick={onSearch} value='길 찾기' _width='80px' _heigth='45px' />
       </RoadButtonDiv>
       {roadList ? (<PublicTransportList />) : (<SearchList />)}
     </RoadDiv>

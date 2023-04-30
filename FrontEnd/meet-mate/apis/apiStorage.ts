@@ -11,7 +11,7 @@ export const roadSearchApi = async (result: any) => {
         .then((res) => res.data)
 }
 export const roadLineApi = async (mapObj: string) => {
-    await odsay
+    return await odsay
         .get(`loadLane?mapObject=0:0@${mapObj}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_API_KEY}`)
-        .then((res) => console.log(res))
+        .then((res) => res.data.result.lane)
 }
