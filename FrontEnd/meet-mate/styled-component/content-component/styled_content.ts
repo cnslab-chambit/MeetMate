@@ -20,6 +20,12 @@ export const ContentInput = styled.input<{ active: boolean }>`
     outline: none;  
     border: ${(props) => props.active ? 'none' : '1.5px solid #3E3E3E'};
 `
+export const ContentInputButtonDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+`
 export const ContentInputButton = styled.input<{ _width: string, _heigth: string }>`
     width: ${(props) => props._width};
     height: ${(props) => props._heigth};
@@ -42,10 +48,15 @@ export const ContentInputForm = styled.form`
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    gap: 25px;
+    overflow-y: scroll;
+    max-height: 65vh;
+`
+export const ContentPlaceDiv = styled.div`
+    display: grid;
+    gap: 20px;
 `
 export const ContentInputIconDiv = styled.div`
+    
     display: flex;      
     width: 345px;
     border: 1.5px solid #3E3E3E;

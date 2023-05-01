@@ -11,12 +11,12 @@ import { roadSearchApi } from '@/apis/apiStorage';
 
 function SubwayPage() {
   const [subway, setSubway] = useRecoilState(subwayState)
-  const [subwayData, setSubwayData] = useRecoilState<IMarkers[]>(subwayMarkerState);
+  const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(subwayMarkerState);
   const [subwayList, setSubwayList] = useRecoilState(subwayListState)
   const [markers, setMarkers] = useState<any>();
   const setSubwayInputCheck = useSetRecoilState(subwayInputState)
   const [subwaySearch, setSubwaySearch] = useRecoilState(subwaySearchState)
-  const setRoadData = useSetRecoilState(subwayDataState)
+  const setSubwayData = useSetRecoilState(subwayDataState)
   const { start, end } = subway
   const onChange = (e: any) => {
     const { name, value } = e.target
@@ -26,13 +26,14 @@ function SubwayPage() {
     })
   }
   const onSearch = async () => {
-    const rodaData = await roadSearchApi(subwaySearch)
-    if (rodaData?.error?.msg) {
+    let subwayData = await roadSearchApi(subwaySearch)
+    if (subwayData?.error?.msg) {
       alert('장소를 다시 확인해주세요')
       return
     }
-    setRoadData(rodaData.result)
-    console.log(rodaData)
+    subwayData = subwayData.path.filter((e: any) => { return e.pathType === 1 })
+    setSubwayData(subwayData)
+    console.log(subwayData)
     // setRoadList(true)
   }
   const handleSubmit = (e: any, keyword: string) => {
@@ -67,7 +68,7 @@ function SubwayPage() {
             })
           })
         setMarkers(markers);
-        setSubwayData(markers);
+        setMarkerRecoil(markers);
       }
     })
     setSubwayList(false)
