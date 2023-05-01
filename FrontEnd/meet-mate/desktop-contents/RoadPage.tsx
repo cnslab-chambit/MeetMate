@@ -62,7 +62,7 @@ function MapPage() {
       alert('장소를 다시 확인해주세요')
       return
     }
-    setRoadData(rodaData.result)
+    setRoadData(rodaData)
     setRoadList(true)
   }
   const handleSubmit = (e: any, keyword: string) => {

@@ -1,5 +1,6 @@
 import { roadLineApi } from '@/apis/apiStorage'
 import { roadDataState, roadResultDataState, roadSearchResultState, transportState } from '@/atom/atoms'
+import DesktopWay from '@/desktop-contents/DesktopWay'
 import { Boldpg, FlexBox, FlexBoxCol, TimeBox, TransferBox } from '@/m-styled-component/content-component/styled_find_bus'
 import { BaseBar, WayBar } from '@/m-styled-component/road-compontnt/road_styled'
 import Gauge from '@/mobile-content/Gauge'
@@ -43,30 +44,13 @@ function TransportCard() {
                                     요금 {path.info.payment}원
                                 </FlexBox>
                             </FlexBox>
-
-                            <FlexBoxCol>
-                                <BaseBar>
-                                    {
-                                        roadData.path.length > 0 ?
-                                            path?.subPath.map((subPath: any, index: number) =>
-                                                <Gauge
-                                                    key={index}
-                                                    sectionWidth={subPath.sectionTime}
-                                                    totalWidth={path.info.totalTime}
-                                                    trafficType={subPath.trafficType}
-                                                    lane={subPath?.lane ? subPath.lane[0].name : "도보"}
-                                                    subwayCode={subPath?.lane ? subPath?.lane[0].subwayCode : "none"}
-                                                    buswayCode={subPath?.lane ? subPath?.lane[0].type : "none"}
-                                                />
-                                            ) : null}
-                                </BaseBar>
-                            </FlexBoxCol>
                             <WayBar>
                                 {roadData.path.length > 0 ?
                                     path?.subPath.map((subPath: any, index: number) =>
-                                        <Way
+                                        <DesktopWay
                                             key={index}
                                             subwayName={subPath?.lane ? subPath?.lane[0].name : "none"}
+                                            sectionTime={subPath.sectionTime}
                                             busNo={subPath?.lane ? subPath?.lane[0].busNo : "none"}
                                             trafficType={subPath?.trafficType}
                                             subwayCode={subPath?.lane ? subPath?.lane[0].subwayCode : "none"}
