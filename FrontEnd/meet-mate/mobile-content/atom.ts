@@ -37,12 +37,12 @@ export interface IMarkers{
   }
 
   export const markerAtom = atom<IMarkers[]>({
-    key: "markerAtom",
+    key: "markerAtom2",
     default: []
   });
 
   export const mapAtom = atom<IMarkers>({
-    key: "mapAtom",
+    key: "mapAtom2",
     default:{
         address_name: "",
         category_group_code: "",
@@ -95,7 +95,7 @@ export interface IMarkers{
   });
 
   export const placeState = atom<Iplace[]>({
-  key:'placeState',
+  key:'placeState2',
   default: [
       {
         id: 0,
@@ -109,7 +109,7 @@ export interface IMarkers{
   });
 
   export const countState = atom<number>({
-  key:'countState',
+  key:'countState2',
   default: 0
   });
 
@@ -124,7 +124,7 @@ export interface IMarkers{
   })
 
   export const pageState = atom<IMobile>({
-    key: 'pageState',
+    key: 'pageState2',
     default: {
       place: false,
       map: false,

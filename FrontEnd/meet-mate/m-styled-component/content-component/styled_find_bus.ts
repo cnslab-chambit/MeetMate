@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TransferBox = styled.div`
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    
     max-height: 50vh;
 `;
 export const TransInfoDiv = styled.div`

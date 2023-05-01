@@ -11,7 +11,6 @@ function Search() {
     const [loadRecoil,setLoadRecoil] = useRecoilState<IMarkers[]>(loadAtom);
     const [divNum, setDivNum] = useRecoilState(divNumAtom);
     const onDivClicked = (data: IMarkers) => {
-        console.log(loadRecoil.length);
         if(divNum === "start"){
             if(loadRecoil.length === 0){
                 setLoadRecoil([data]);
@@ -28,19 +27,25 @@ function Search() {
                 setLoadRecoil([...loadRecoil.slice(0,1),data]);
             }
         }
-        console.log(loadRecoil.length);
         router.push("/mobile/road");
     };
 
     useEffect(() => {
 
     },[markerRecoil])
-
     return (
         <LocationContainer>
             {markerRecoil?.map((data: IMarkers, index:number) => 
             <LocationDiv key={index} onClick={() => onDivClicked(data)}>
-                {data.place_name}
+                <div style={{display:"flex",alignItems:"center"                                             }}>
+                    <div>
+                        {data.place_name.length > 15 ? `${data.place_name.substr(0, 15)}...`: data.place_name}
+                    </div>
+                    <div style={{fontSize:"1.5rem", marginLeft:"2rem",fontWeight:"700", color:"#9e9d9d"}}>
+                        {data.category_group_name}
+                    </div>
+                </div>
+
                 <LocationName>
                     {data.road_address_name}
                 </LocationName>

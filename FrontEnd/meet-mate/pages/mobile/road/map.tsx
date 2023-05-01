@@ -1,29 +1,29 @@
-import { IEachLocation, IMarkers, loadAtom, locationAtom, mapAtom } from "@/mobile-content/atom";
+import { IEachLocation, IMarkers, loadAtom, locationAtom, mapAtom, trafficState } from "@/mobile-content/atom";
+import { selectType } from "@/mobile-hook/select-color";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Map,MapMarker,Polyline} from 'react-kakao-maps-sdk'
 import { useRecoilState, useRecoilValue } from "recoil";
+import start from "../../../public/images/start.svg";
 
 function Road() {
-    const [apiData, setApiData] = useState<any>();
     const loadRecoil = useRecoilValue<IMarkers[]>(loadAtom);
-    const [laneData, setLaneData] = useState<any | null>([]);
     const [laneData2, setLaneData2] = useState<any | null>([]);
+    const [map, setMap] = useState<any>()
     const mapRecoil = useRecoilValue(mapAtom);
-    const mapRef: any = useRef();
+    const pathRecoil = useRecoilValue(trafficState);
     let lineArr = new Array();
-    let sx = loadRecoil[0].x;
-    let sy = loadRecoil[0].y;  //출발 좌표
-    let ex = loadRecoil[1].x;
-    let ey = loadRecoil[1].y;  //도착 좌표
-    const bounds = useMemo(() => {
-      const bounds = new kakao.maps.LatLngBounds();
-      for(let i = 0; i < 2; i++){
-        bounds.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[i].y),parseFloat(loadRecoil[i].x)))
-      }
-      return bounds;
-    },[])
+    let bounds;
 
-	let url = `https://api.odsay.com/v1/api/searchPubTransPathT?SX=${sx}&SY=${sy}&EX=${ex}&EY=${ey}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`;
+    const setBound = () => {
+      if(map){      
+      bounds = new kakao.maps.LatLngBounds();
+      for(let i   = 0; i < 2; i++){
+        bounds?.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[i]?.y),parseFloat(loadRecoil[i]?.x)))
+      }
+
+      map?.setBounds(bounds)
+    };      
+    }
 	
   const callMapObjApiAJAX = (mapObj: string) => {
     const url = `https://api.odsay.com/v1/api/loadLane?mapObject=0:0@${mapObj}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`;
@@ -44,60 +44,28 @@ const drawPolyLine = (lane: any) => {
         lineArr.push({lat: lane.section[j].graphPos[k].y, lng: lane.section[j].graphPos[k].x});
       }
     }
-    mapRef.current.setBounds(bounds);
     return lineArr;
 }
 
-    const selectType = (type: number) => {
-       
-      if(type == 1){
-        return {
-          strokeWeight: 5,
-          strokeColor: "#0084ff",
-          strokeOpacity:0.7,
-          strokeStyle: "solid"
-        };
-      }
-      else if(type == 2){
-        return{
-          strokeWeight: 5,
-          strokeColor: "#37b42d",
-          strokeOpacity:0.7,
-          strokeStyle: "solid"
-        }
-      }
-      else{
-        return {
-          strokeColor: "#f811ce",
-          strokeWeight: 5,
-        }
-      }
-    }
-
-    
     useEffect(() => {
-        (async () => {
-            const data = await (await fetch(url)).json();
-            setApiData(data);  
-            if(data){
-              callMapObjApiAJAX(data?.result?.path[0].info.mapObj); 
-            }
-        })()
-    },[]);
+      setBound();  
+      callMapObjApiAJAX(pathRecoil.info.mapObj); 
+        
+    },[map]);
 
     return (
     <>
       <Map
-      center={{ lat: parseFloat(mapRecoil.y), lng: parseFloat(mapRecoil.x) }}
+      center={{ lat: parseFloat("33.55635"), lng: parseFloat("126.795841") }}
       style={{ width: "100%", height: "85vh" ,maxHeight:"100vh"}}
-      id="map"
-      ref={mapRef}
+      onCreate={setMap}
+      
     >
       {laneData2.length !== 0 ? 
     laneData2.map((data: any, index:number) =>
     <Polyline key={index}
     path={drawPolyLine(data)}
-    strokeColor={selectType(data.type).strokeColor}
+    strokeColor={selectType(data) as string}
     strokeWeight={5}
     />
     )
@@ -106,9 +74,9 @@ const drawPolyLine = (lane: any) => {
     }
     {loadRecoil.map((load:IMarkers,index:number) => 
       <MapMarker key={index}
-      position={{lat: parseFloat(load.y), lng: parseFloat(load.x)}}/>
+      position={{lat: parseFloat(load.y), lng: parseFloat(load.x)}}
+      />
     )}
-
     </Map>
 
     </>

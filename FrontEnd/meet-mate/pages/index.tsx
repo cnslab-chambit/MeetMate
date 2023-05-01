@@ -1,15 +1,17 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import { Map, MapMarker } from 'react-kakao-maps-sdk'
-import { useMediaHook } from '@/custom-hook/MediaQueryHook'
-import Desktop from './desktop'
+import { Map,MapMarker } from 'react-kakao-maps-sdk'
+
 export default function Home() {
-  const mediaCheck = useMediaHook()
   return (
     <>
-      {mediaCheck ? (null) : (<Desktop />)}
+        <Map
+      center={{ lat: 33.5563, lng: 126.79581 }}
+      style={{ width: "100%", height: "100vh" ,maxHeight:"100vh"}}
+    >
+      <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+        {/* <div style={{ color: "#000" }}>Hello World!</div> */}
+      </MapMarker>
+    </Map>
+
     </>
   )
 }

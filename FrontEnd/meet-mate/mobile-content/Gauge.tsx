@@ -77,7 +77,6 @@ function Gauge(props: any) {
             }else if(props.subwayCode === 115){
                 setColor("#9F7E20");
             }
-
         }
     },[]);
 

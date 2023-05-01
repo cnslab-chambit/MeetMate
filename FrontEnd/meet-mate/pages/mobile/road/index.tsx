@@ -1,8 +1,6 @@
 import { Boldpg, FlexBox, FlexBoxCol, TimeBox, TransferBox } from "@/m-styled-component/content-component/styled_find_bus";
-import { HandleButton } from "@/m-styled-component/content-component/styled_place";
-import { NavForm, NavSearchDiv2 } from "@/m-styled-component/nav-component/nav_styled";
 import { BaseBar, WayBar } from "@/m-styled-component/road-compontnt/road_styled";
-import { LogoDiv, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
+import { PromiseDiv} from "@/m-styled-component/search-component/serch_styled";
 import Gauge from "@/mobile-content/Gauge";
 import Way from "@/mobile-content/Way";
 import { IMarkers, divNumAtom, loadAtom, trafficState } from "@/mobile-content/atom";
@@ -14,7 +12,7 @@ import styled from "styled-components";
 
 const CrossIconDiv = styled.div`
    position: relative;
-    left: 33rem;
+    left: 47rem;
     bottom: 6.6rem;
 `;
 
@@ -66,7 +64,6 @@ function Input() {
         let url = `https://api.odsay.com/v1/api/searchPubTransPathT?SX=${sx}&SY=${sy}&EX=${ex}&EY=${ey}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`;
         (async () => {
             const data = await (await fetch(url)).json();
-            console.log(data);
             if(data){
                 setPathData(data?.result?.path);
             }
@@ -75,7 +72,6 @@ function Input() {
     }
     },[loadRecoil.length === 2 && loadRecoil[0]?.place_name !== "장소를 입력해주세요",swapClick]);
 
-    console.log(pathData);
     return (
         <div style={{display:"flex", flexDirection:"column",alignItems:"center"}}>
             <ContentSearchDiv>
@@ -91,7 +87,7 @@ function Input() {
             </ContentSearchDiv>
              <TransferBox>
             {pathData?.length > 0 ? pathData?.map((path: any,index: number) =>
-                <TimeBox key={index} onClick={() => setWay(path[index])}>
+                <TimeBox key={index} onClick={() => setWay(path)}>
                     <FlexBox>
                         <Boldpg>{Math.floor(path.info.totalTime / 60)}</Boldpg>시간 
                         <Boldpg>{path.info.totalTime % 60}분</Boldpg>
