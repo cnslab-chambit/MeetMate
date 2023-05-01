@@ -9,7 +9,8 @@ import {
   market,
   roadStruct,
   transport,
-  pathType
+  pathType,
+  subwaySerach
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -25,11 +26,11 @@ export const placeState = atom<place[]>({
   key: 'placeState',
   default: [
     {
-      id: 0,
+      id: 1,
       current: '1번째 장소'
     },
     {
-      id: 1,
+      id: 2,
       current: '2번째 장소'
     },
   ]
@@ -47,6 +48,15 @@ export const roadState = atom<road>({
   }
 })
 
+export const subwayState = atom<road>({
+  key: 'subwayState',
+  default: {
+    start: '',
+    end: ''
+  }
+})
+
+
 export const eventState = atom<event>({
   key: 'event',
   default: {
@@ -61,6 +71,12 @@ export const markerAtom = atom<IMarkers[]>({
   key: "markerAtom",
   default: []
 });
+
+export const subwayMarkerState = atom<IMarkers[]>({
+  key: "subwayMarkerState",
+  default: []
+});
+
 
 export const mapAtom = atom<IMarkers>({
   key: "mapAtom",
@@ -88,8 +104,20 @@ export const searchState = atom<serach>({
   }
 })
 
+export const subwaySearchState = atom<subwaySerach>({
+  key: 'subwaySearchState',
+  default: {
+    start_point: { lat: "", lng: "" },
+    end_point: { lat: "", lng: "" }
+  }
+})
+
 export const inputState = atom<boolean>({
   key: 'inputState',
+  default: true
+})
+export const subwayInputState = atom<boolean>({
+  key: 'subwayInputState',
   default: true
 })
 export const clickState = atom<number>({
@@ -120,9 +148,37 @@ export const roadDataState = atom<roadStruct>({
     subwayCount: 0,
   }
 })
+
+export const subwayDataState = atom<roadStruct>({
+  key: 'subwayDataState',
+  default: {
+    busCount: 0,
+    endRadius: 0,
+    outTrafficCheck: 0,
+    path: [],
+    pointDistance: 0,
+    searchType: 0,
+    startRadius: 0,
+    subwayBusCount: 0,
+    subwayCount: 0,
+  }
+})
 export const roadSearchState = atom<boolean>({
   key: 'roadSearchState',
   default: false
+})
+export const subwayListState = atom<boolean>({
+  key: 'subwayListState',
+  default: false
+})
+
+export const roadSearchResultState = atom<boolean>({
+  key: 'roadSearchresultState',
+  default: false
+})
+export const roadResultDataState = atom<any>({
+  key: 'roadResultDataState',
+  default: {}
 })
 export const transportState = atom<transport>({
   key: 'transportState',
@@ -131,27 +187,4 @@ export const transportState = atom<transport>({
     bus: false,
     subwaybus: false,
   }
-})
-export const subwayTypeState = atom<object>({
-  key: 'subwayTypeState',
-  default: {
-    info: [],
-    subPath: []
-  },
-})
-
-export const busTypeState = atom<object>({
-  key: 'busTypeState',
-  default: {
-    info: [],
-    subPath: []
-  },
-})
-
-export const subwaybusTypeState = atom<object>({
-  key: 'subwaybusTypeState',
-  default: {
-    info: [],
-    subPath: []
-  },
 })
