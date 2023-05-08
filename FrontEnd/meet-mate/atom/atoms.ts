@@ -35,6 +35,13 @@ export const placeState = atom<place[]>({
     },
   ]
 });
+export const placeTextState = atom<any>({
+  key: 'placeTextState',
+  default: {
+    1: '',
+    2: ''
+  }
+})
 export const countState = atom<number>({
   key: 'countState',
   default: 0
