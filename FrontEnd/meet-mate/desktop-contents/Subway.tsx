@@ -8,6 +8,7 @@ import { IMarkers } from '@/interface/desktop_intergace';
 import { subwayDataState, subwayInputState, subwayListState, subwayMarkerState, subwaySearchState, subwayState } from '@/atom/atoms';
 import SubwaySearchList from '@/desktop-search-list/SubwaySearchList';
 import { roadSearchApi } from '@/apis/apiStorage';
+import SubwayCard from '@/desktop-search-list/SubwayCard';
 
 function SubwayPage() {
   const [subway, setSubway] = useRecoilState(subwayState)
@@ -27,14 +28,11 @@ function SubwayPage() {
   }
   const onSearch = async () => {
     let subwayData = await roadSearchApi(subwaySearch)
-    if (subwayData?.error?.msg) {
-      alert('장소를 다시 확인해주세요')
+    if (!subwayData) {
       return
     }
-    subwayData = subwayData.path.filter((e: any) => { return e.pathType === 1 })
     setSubwayData(subwayData)
-    console.log(subwayData)
-    // setRoadList(true)
+    setSubwayList(true)
   }
   const handleSubmit = (e: any, keyword: string) => {
     e.preventDefault();
@@ -110,7 +108,7 @@ function SubwayPage() {
         <ContentInputButton type='button' onClick={onReset} value='다시 입력' _width='80px' _heigth='45px' />
         <ContentInputButton type='button' onClick={onSearch} value='전철 검색' _width='80px' _heigth='45px' />
       </RoadButtonDiv>
-      <SubwaySearchList />
+      {subwayList ? (<SubwayCard />) : (<SubwaySearchList />)}
     </RoadDiv>
   )
 }
