@@ -127,7 +127,7 @@ function Input() {
                                 buswayCode={subPath?.lane? subPath?.lane[0].type : "none"}
                                 />
                             ) : null}
-                        </WayBar>
+                    </WayBar>
                 </TimeBox>
             )
             :

@@ -11,6 +11,7 @@ function Promise() {
     const [count, setCount] = useRecoilState(countState);
     const [open, setOpen] = useState<boolean>(false);
     const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
+    
     const onDelete = (target:number) =>{
     const newPlaces = placeAdd.filter((element)=>{
       console.log(element.id,target)

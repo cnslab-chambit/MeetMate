@@ -121,7 +121,7 @@ export interface IMarkers{
   export const searchAtom = atom<any>({
     key: "searchAtom",
     default: "",
-  })
+  });
 
   export const pageState = atom<IMobile>({
     key: 'pageState2',
@@ -131,5 +131,9 @@ export interface IMarkers{
       bus: false,
       subway: false
     }
-  })
+  });
   
+  export const busState = atom<any>({
+    key: 'busState',
+    default: []
+  });

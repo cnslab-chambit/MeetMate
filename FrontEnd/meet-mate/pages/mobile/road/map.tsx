@@ -20,7 +20,6 @@ function Road() {
       for(let i   = 0; i < 2; i++){
         bounds?.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[i]?.y),parseFloat(loadRecoil[i]?.x)))
       }
-
       map?.setBounds(bounds)
     };      
     }
@@ -49,8 +48,7 @@ const drawPolyLine = (lane: any) => {
 
     useEffect(() => {
       setBound();  
-      callMapObjApiAJAX(pathRecoil.info.mapObj); 
-        
+      callMapObjApiAJAX(pathRecoil.info.mapObj);
     },[map]);
 
     return (
@@ -59,15 +57,24 @@ const drawPolyLine = (lane: any) => {
       center={{ lat: parseFloat("33.55635"), lng: parseFloat("126.795841") }}
       style={{ width: "100%", height: "85vh" ,maxHeight:"100vh"}}
       onCreate={setMap}
-      
     >
       {laneData2.length !== 0 ? 
     laneData2.map((data: any, index:number) =>
-    <Polyline key={index}
+    <div
+    key={index}>
+    <Polyline
     path={drawPolyLine(data)}
     strokeColor={selectType(data) as string}
-    strokeWeight={5}
+    strokeWeight={8}
     />
+    <Polyline key={index + 10}
+    path={drawPolyLine(data)}
+    strokeColor="white"
+    strokeWeight={2}
+    strokeStyle="dash"
+    strokeOpacity={1}
+    />
+    </div>
     )
     :
     null  
