@@ -10,25 +10,31 @@ function Map() {
     let bounds;
 
     const drawPolyLine = (lane: any) => {  
-        for(let i = 0; i < lane.length; i++){
-              setGraphPos((prev: any) => [...prev, {lat: lane[i].y, lng: lane[i].x}]);
-            }
-      };
-
-    const setBound = () => {
+      for(let i = 0; i < lane.length; i++){
+          const lat = lane[i].y;
+          const lng = lane[i].x;
+          if (lat && lng) {
+              setGraphPos((prev: any) => [...prev, {lat: lat, lng: lng}]);
+          }
+      }
+  };
+    const setBound = (boundary: any) => {
       if(map){
         bounds = new kakao.maps.LatLngBounds();
-        //bounds.extend(new kakao.maps.LatLng(parseFloat()))
-        
+        bounds.extend(new kakao.maps.LatLng(parseFloat(boundary?.bottom),parseFloat(boundary?.left)))
+        bounds.extend(new kakao.maps.LatLng(parseFloat(boundary?.top),parseFloat(boundary?.right))) 
+        map?.setBounds(bounds);
       }
     };
 
       useEffect(() => {
-        //setBound();
-        drawPolyLine(busRecoil?.data?.result.lane[0].section[0].graphPos);
+        if(busRecoil){
+        setBound(busRecoil?.data?.result.boundary);    
+        }
         console.log(busRecoil);
+        drawPolyLine(busRecoil?.data?.result.lane[0].section[0].graphPos);
     },[map]);
-console.log(busRecoil);
+
       return (
         <>
         <KakaoMap
