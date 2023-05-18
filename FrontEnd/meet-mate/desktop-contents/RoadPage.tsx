@@ -58,8 +58,7 @@ function MapPage() {
   }
   const onSearch = async () => {
     const rodaData = await roadSearchApi(search)
-    if (rodaData?.error?.msg) {
-      alert('장소를 다시 확인해주세요')
+    if (!rodaData) {
       return
     }
     setRoadData(rodaData)
