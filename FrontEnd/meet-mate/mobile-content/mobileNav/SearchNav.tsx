@@ -6,52 +6,19 @@ import SearchIcon from "../../public/images/search.svg";
 import MapIcon from "../../public/images/map2.svg";
 import XIcon from "../../public/images/X.svg";
 import { useEffect, useState } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { IMarkers, markerAtom } from "../atom";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { IMarkers, markerAtom, searchAtom } from "../atom";
+import axios from "axios";
 
 function SearchNav() {
     const [keyword, setKeyword] = useState("");
-    const [place, setPlace] = useState("");
     const [markers, setMarkers] = useState<any[]>([]);
     const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
     const markerReset = useResetRecoilState(markerAtom);
-    
     const router = useRouter();
-    const handleSubmit = (e:any) => {
-      e.preventDefault();
-      
-        let ps = new kakao.maps.services.Places();
-        if(ps === undefined || ps === null) return;
-        ps.keywordSearch(keyword,(data: IMarkers[], status: any, _pagination: any ) => {
-          if(status === kakao.maps.services.Status.OK){
-            let bounds = new kakao.maps.LatLngBounds();
-            let markers = [];
-  
-            for(let i = 0; i < data.length; i++){
-              
-              markers.push({
-                address_name: data[i].address_name,
-                category_group_code: data[i].category_group_code,
-                category_group_name: data[i].category_group_name,
-                category_name: data[i].category_name,
-                distance: data[i].distance,
-                id: data[i].id,
-                phone: data[i].phone,
-                place_name: data[i].place_name,
-                place_url: data[i].place_url,
-                road_address_name: data[i].road_address_name,
-                x: data[i].x,
-                y: data[i].y
-              });
-              bounds.extend(new kakao.maps.LatLng(parseFloat(data[i].y) ,parseFloat(data[i].x)));
-            }
-            setMarkers(markers);
-            
-            setMarkerRecoil(markers);
-          }
-        })
-    };
-
+    const searchRecoil = useRecoilValue<any>(searchAtom)
+    const url = "https://dapi.kakao.com/v2/local/search/keyword.json";
+    
     const onXIconClicked = () => {
       setMarkerRecoil([]);
       router.back();
@@ -64,6 +31,52 @@ function SearchNav() {
     const moveOtherPage = (path: string) => {
       router.push(path);
     };
+
+    const handleSubmit = (e:any) => {
+      e.preventDefault();
+      searchKeyword();
+    };
+
+    const searchKeyword = async () => {
+      (async () => {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAOMAP_REST_API_KEY}`,
+          },
+          params: {
+            query: keyword,
+          },
+        });
+        
+        let markers = [];
+
+          for(let i = 0; i < response?.data.documents.length; i++){
+            markers.push({
+              address_name: response?.data.documents[i].address_name,
+              category_group_code: response?.data.documents[i].category_group_code,
+              category_group_name: response?.data.documents[i].category_group_name,
+              category_name: response?.data.documents[i].category_name,
+              distance: response?.data.documents[i].distance,
+              id: response?.data.documents[i].id,
+              phone: response?.data.documents[i].phone,
+              place_name: response?.data.documents[i].place_name,
+              place_url: response?.data.documents[i].place_url,
+              road_address_name: response?.data.documents[i].road_address_name,
+              x: response?.data.documents[i].x,
+              y: response?.data.documents[i].y
+            });
+            }
+          setMarkers(markers);
+          
+          setMarkerRecoil(markers);
+      })();
+  
+      };
+
+
+    // useEffect(() => {
+    //   searchKeyword();
+    // },[]);
 
     return (
         <Navigation>

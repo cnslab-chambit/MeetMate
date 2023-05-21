@@ -66,7 +66,7 @@ export const PromiseDiv = styled.div`
     font-family: 'GmarketSansBD';
     font-size: 1.5rem;
     height: 4rem;
-    width: 35rem;
+    width: 50rem;
     color: #666666;
     border-radius: 1rem;
     padding-left: 1rem;
@@ -106,5 +106,4 @@ export const LocationDiv = styled.div`
 
 export const LocationName = styled.div`
     font-size: 2rem;
-    color: #9e9d9d;
 `;

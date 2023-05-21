@@ -32,8 +32,8 @@ export const IconTextDiv = styled.div<{isActive:boolean}>`
     gap: 5px;
     width: 25%;
     height: 80px;
-    
     cursor: pointer;
+    
     background-color: ${(props) => props.isActive ? "#ffffff" : ""};
     transition: 0.3s ease;
     color: ${(props) => props.isActive ? "#666666" : "white"};
@@ -42,12 +42,12 @@ export const IconTextDiv = styled.div<{isActive:boolean}>`
             fill: ${(props) => props.isActive ? "#00A3FF" : "white"};
         }
     :hover{
-        background-color: #00A3FF;
+        background-color: ${(props) => props.isActive ? null : "#00A3FF"};
         transition: 0.3s ease;
         color: #666666;
         path{
             transition: 0.3s ease;
-            fill: white;
+            fill: ${(props) => props.isActive ? "#00A3FF" : "white"};;
         }
     }
 `;
