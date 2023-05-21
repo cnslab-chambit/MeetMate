@@ -9,8 +9,8 @@ import {
   market,
   roadStruct,
   transport,
-  pathType,
-  subwaySerach
+  subwaySerach,
+  subwaySerachData
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -35,6 +35,13 @@ export const placeState = atom<place[]>({
     },
   ]
 });
+export const placeTextState = atom<any>({
+  key: 'placeTextState',
+  default: {
+    1: '',
+    2: ''
+  }
+})
 export const countState = atom<number>({
   key: 'countState',
   default: 0
@@ -187,4 +194,8 @@ export const transportState = atom<transport>({
     bus: false,
     subwaybus: false,
   }
+})
+export const subPathState = atom<[]>({
+  key: 'subPathState',
+  default: []
 })

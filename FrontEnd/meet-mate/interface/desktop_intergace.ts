@@ -66,17 +66,8 @@ export interface transport {
     subway: boolean
     subwaybus: boolean
 }
-export interface pathType {
-    subwayType: {
-        info: [],
-        subPath: []
-    },
-    busType: {
-        info: [],
-        subPath: []
-    },
-    subwaybusType: {
-        info: [],
-        subPath: []
-    }
+
+export interface subwaySerachData {
+    info: {}
+    subPath: [{}]
 }
