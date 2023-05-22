@@ -51,3 +51,15 @@ const setWayColor = (trafficType: number, buswayCode: number, subwayCode: number
     }
 
 }
+
+export const callApi = async(center: any) => {
+    const response = await fetch(`/search?longitude=${center.x}&latitude=${center.y}`,{
+        method: "GET",
+        headers : {
+            "Content-type" : "application/json;"
+        }
+    }).then((response) => response.json());
+    console.log(response);
+    return response;
+}
+

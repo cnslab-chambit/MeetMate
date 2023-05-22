@@ -1,17 +1,20 @@
 import PlaceDialog from "@/mobile-content/Dialog";
 import { ButtonDiv, LogoDiv, LogoMent, PromiseButton, PromiseButton2, PromiseContainer, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
-import { countState, placeState } from "@/mobile-content/atom";
+import { countState, placeState, promiseIndex } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import Logo from "../../../public/images/Logo.svg";
 import CancelIcon from "../../../public/images/cancel.svg";
 import { NavSearchDiv3 } from "@/m-styled-component/nav-component/nav_styled";
+import { useRouter } from "next/router";
 
 function Promise() {
+    const router = useRouter();
     const [count, setCount] = useRecoilState(countState);
     const [open, setOpen] = useState<boolean>(false);
     const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
-    
+    const setIndex = useSetRecoilState(promiseIndex);
+
     const onDelete = (target:number) =>{
     const newPlaces = placeAdd.filter((element)=>{
       console.log(element.id,target)
@@ -19,7 +22,13 @@ function Promise() {
     })
     
     setPlaceAdd(newPlaces)
-  }
+  };
+
+    const changePage = (id: number) => {
+        setIndex(id);
+        router.push(`/mobile/promise/search/`);
+    };
+
   useEffect(() => {
     const newPlaces = [];
     for (let i = placeAdd.length; i < placeAdd.length + (+count); i++) {
@@ -31,8 +40,8 @@ function Promise() {
     }
     setPlaceAdd([...placeAdd, ...newPlaces]);
     setCount(0)
-  }, [count])
-
+  }, [count]);
+  
     return (
         <PromiseContainer>
             {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>): null}
@@ -43,20 +52,26 @@ function Promise() {
             <LogoDiv>
                 {placeAdd.map((element, index) => {
                     return index > 1 ? (
-                        <NavSearchDiv3>
-                        <PromiseDiv key={element.id}>
+                        <NavSearchDiv3 key={element.id}>
+                        <PromiseDiv
+                        onClick={() => changePage(element.id)}>
                             {element.current}
                         </PromiseDiv>
                         <CancelIcon onClick={()=>onDelete(element.id)}/>
                         </NavSearchDiv3>
-                    ):(
-                        <PromiseDiv>{element.current}</PromiseDiv>
+                    ):
+                    (
+                        <PromiseDiv
+                        key={element.id}
+                        onClick={() => changePage(element.id)}
+                        >{element.current}
+                        </PromiseDiv>
                     )
                 })}
             </LogoDiv>
             <ButtonDiv>
                 <PromiseButton onClick={() => setOpen(true)} >장소 추가</PromiseButton>
-                <PromiseButton2>장소 찾기</PromiseButton2>
+                <PromiseButton2 onClick={() => router.push("/mobile/promise/map")}>장소 찾기</PromiseButton2>
             </ButtonDiv>
         </PromiseContainer>
     );

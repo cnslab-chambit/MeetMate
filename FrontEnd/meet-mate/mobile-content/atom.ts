@@ -36,6 +36,21 @@ export interface IMarkers{
     subway: boolean;
   }
 
+  export interface IStore{
+    category_name: string;
+    searchList: IStoreInfo[];
+  }
+
+  export interface IStoreInfo{
+    address : string;
+    id: number;
+    place_name: string
+    place_url: string;
+    star_rate: number;
+    x: string;
+    y: string;
+  }
+
   export const markerAtom = atom<IMarkers[]>({
     key: "markerAtom2",
     default: []
@@ -136,4 +151,19 @@ export interface IMarkers{
   export const busState = atom<any>({
     key: 'busState',
     default: []
+  });
+
+  export const storeState = atom<IStore[]>({
+    key: 'storeState',
+    default: []
+  });
+
+  export const promiseState = atom <IMarkers[]>({
+    key: 'promiseState',
+    default: []
+  });
+
+  export const promiseIndex = atom<number>({
+    key: 'promiseIndex',
+    default: -1,
   });

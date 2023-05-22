@@ -2,13 +2,14 @@ import { busState } from "@/mobile-content/atom";
 import { useRecoilValue } from "recoil";
 import { MapMarker,Polyline,Map as KakaoMap} from 'react-kakao-maps-sdk';
 import { useEffect, useState } from "react";
+import Start from "../../../public/images/start.svg";
 
 function Map() {
     const busRecoil = useRecoilValue(busState);
     const [map,setMap] = useState<any>();
     const [graphPos, setGraphPos] = useState<any>([]);
     let bounds;
-
+    
     const drawPolyLine = (lane: any) => {  
       for(let i = 0; i < lane.length; i++){
           const lat = lane[i].y;
@@ -31,10 +32,9 @@ function Map() {
         if(busRecoil){
         setBound(busRecoil?.data?.result.boundary);    
         }
-        console.log(busRecoil);
         drawPolyLine(busRecoil?.data?.result.lane[0].section[0].graphPos);
-    },[map]);
-
+      console.log(graphPos[0]);
+      },[map]);
       return (
         <>
         <KakaoMap
@@ -55,6 +55,19 @@ function Map() {
             strokeOpacity={1}
             strokeStyle="dash"
             />  
+            {graphPos.length > 0 ?
+            <MapMarker position={{ lat: graphPos[0].lat, lng: graphPos[0].lng}}
+            image={{
+              src: "../../../public/images/start.svg",
+              size: {
+                width: 55,
+                height: 55,
+              },
+            }} >
+          </MapMarker>
+             :
+             null
+             }
         </KakaoMap>
     </>
     )

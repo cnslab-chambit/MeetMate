@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         {mediaCheck ? (
           <GlobalContainer>
-          {router.asPath==="/mobile/search" || router.asPath ==="/mobile/road/search" ? <SearchNav/> : <MobileNav />}
+          {router.asPath==="/mobile/search" || router.asPath === "/mobile/road/search" || router.asPath === "/mobile/promise/search" ? <SearchNav/> : <MobileNav />}
           <Component {...pageProps}/>
           </GlobalContainer>
         ) :
