@@ -21,9 +21,9 @@ function PromiseMap() {
     const [startPoint, setStartPoint] = useState<any>([]);
     const [toggle, setToggle] = useState(false);
     const [center, setCetner] = useState<any>([]);
+    const [info, setInfo] = useState<any>();
     const promiseLocation = useRecoilValue<IMarkers[]>(promiseState);
-
-    let bounds;
+    
     const getCenterPosition = () => {
       let x = 0;
       let y = 0;
@@ -45,17 +45,23 @@ function PromiseMap() {
 
     const setBound = (center:any) => {
       if(map && !toggle){      
-      bounds = new kakao.maps.LatLngBounds();
+      let bounds = new kakao.maps.LatLngBounds();
       for(let i = 0; i < promiseLocation.length; i++){
         bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
       }
       map?.setBounds(bounds)
       }      
       else if(map && toggle){
-        bounds = new kakao.maps.LatLngBounds();
+        let bounds = new kakao.maps.LatLngBounds();
         bounds?.extend(new kakao.maps.LatLng(parseFloat(center.y), parseFloat(center.x)));
         map?.setBounds(bounds);
       }
+    };
+
+    const divSetBound = (store :any) => {
+      let bounds = new kakao.maps.LatLngBounds();
+      bounds?.extend(new kakao.maps.LatLng(parseFloat(store.y),parseFloat(store.x)))      
+      map.setBounds(bounds);
     };
 
     const buttonClick = (num: number) => {
@@ -91,7 +97,7 @@ function PromiseMap() {
       const center = getCenterPosition();
       setBound(center);
     },[toggle]);
-    console.log(storeRecoil);
+    console.log(info);
     return (
     <div>
       <MapConatiner>
@@ -117,7 +123,12 @@ function PromiseMap() {
                   height: 45,
                 },
               }}
-                />
+              onClick={() => setInfo(store.place_name)}
+                >
+                {info && info === store.place_name && (
+                  <div style={{width:"10rem",height:"5rem",backgroundColor:"white"}}>{store.place_name}</div>
+                )}
+                </MapMarker>
             ))
           ))
         : (
@@ -130,7 +141,13 @@ function PromiseMap() {
                 width: 42,
                 height: 45,
               },
-            }}/>
+            }}
+            onClick={() => setInfo(store.place_name)}
+            >
+              {info && info === store.place_name && (
+                <div style={{width:"10rem",height:"5rem",backgroundColor:"white"}}>{store.place_name}</div>
+              )}
+              </MapMarker>
           ))
         )
         }
@@ -208,7 +225,7 @@ function PromiseMap() {
             }
           </ToggleButton>
           {toggle ?
-              <Info buttonIndex={buttonIndex}/>
+              <Info buttonIndex={buttonIndex} setInfo={setInfo} divSetBound={divSetBound}/>
             :
             null
         }
