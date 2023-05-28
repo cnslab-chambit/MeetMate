@@ -164,4 +164,52 @@ export const RoadButton = styled.div`
       fill: #00A3FF;
     }  
     box-shadow: 0px 1px 0px 0px #000000;
-`
+`;
+
+export const StoreInfoDiv = styled.div`
+  display: flex;
+  font-size: 1.5rem;
+  width: 20rem;
+  height:8rem;
+  overflow: hidden;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 700;
+  box-shadow: 2px 2px 1px 0px gray;
+`;
+
+export const StoreName = styled.div`
+  display: flex;
+  width: 70%;
+  justify-content: center;
+`;
+
+export const DecisionDiv = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+  background-color: #D95050;
+  color: white;
+  border-radius: 0 1rem 1rem 0;
+  border: none;
+`;
+
+export const BackButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 1rem;
+`;

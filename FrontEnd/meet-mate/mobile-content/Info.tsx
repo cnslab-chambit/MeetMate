@@ -39,7 +39,7 @@ function Info({buttonIndex, setInfo, divSetBound}: {buttonIndex:number, setInfo:
           ))
         : (
           storeRecoil[buttonIndex]?.searchList.map((store) => (
-            <DetailDiv key={store.id}  onClick={() => setInfo(store.place_name)}>
+            <DetailDiv key={store.id}  onClick={() => divClick(store)}>
                 <PlaceName>
                   {store.place_name}
                   <Star/>
@@ -48,6 +48,10 @@ function Info({buttonIndex, setInfo, divSetBound}: {buttonIndex:number, setInfo:
                   </StarSpan>
                 </PlaceName>
                 <PlaceAddress>{store.address}</PlaceAddress>
+                <RoadButton>
+                    <RoadArrow/>
+                    길 찾기
+                  </RoadButton>
               </DetailDiv>
         ))
         )

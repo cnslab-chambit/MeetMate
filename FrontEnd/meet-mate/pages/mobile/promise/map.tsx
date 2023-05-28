@@ -1,10 +1,10 @@
 import { IMarkers, IStore, loadAtom, mapAtom, promiseState, storeState, trafficState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
-import { Map, MapMarker, Polygon, Polyline, ZoomControl,RoadviewInfoWindow } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polygon, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { selectType } from "@/mobile-hook/select-color";
 import { callApi } from "@/mobile-content/fx";
-import { ButtonContainer, InfoDiv, MapConatiner, SelectButton, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
+import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
 import Shopping from "../../../public/images/shoppingbag.svg";
 import Food from "../../../public/images/food.svg";
 import Mug from "../../../public/images/mug.svg";
@@ -38,9 +38,11 @@ function PromiseMap() {
     };
   
     const getPolyLine = () => {
+      if(startPoint.length > 0) return;
       for(let i = 0; i < promiseLocation.length; i++){
         setStartPoint((prev: any) => [...prev,{lat: parseFloat(promiseLocation[i].y), lng: parseFloat(promiseLocation[i].x)}]);
       }
+      setStartPoint((prev: any) => [...prev, {lat: parseFloat(promiseLocation[0].y), lng: parseFloat(promiseLocation[0].x)}])
     };
 
     const setBound = (center:any) => {
@@ -60,7 +62,7 @@ function PromiseMap() {
 
     const divSetBound = (store :any) => {
       let bounds = new kakao.maps.LatLngBounds();
-      bounds?.extend(new kakao.maps.LatLng(parseFloat(store.y),parseFloat(store.x)))      
+      bounds?.extend(new kakao.maps.LatLng(parseFloat(store.y) - 0.0005,parseFloat(store.x)))      
       map.setBounds(bounds);
     };
 
@@ -72,6 +74,11 @@ function PromiseMap() {
       setButtonIndex((prev) => num);
       }
     };
+
+    const toggleClick = () => {
+      setToggle((prev) => !prev);
+      setInfo("");
+    }
 
     const setMarkerUrl = (category: any) => {
       if(category === "대형마트") return "/images/shopping.svg";
@@ -97,7 +104,9 @@ function PromiseMap() {
       const center = getCenterPosition();
       setBound(center);
     },[toggle]);
-    console.log(info);
+    
+    console.log(center, startPoint[0]);
+
     return (
     <div>
       <MapConatiner>
@@ -114,7 +123,8 @@ function PromiseMap() {
           { buttonIndex === -1 ?
           storeRecoil?.map((element: any) => (
             element.searchList.map((store: any) =>(
-              <MapMarker key={store.id}
+              <div key={store.id}>
+              <MapMarker
               position={{lat: parseFloat(store.y), lng: parseFloat(store.x)}}
               image={{
                 src: setMarkerUrl(element.category_name),
@@ -125,15 +135,31 @@ function PromiseMap() {
               }}
               onClick={() => setInfo(store.place_name)}
                 >
-                {info && info === store.place_name && (
-                  <div style={{width:"10rem",height:"5rem",backgroundColor:"white"}}>{store.place_name}</div>
-                )}
                 </MapMarker>
+                {info && info === store.place_name && (
+                  <CustomOverlayMap
+                  position={{lat: parseFloat(store.y), lng: parseFloat(store.x)}}
+                  yAnchor={1.8}
+                  zIndex={3}
+                  >
+                    <StoreInfoDiv>
+                      <StoreName>
+                        {store.place_name}
+                      </StoreName>
+                      <DecisionDiv>
+                        길 찾기
+                      </DecisionDiv>
+                      <BackButton onClick={() => setInfo("")}>x</BackButton>
+                    </StoreInfoDiv>
+                  </CustomOverlayMap>
+                )}
+                </div>
             ))
           ))
         : (
           storeRecoil[buttonIndex]?.searchList.map((store) => (
-            <MapMarker key={store.id}
+            <div key={store.id}>
+            <MapMarker
             position={{lat: parseFloat(store.y), lng: parseFloat(store.x)}}
             image={{
               src: setMarkerUrl(storeRecoil[buttonIndex].category_name),
@@ -144,10 +170,24 @@ function PromiseMap() {
             }}
             onClick={() => setInfo(store.place_name)}
             >
-              {info && info === store.place_name && (
-                <div style={{width:"10rem",height:"5rem",backgroundColor:"white"}}>{store.place_name}</div>
-              )}
               </MapMarker>
+              {info && info === store.place_name && (
+                <CustomOverlayMap
+                position={{lat: parseFloat(store.y), lng: parseFloat(store.x)}}
+                yAnchor={1.8}
+                zIndex={3}>
+                  <StoreInfoDiv>
+                      <StoreName>
+                        {store.place_name}
+                      </StoreName>
+                      <DecisionDiv>
+                        길 찾기
+                      </DecisionDiv>
+                      <BackButton onClick={() => setInfo("")}>x</BackButton>
+                    </StoreInfoDiv>  
+                </CustomOverlayMap>
+              )}
+              </div>
           ))
         )
         }
@@ -177,17 +217,32 @@ function PromiseMap() {
             zIndex={2}
             />
 
-          {promiseLocation ?
+          {/* {promiseLocation ?
           <Polygon
           path={startPoint}
-          fillColor={"#39DE2A"}
+          fillColor={"#f87b87"}
           strokeWeight={3}
-          strokeColor={"#39DE2A"} 
+          strokeColor={"#FF4154"} 
           strokeOpacity={0.8}
+          fillOpacity={0.15}
           />
           :
           null
+          } */}
+
+          {center ?
+            startPoint.slice(0,startPoint.length -1).map((point: any, index: number) => (
+              <Polygon
+              path={[center, startPoint[index], startPoint[index + 1]]}
+              fillColor={"#f87b87"}
+              fillOpacity={0.2}
+              strokeOpacity={0}
+              />
+            ))
+            :
+            null
           }
+
           
       </Map>
 
@@ -215,7 +270,7 @@ function PromiseMap() {
       </ButtonContainer>
       
       <ToggleContainer visible={toggle}>
-          <ToggleButton onClick={() => setToggle((prev) => !prev)}>
+          <ToggleButton onClick={toggleClick}>
             {toggle ? 
             <ToggleMenuDiv>목록 접기</ToggleMenuDiv> :
             <ToggleMenuDiv>
