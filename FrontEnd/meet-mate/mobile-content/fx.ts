@@ -59,7 +59,6 @@ export const callApi = async(center: any) => {
             "Content-type" : "application/json;"
         }
     }).then((response) => response.json());
-    console.log(response);
     return response;
 }
 
