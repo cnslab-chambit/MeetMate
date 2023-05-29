@@ -7,12 +7,12 @@ export const PlaceAddDialog = styled.dialog`
     align-items: center;
     justify-content: center;
     width: 240px;
-    border-radius: 3px;
+    border-radius: 1rem;
     gap: 20px;
     font-family: 'GmarketSansBD';
     border: 2px solid black;
-    left: 45vw;
-    top: 25vh;
+    left: 30vw;
+    top: 30vh;
 `
 
 export const TextDialog = styled.p`
@@ -49,7 +49,7 @@ export const HandleButton = styled.input`
     width: 80px;
     height: 45px;
     background-color: #E1E1E1;
-    border-radius: 3px;
+    border-radius: 1rem;
     cursor: pointer;
     font-size: 14px;
     transition: 0.3s ease;

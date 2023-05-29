@@ -13,7 +13,12 @@ function SearchList() {
     const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
 
     const onDivClicked = (data: IMarkers) => {
-        setPromiseState((prev) => [...prev, data]);        
+        setPromiseState((prev) => {
+            const updatedPromise = [...prev];
+            updatedPromise[id] = {...data};
+            return updatedPromise;
+        });        
+        
         setPlaceAdd((prev) => {
             const updatedPlaceAdd = [...prev];
             updatedPlaceAdd[id] = { ...updatedPlaceAdd[id], current: data.place_name };

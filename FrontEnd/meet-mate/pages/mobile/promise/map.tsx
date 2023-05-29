@@ -1,9 +1,9 @@
-import { IMarkers, IStore, loadAtom, mapAtom, promiseState, storeState, trafficState } from "@/mobile-content/atom";
+import { IMarkers, IStore, loadAtom, mapAtom, promiseRoute, promiseState, storeState, trafficState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { Map, MapMarker, Polygon, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { selectType } from "@/mobile-hook/select-color";
-import { callApi } from "@/mobile-content/fx";
+import { callApi, findPlaceRoute } from "@/mobile-content/fx";
 import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
 import Shopping from "../../../public/images/shoppingbag.svg";
 import Food from "../../../public/images/food.svg";
@@ -16,6 +16,7 @@ import Start from "../../../public/images/start.svg";
 
 function PromiseMap() {
     const [map, setMap] = useState<any>()
+    const [placeRoute, setPlaceRoute] = useRecoilState(promiseRoute);
     const [storeRecoil, setStoreRecoil] = useRecoilState<IStore[]>(storeState);
     const [buttonIndex, setButtonIndex] = useState(-1);
     const [startPoint, setStartPoint] = useState<any>([]);
@@ -90,6 +91,7 @@ function PromiseMap() {
     }
 
     useEffect(() => {
+      if(map){
       const center = getCenterPosition();
       const fetchData = async () => {
         const response = await callApi(center);
@@ -98,6 +100,7 @@ function PromiseMap() {
       fetchData();
       getPolyLine();
       setBound(center);
+    }
     }, [map]);
 
     useEffect(() => {
@@ -105,7 +108,7 @@ function PromiseMap() {
       setBound(center);
     },[toggle]);
     
-    console.log(center, startPoint[0]);
+    
 
     return (
     <div>
@@ -146,7 +149,7 @@ function PromiseMap() {
                       <StoreName>
                         {store.place_name}
                       </StoreName>
-                      <DecisionDiv>
+                      <DecisionDiv onClick={() => findPlaceRoute(promiseLocation, store, setPlaceRoute)}>
                         길 찾기
                       </DecisionDiv>
                       <BackButton onClick={() => setInfo("")}>x</BackButton>
@@ -232,7 +235,8 @@ function PromiseMap() {
 
           {center ?
             startPoint.slice(0,startPoint.length -1).map((point: any, index: number) => (
-              <Polygon
+              <Polygon 
+              key={index}
               path={[center, startPoint[index], startPoint[index + 1]]}
               fillColor={"#f87b87"}
               fillOpacity={0.2}
