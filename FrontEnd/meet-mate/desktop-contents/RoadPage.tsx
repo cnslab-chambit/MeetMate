@@ -21,7 +21,7 @@ import PublicTransportList from '@/desktop-search-list/PublicTransportList'
 
 function MapPage() {
   const [road, setRoad] = useRecoilState(roadState)
-  const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(markerAtom);
+  const [markerRecoil, setMarkerRecoil] = useRecoilState(markerAtom);
   const [markers, setMarkers] = useState<any[]>([]);
   const [roadList, setRoadList] = useRecoilState(roadSearchState)
   const { start, end } = road
