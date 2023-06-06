@@ -1,15 +1,9 @@
 import { clickState, inputState, markerState, roadResultDataState, roadSearchResultState, searchState } from '@/atom/atoms';
 import { useDrawPolyLine, useSelectType } from '@/custom-hook/mapBaseHook';
 import { useEffect, useState } from 'react';
-import { Map, MapMarker, Polyline, ZoomControl } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import { useRecoilState } from 'recoil';
-const ZoomCustem = () => {
-  return (
-    <>
-      <ZoomControl position={kakao.maps.ControlPosition.TOPRIGHT} />
-    </>
-  )
-}
+import { ZoomCustem } from '@/custom-hook/ZoomCustem';
 function CustemMap() {
   const [marker, setMarker] = useRecoilState(markerState)
   const [click] = useRecoilState(clickState)
