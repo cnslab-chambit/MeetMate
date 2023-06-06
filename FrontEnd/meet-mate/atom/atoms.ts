@@ -10,7 +10,9 @@ import {
   roadStruct,
   transport,
   subwaySerach,
-  subwaySerachData
+  subwaySerachData,
+  Coordinate,
+  coordinateStruct
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -42,6 +44,16 @@ export const placeTextState = atom<any>({
     2: ''
   }
 })
+export const placeCoordinateState = atom<any>({
+  key: 'placeCoordinateState',
+  default: {}
+})
+export const CoordinatesBoxState = atom<any>(
+  {
+    key: 'CoordinatesBoxState',
+    default: []
+  }
+)
 export const countState = atom<number>({
   key: 'countState',
   default: 0
@@ -84,6 +96,10 @@ export const subwayMarkerState = atom<IMarkers[]>({
   default: []
 });
 
+export const placeMarkerState = atom<IMarkers[]>({
+  key: "placeMarkerState",
+  default: []
+});
 
 export const mapAtom = atom<IMarkers>({
   key: "mapAtom",
@@ -155,6 +171,22 @@ export const roadDataState = atom<roadStruct>({
     subwayCount: 0,
   }
 })
+export const coordinateDataState = atom<coordinateStruct[]>({
+  key: 'coordinateDataState',
+  default: [{
+    category_name: '',
+    searchList: [{
+      address: '',
+      id: 0,
+      place_name: '',
+      place_url: '',
+      star_rate: 0,
+      x: '',
+      y: '',
+    }]
+  }
+  ]
+})
 
 export const subwayDataState = atom<roadStruct>({
   key: 'subwayDataState',
@@ -174,11 +206,18 @@ export const roadSearchState = atom<boolean>({
   key: 'roadSearchState',
   default: false
 })
+export const roadPlaceState = atom<boolean>({
+  key: 'roadPlaceState',
+  default: false
+})
 export const subwayListState = atom<boolean>({
   key: 'subwayListState',
   default: false
 })
-
+export const placeIdState = atom<string>({
+  key: 'placeIdState',
+  default: ''
+})
 export const roadSearchResultState = atom<boolean>({
   key: 'roadSearchresultState',
   default: false
@@ -193,6 +232,16 @@ export const transportState = atom<transport>({
     subway: true,
     bus: false,
     subwaybus: false,
+  }
+})
+export const coordinateState = atom<Coordinate>({
+  key: 'coordinateState',
+  default: {
+    supermarket: false,
+    cultural: false,
+    tourist: false,
+    restaurant: true,
+    cafe: false
   }
 })
 export const subPathState = atom<[]>({
