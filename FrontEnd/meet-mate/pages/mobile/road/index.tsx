@@ -71,7 +71,7 @@ function Input() {
         setSwapClick(false);
     }
     },[loadRecoil.length === 2 && loadRecoil[0]?.place_name !== "장소를 입력해주세요",swapClick]);
-
+3
     return (
         <div style={{display:"flex", flexDirection:"column",alignItems:"center"}}>
             <ContentSearchDiv>

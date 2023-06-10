@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-
 export const slideIn = keyframes`
   from {
     transform: translateY(100%);
@@ -130,6 +129,22 @@ export const PlaceName = styled.div`
   path{
     fill: #FFC910;
   }
+`;
+
+export const NonStoreDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 800;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ImageBox = styled.div`
+  width: 7rem;
+  height: 7rem;
+  background-image: url("/images/sad.svg");
 `;
 
 export const PlaceAddress = styled.div`

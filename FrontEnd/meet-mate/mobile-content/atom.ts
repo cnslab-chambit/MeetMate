@@ -167,8 +167,3 @@ export interface IMarkers{
     key: 'promiseIndex',
     default: -1,
   });
-
-  export const promiseRoute = atom<any>({
-    key: 'prmoiseRoute',
-    default: []
-  })

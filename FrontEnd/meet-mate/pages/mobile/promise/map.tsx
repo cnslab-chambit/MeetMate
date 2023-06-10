@@ -1,9 +1,9 @@
-import { IMarkers, IStore, loadAtom, mapAtom, promiseRoute, promiseState, storeState, trafficState } from "@/mobile-content/atom";
+import { IMarkers, IStore, loadAtom, mapAtom, promiseState, storeState, trafficState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
-import { Map, MapMarker, Polygon, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polygon, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { selectType } from "@/mobile-hook/select-color";
-import { callApi, findPlaceRoute } from "@/mobile-content/fx";
+import { callApi, callMapObjApiAJAX, drawPolyLine, findPlaceRoute, setMarkerUrl } from "@/mobile-content/fx";
 import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
 import Shopping from "../../../public/images/shoppingbag.svg";
 import Food from "../../../public/images/food.svg";
@@ -16,17 +16,19 @@ import Start from "../../../public/images/start.svg";
 
 function PromiseMap() {
     const [map, setMap] = useState<any>()
-    const [placeRoute, setPlaceRoute] = useRecoilState(promiseRoute);
+    const [placeRoute, setPlaceRoute] = useState<any>([]);
     const [storeRecoil, setStoreRecoil] = useRecoilState<IStore[]>(storeState);
     const [buttonIndex, setButtonIndex] = useState(-1);
     const [startPoint, setStartPoint] = useState<any>([]);
     const [toggle, setToggle] = useState(false);
     const [center, setCetner] = useState<any>([]);
     const [info, setInfo] = useState<any>();
+    const [polyline,setPolyLine] = useState<any>([]);
     const promiseLocation = useRecoilValue<IMarkers[]>(promiseState);
-    
+    const color = ["#a5e495", "#95b3e7","#eb9191","#bc83fd","#A9E1ED","#d6f3ad"];
+    let linArr: any = [];
     const getCenterPosition = () => {
-      let x = 0;
+      let x = 0;  
       let y = 0;
       for(let i = 0; i < promiseLocation.length; i++){
         x += parseFloat(promiseLocation[i].x);
@@ -61,6 +63,17 @@ function PromiseMap() {
       }
     };
 
+    const setRoadBound = (center:any) => {
+      if(map){      
+      let bounds = new kakao.maps.LatLngBounds();
+      for(let i = 0; i < promiseLocation.length; i++){
+        bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
+      }
+      map?.setBounds(bounds)
+      setToggle((prev: boolean) => !prev);
+    }
+    };
+
     const divSetBound = (store :any) => {
       let bounds = new kakao.maps.LatLngBounds();
       bounds?.extend(new kakao.maps.LatLng(parseFloat(store.y) - 0.0005,parseFloat(store.x)))      
@@ -81,14 +94,26 @@ function PromiseMap() {
       setInfo("");
     }
 
-    const setMarkerUrl = (category: any) => {
-      if(category === "대형마트") return "/images/shopping.svg";
-      else if(category === "문화시설") return "/images/activity.svg";
-      else if(category === "관광명소") return "/images/travel.svg";
-      else if(category === "음식점") return "/images/foodPlace.svg";
-      else if(category === "카페") return "/images/cafe.svg";
-      return "";
-    }
+    const clickFindRoad = async(store: any) => {
+      setPlaceRoute([]);
+      const promises = promiseLocation.map(async (location) => {
+      const result = await findPlaceRoute([location], store, setPlaceRoute);
+      return result;
+  });
+
+      const placeRoutes = await Promise.all(promises);
+
+      for (let i = 0; i < promiseLocation.length; i++) {
+        const response = await callMapObjApiAJAX(placeRoutes[i]?.result.path[0].info.mapObj);
+        if (response) {
+          const arr = await drawPolyLine(response.result.lane);
+          setPolyLine((prev: any[]) => [...prev, arr]);
+        }
+  }
+
+  const center = getCenterPosition();
+  setRoadBound(center);
+    };
 
     useEffect(() => {
       if(map){
@@ -107,8 +132,6 @@ function PromiseMap() {
       const center = getCenterPosition();
       setBound(center);
     },[toggle]);
-    
-    
 
     return (
     <div>
@@ -149,7 +172,7 @@ function PromiseMap() {
                       <StoreName>
                         {store.place_name}
                       </StoreName>
-                      <DecisionDiv onClick={() => findPlaceRoute(promiseLocation, store, setPlaceRoute)}>
+                      <DecisionDiv onClick={() => clickFindRoad(store)}>
                         길 찾기
                       </DecisionDiv>
                       <BackButton onClick={() => setInfo("")}>x</BackButton>
@@ -248,6 +271,29 @@ function PromiseMap() {
           }
 
           
+          {polyline.length > 0 ? 
+          polyline.map((line: any,index: number) => (
+            <div key={index+40}>
+            <Polyline
+            key={index + 10}
+            path={line}
+            strokeColor={color[index % 6]}
+            strokeWeight={8}
+            strokeOpacity={1}
+            />
+            <Polyline
+            key={index + 0}
+            path={line}
+            strokeColor="white"
+            strokeStyle="dash"
+            strokeWeight={2}
+            strokeOpacity={1}
+            />
+            </div>
+          ))
+            :
+            null}
+          
       </Map>
 
       <ButtonContainer>
@@ -289,9 +335,6 @@ function PromiseMap() {
             null
         }
       </ToggleContainer>
-
-
-
     </MapConatiner>
   </div>
     )
