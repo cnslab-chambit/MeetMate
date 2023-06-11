@@ -9,17 +9,17 @@ import {
   ContentPlaceDiv,
   ContentInputButtonDiv,
   ContentDiv,
+  LodingDiv,
 } from '@/styled-component/content-component/styled_content'
 import PlaceDialog from '@/dialog/PlaceDialog';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { coordinateDataState, countState, placeCoordinateState, placeIdState, placeMarkerState, placeState, roadPlaceState } from '@/atom/atoms';
 import CancelIcon from '../public/images/cancel.svg'
 import { placeCoordinateList } from '@/apis/apiStorage';
-import PublicTransportList from '@/desktop-search-list/PublicTransportList';
 import { IMarkers } from '@/interface/desktop_intergace';
 import PlaceSearchList from '@/desktop-search-list/PlaceSearchList';
-import SearchList from '@/desktop-search-list/SearchList';
 import CoordinateCategory from '@/desktop-search-list/CoordinateCategory';
+import LodingIcon from '../public/images/Loding.svg'
 function PlacePage() {
 
   const [count, setCount] = useRecoilState(countState);
@@ -30,6 +30,7 @@ function PlacePage() {
   const [PlaceList, setPlaceList] = useRecoilState(roadPlaceState)
   const [coordinateData, setCoordinateData] = useRecoilState(coordinateDataState)
   const setPlaceId = useSetRecoilState(placeIdState)
+  const [loding, setLoding] = useState(false)
   const onChange = (e: any) => {
     const { name, value } = e.target
     setPlaceCoordinate({ ...placeCoordinate, [name]: { name: value, lat: '', lng: '' } })
@@ -92,6 +93,7 @@ function PlacePage() {
     let newLat = 0
     let newLng = 0
     let cnt = 0
+    setLoding(true)
     for (let obj of Object.values(placeCoordinate)) {
       newLat += (+obj?.lat)
       newLng += (+obj?.lng)
@@ -100,32 +102,40 @@ function PlacePage() {
     const data = await placeCoordinateList(newLng / cnt, newLat / cnt)
     setCoordinateData(data)
     setPlaceList(true)
+    setLoding(false)
   }
   return (
-    <ContentPlaceDiv>
-      <ContentDiv>
-        {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
-        <ContentInputDiv active={true}>
-          {placeAdd.map((element, index: any) => {
-            return index > 1 ? (
-              <ContentInputIconDiv onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
-                <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={true} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
-                <CancelIcon onClick={() => onDelete(element.id)} />
-              </ContentInputIconDiv>
-            ) : (
-              <ContentInputForm onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
-                <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={false} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
-              </ContentInputForm>
-            );
-          })}
-        </ContentInputDiv>
-      </ContentDiv>
-      <ContentInputButtonDiv>
-        <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} _width='104px' _heigth='49px' />
-        <ContentInputButton type='button' value='장소 찾기' onClick={() => searchPlace()} _width='104px' _heigth='49px' />
-      </ContentInputButtonDiv>
-      {PlaceList ? (<CoordinateCategory />) : (<PlaceSearchList />)}
-    </ContentPlaceDiv>
+    <>
+      {loding ? (
+        <LodingDiv>
+          <LodingIcon />
+        </LodingDiv>
+      ) : (null)}
+      <ContentPlaceDiv>
+        <ContentDiv>
+          {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
+          <ContentInputDiv active={true}>
+            {placeAdd.map((element, index: any) => {
+              return index > 1 ? (
+                <ContentInputIconDiv onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
+                  <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={true} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
+                  <CancelIcon onClick={() => onDelete(element.id)} />
+                </ContentInputIconDiv>
+              ) : (
+                <ContentInputForm onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
+                  <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={false} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
+                </ContentInputForm>
+              );
+            })}
+          </ContentInputDiv>
+        </ContentDiv>
+        <ContentInputButtonDiv>
+          <ContentInputButton type='button' value='장소 추가' onClick={() => setOpen(true)} _width='104px' _heigth='49px' />
+          <ContentInputButton type='button' value='장소 찾기' onClick={() => searchPlace()} _width='104px' _heigth='49px' />
+        </ContentInputButtonDiv>
+        {PlaceList ? (<CoordinateCategory />) : (<PlaceSearchList />)}
+      </ContentPlaceDiv>
+    </>
   )
 }
 
