@@ -1,20 +1,20 @@
-import { CoordinatesBoxState, placeCoordinateState, placeIdState } from '@/atom/atoms'
+import { CoordinatesBoxState, coordinateDataState, placeCoordinateState, placeIdState, roadPlaceCenterState, roadPlaceState, roadSearchTypeState } from '@/atom/atoms'
 import { ConvexHull } from '@/convex-hull/ConvexHull'
 import { ZoomCustem } from '@/custom-hook/ZoomCustem'
 import React, { useEffect, useState } from 'react'
 import { Map, MapMarker, Polygon, Polyline } from 'react-kakao-maps-sdk'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 function PlaceMap() {
 
     const [placeCoordinate, setPlaceCoordinate] = useRecoilState(placeCoordinateState)
+    const coordinateData = useRecoilValue(coordinateDataState);
+    const type = useRecoilValue(roadSearchTypeState)
     const [placeId, setPlaceId] = useRecoilState(placeIdState)
     const [path, setPath] = useState<any>([])
     const [pathMarker, setPathMarker] = useState<any>([])
-    const [center, setCenter] = useState({
-        lat: 0,
-        lng: 0
-    })
+    const placeList = useRecoilValue(roadPlaceState)
+    const [center, setCenter] = useRecoilState(roadPlaceCenterState)
     let newLat = 0
     let newLng = 0
     let cnt = 0
@@ -43,7 +43,7 @@ function PlaceMap() {
 
                 center={center.lat ? (center) : ({ lat: 37.6192404638865, lng: 127.058270608867 })}
                 style={{ width: "100%", height: "100vh" }}
-                level={8}
+                level={placeList ? (1) : (8)}
             >
                 <ZoomCustem />
                 {Object.entries(pathMarker).map(([id, { lat, lng }]) => (
@@ -59,13 +59,49 @@ function PlaceMap() {
                         }}
                     />
                 ))}
+                {center ? (<MapMarker
+                    position={center}
+                    image={{
+                        src: '/images/end.svg',
+                        size: {
+                            width: 40,
+                            height: 40,
+                        },
+                    }}
+                />) : (null)
+                }
+                {placeList ? (
+                    coordinateData.map((info: any, index: number) => {
+                        if (type === info.category_name) {
+                            return (
+                                info?.searchList?.map((e: any) => {
+                                    return (
+                                        <MapMarker
+                                            position={{ lat: e?.y, lng: e?.x }}
+                                            image={{
+                                                src: '/images/end.svg',
+                                                size: {
+                                                    width: 40,
+                                                    height: 40,
+                                                },
+                                            }}
+                                        />
+                                    )
+                                })
+                            )
+                        }
+
+                    }
+                    )
+                ) : (null)}
                 <Polygon
                     path={path}
-                    strokeWeight={4}
+                    strokeWeight={2}
                     fillColor={"#f87b87"}
-                    fillOpacity={0.3}
-                    strokeOpacity={0}
+                    fillOpacity={0.5}
+                    strokeOpacity={path.length > 2 ? (0) : (1)}
                 />
+
             </Map>
         </>
     )
