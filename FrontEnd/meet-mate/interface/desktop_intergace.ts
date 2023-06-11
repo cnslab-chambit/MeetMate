@@ -60,14 +60,36 @@ export interface roadStruct {
     subwayBusCount: number
     subwayCount: number
 }
-
+export interface coordinateStruct {
+    category_name: string
+    searchList: [{
+        address: string
+        id: number
+        place_name: string
+        place_url: string
+        star_rate: number
+        x: string
+        y: string
+    }]
+}
 export interface transport {
     bus: boolean
     subway: boolean
     subwaybus: boolean
 }
+export interface Coordinate {
+    supermarket: boolean
+    cultural: boolean
+    tourist: boolean
+    restaurant: boolean
+    cafe: boolean
+}
 
 export interface subwaySerachData {
     info: {}
     subPath: [{}]
+}
+export interface roadCenterState {
+    lat: number
+    lng: number
 }

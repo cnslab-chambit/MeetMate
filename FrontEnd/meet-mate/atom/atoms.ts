@@ -12,7 +12,8 @@ import {
   subwaySerach,
   subwaySerachData,
   Coordinate,
-  coordinateStruct
+  coordinateStruct,
+  roadCenterState
 } from "@/interface/desktop_intergace";
 export const pageState = atom<desktop>({
   key: 'pageState',
@@ -210,6 +211,13 @@ export const roadPlaceState = atom<boolean>({
   key: 'roadPlaceState',
   default: false
 })
+export const roadPlaceCenterState = atom<roadCenterState>({
+  key: 'roadPlaceCenterState',
+  default: {
+    lat: 0,
+    lng: 0
+  }
+})
 export const subwayListState = atom<boolean>({
   key: 'subwayListState',
   default: false
@@ -220,6 +228,14 @@ export const placeIdState = atom<string>({
 })
 export const roadSearchResultState = atom<boolean>({
   key: 'roadSearchresultState',
+  default: false
+})
+export const roadSearchTypeState = atom<string>({
+  key: 'roadSearchTypeState',
+  default: ''
+})
+export const roadSearchOnWayState = atom<boolean>({
+  key: 'roadSearchOnWayState',
   default: false
 })
 export const roadResultDataState = atom<any>({
