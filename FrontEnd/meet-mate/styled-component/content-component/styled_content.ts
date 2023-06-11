@@ -70,3 +70,19 @@ export const ContentInputIconDiv = styled.form`
 export const ContentInputForm = styled.form`
 
 `
+export const LodingDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    background: rgba(241, 241, 241, 0.4);
+    height: 100vh;
+    width: 100vw;
+    svg {
+        width: 5vw;
+    }
+`
