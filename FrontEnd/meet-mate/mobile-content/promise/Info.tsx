@@ -1,12 +1,13 @@
 import { useRecoilState } from "recoil";
-import { IStore, storeState } from "./atom";
+import { IStore, storeState } from "../atom";
 import { CategotyDiv, DetailDiv, ImageBox, InfoDiv, NonStoreDiv, PlaceAddress, PlaceInfoDiv, PlaceName, RoadButton, StarSpan } from "@/m-styled-component/promise-component/promise_styled";
-import Star from "../public/images/star.svg";
-import RoadArrow from "../public/images/roadArrow.svg";
-import Sad from "../public/images/sad.png";
+import Star from "../../public/images/star.svg";
+import RoadArrow from "../../public/images/roadArrow.svg";
+import Sad from "../../public/images/sad.png";
+import Route from "../Route";
 
 
-function Info({buttonIndex, setInfo, divSetBound}: {buttonIndex:number, setInfo: any, divSetBound:any}) {
+function Info({buttonIndex, setInfo, divSetBound,clickedRoad,placeRoute}: {buttonIndex:number, setInfo: any, divSetBound:any, clickedRoad: boolean, placeRoute:any}) {
     const [storeRecoil, setStoreRecoil] = useRecoilState(storeState);
 
     const divClick = (store: any) => {

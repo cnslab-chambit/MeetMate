@@ -11,8 +11,9 @@ import Mug from "../../../public/images/mug.svg";
 import Camera from "../../../public/images/camera.svg";
 import Bike from "../../../public/images/bike.svg";
 import Menu from "../../../public/images/menu.svg";
-import Info from "@/mobile-content/Info";
+import Info from "@/mobile-content/promise/Info";
 import Start from "../../../public/images/start.svg";
+import Route from "@/mobile-content/Route";
 
 function PromiseMap() {
     const [map, setMap] = useState<any>()
@@ -23,6 +24,7 @@ function PromiseMap() {
     const [toggle, setToggle] = useState(false);
     const [center, setCetner] = useState<any>([]);
     const [info, setInfo] = useState<any>();
+    const [clickedRoad, setClickedRoad] = useState(false);
     const [polyline,setPolyLine] = useState<any>([]);
     const promiseLocation = useRecoilValue<IMarkers[]>(promiseState);
     const color = ["#a5e495", "#95b3e7","#eb9191","#bc83fd","#A9E1ED","#d6f3ad"];
@@ -90,14 +92,22 @@ function PromiseMap() {
     };
 
     const toggleClick = () => {
+      if(toggle === true){
+        setClickedRoad(true);
+      }
+      else{
+        setClickedRoad(false);
+      }
       setToggle((prev) => !prev);
       setInfo("");
     }
 
     const clickFindRoad = async(store: any) => {
+      setClickedRoad((prev: boolean) => false);
       setPlaceRoute([]);
       const promises = promiseLocation.map(async (location) => {
       const result = await findPlaceRoute([location], store, setPlaceRoute);
+      console.log(result);
       return result;
   });
 
@@ -109,11 +119,11 @@ function PromiseMap() {
           const arr = await drawPolyLine(response.result.lane);
           setPolyLine((prev: any[]) => [...prev, arr]);
         }
-  }
+    }
 
   const center = getCenterPosition();
   setRoadBound(center);
-    };
+  };
 
     useEffect(() => {
       if(map){
@@ -320,6 +330,8 @@ function PromiseMap() {
       </ButtonContainer>
       
       <ToggleContainer visible={toggle}>
+        
+      
           <ToggleButton onClick={toggleClick}>
             {toggle ? 
             <ToggleMenuDiv>목록 접기</ToggleMenuDiv> :
@@ -330,10 +342,10 @@ function PromiseMap() {
             }
           </ToggleButton>
           {toggle ?
-              <Info buttonIndex={buttonIndex} setInfo={setInfo} divSetBound={divSetBound}/>
+              <Info buttonIndex={buttonIndex} placeRoute={placeRoute} setInfo={setInfo} divSetBound={divSetBound} clickedRoad={clickedRoad}/>
             :
-            null
-        }
+            <Route placeRoute={placeRoute}/>
+          }
       </ToggleContainer>
     </MapConatiner>
   </div>

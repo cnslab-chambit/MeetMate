@@ -167,3 +167,8 @@ export interface IMarkers{
     key: 'promiseIndex',
     default: -1,
   });
+
+  export const pathDataState = atom<any | null> ({
+    key: "pathDataState",
+    default: []
+  });

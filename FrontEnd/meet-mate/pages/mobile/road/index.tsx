@@ -113,7 +113,6 @@ function Input() {
                             />
                             ):null}
                         </BaseBar>
-                        
                     </FlexBoxCol>
                     <WayBar>
                             {pathData.length > 0 ?

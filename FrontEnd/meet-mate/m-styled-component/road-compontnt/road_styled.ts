@@ -47,4 +47,31 @@ export const RangeText = styled.div`
     transform: translateX(-0.7rem);
     font-size: 0.01rem;
     margin: 0 auto;
-`
+`;
+
+
+export const RoadInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  padding: 0 2rem;
+  cursor: pointer;
+  bottom : 7rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const RoadInfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 20rem;
+  margin-top: 1rem;
+  z-index: 2;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 1px 1px #666666;
+  overflow: auto;
+`;
