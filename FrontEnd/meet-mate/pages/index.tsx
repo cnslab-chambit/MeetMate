@@ -1,4 +1,3 @@
-
 import { pageState } from "@/atom/atoms";
 import CustemMap from "@/desktop-contents/CustemMap";
 import PlaceMap from "@/desktop-contents/PlaceMap";
@@ -16,5 +15,3 @@ export default function Home() {
       navState.subway ? (<SubwayMap></SubwayMap>) : (<CustemMap></CustemMap >)
     )
   }
-
-}
