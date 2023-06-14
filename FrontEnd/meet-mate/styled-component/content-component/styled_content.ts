@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const ContentPageDiv = styled.div`
-    overflow: hidden;
+    overflow: scroll;
     max-height: 100vh;
 `
 export const ContentInputDiv = styled.div<{ active: boolean }>`
@@ -44,7 +44,7 @@ export const ContentInputButton = styled.input<{ _width: string, _heigth: string
     }
 
 `
-export const ContentInputForm = styled.form`
+export const ContentDiv = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -55,8 +55,7 @@ export const ContentPlaceDiv = styled.div`
     display: grid;
     gap: 20px;
 `
-export const ContentInputIconDiv = styled.div`
-    
+export const ContentInputIconDiv = styled.form`
     display: flex;      
     width: 345px;
     border: 1.5px solid #3E3E3E;
@@ -66,5 +65,24 @@ export const ContentInputIconDiv = styled.div`
         right: 10px;
         top: 13px;  
         cursor: pointer;
+    }
+`
+export const ContentInputForm = styled.form`
+
+`
+export const LodingDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    background: rgba(241, 241, 241, 0.4);
+    height: 100vh;
+    width: 100vw;
+    svg {
+        width: 5vw;
     }
 `
