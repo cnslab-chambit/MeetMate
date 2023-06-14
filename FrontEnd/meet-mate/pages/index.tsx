@@ -15,3 +15,4 @@ export default function Home() {
       navState.subway ? (<SubwayMap></SubwayMap>) : (<CustemMap></CustemMap >)
     )
   }
+}
