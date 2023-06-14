@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { GlobalContainer } from '@/m-styled-component/index-component/styled_index';
 import SearchNav from '@/mobile-content/mobileNav/SearchNav';
 import MobileNav from '@/mobile-content/mobileNav/MobileNav';
-import { TransInfoDiv } from '@/m-styled-component/content-component/styled_find_bus';
+// import { TransInfoDiv } from '@/m-styled-component/content-component/styled_find_bus';
 const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   const [open, setOpen] = useState<boolean>(true)

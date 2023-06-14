@@ -1,6 +1,6 @@
 import PlaceDialog from "@/mobile-content/Dialog";
 import { ButtonDiv, LogoDiv, LogoMent, PromiseButton, PromiseButton2, PromiseContainer, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
-import { countState, placeState, promiseIndex } from "@/mobile-content/atom";
+import { countState, placeState, promiseIndex, promiseRoute, promiseState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Logo from "../../../public/images/Logo.svg";
@@ -14,19 +14,23 @@ function Promise() {
     const [open, setOpen] = useState<boolean>(false);
     const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
     const setIndex = useSetRecoilState(promiseIndex);
-
+    
     const onDelete = (target:number) =>{
     const newPlaces = placeAdd.filter((element)=>{
-      console.log(element.id,target)
         return element.id !== target
-    })
+    });
     
     setPlaceAdd(newPlaces)
   };
 
     const changePage = (id: number) => {
         setIndex(id);
-        router.push(`/mobile/promise/search/`);
+        console.log(id);
+        router.push(`/mobile/promise/search`);
+    };
+
+    const findPlace = (url: string) => {
+      router.push(url);
     };
 
   useEffect(() => {
@@ -59,7 +63,8 @@ function Promise() {
                         </PromiseDiv>
                         <CancelIcon onClick={()=>onDelete(element.id)}/>
                         </NavSearchDiv3>
-                    ):
+                    )
+                    :
                     (
                         <PromiseDiv
                         key={element.id}
@@ -71,7 +76,7 @@ function Promise() {
             </LogoDiv>
             <ButtonDiv>
                 <PromiseButton onClick={() => setOpen(true)} >장소 추가</PromiseButton>
-                <PromiseButton2 onClick={() => router.push("/mobile/promise/map")}>장소 찾기</PromiseButton2>
+                <PromiseButton2 onClick={() => findPlace("/mobile/promise/map")}>장소 찾기</PromiseButton2>
             </ButtonDiv>
         </PromiseContainer>
     );

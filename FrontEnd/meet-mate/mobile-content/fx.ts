@@ -1,3 +1,5 @@
+import { IMarkers } from "./atom";
+
 const setWayColor = (trafficType: number, buswayCode: number, subwayCode: number) => {
     
     if(trafficType === 3){
@@ -59,7 +61,15 @@ export const callApi = async(center: any) => {
             "Content-type" : "application/json;"
         }
     }).then((response) => response.json());
-    console.log(response);
     return response;
 }
 
+export const findPlaceRoute = (startPoint: IMarkers[],store: any,setPlaceRoute: any) => {
+    for(let i = 0; i < startPoint.length; i++){
+        let baseUrl = `https://api.odsay.com/v1/api/searchPubTransPathT?SX=${parseFloat(startPoint[i].x)}&SY=${parseFloat(startPoint[i].y)}&EX=${store.x}&EY=${store.y}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`;
+        (async () => {
+            const data = await (await fetch(baseUrl)).json();
+            console.log(data);
+        })()
+      }
+}

@@ -36,6 +36,7 @@ export const PromiseInput = styled.input`
 export const PromiseButton = styled.button`
     background-color: white;
     border: 0.15rem solid;
+    border-radius: 1rem;
     font-size: 2rem;
     width: 10rem;
     height: 5rem;
@@ -47,7 +48,7 @@ export const PromiseButton = styled.button`
 `;
 
 export const PromiseButton2 = styled(PromiseButton)`
-    background-color: #00A3FF;
+    background-color: #3880FF;
     &:hover{
         background-color: #0381ca;
     }
