@@ -42,12 +42,13 @@ export const SelectButton = styled.div<{active:boolean}>`
     justify-content: space-evenly;
     width: 10rem;
     height: 3rem;
-    border: 2px solid gray;
+    border: none;
     border-radius: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
     background-color: ${(props) => props.active ? "#C7D6FF" : "white"};
     color: ${(props) => props.active ? "white" : "black"};
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const ToggleContainer = styled.div<{visible:boolean}>`
@@ -69,13 +70,20 @@ export const ToggleContainer = styled.div<{visible:boolean}>`
       : css`
           ${slideOut} 0.5s forwards
         `};
+        
+`;
+
+export const ToggleButtonDiv = styled.div`
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
 `;
 
 export const ToggleButton = styled.div`
     display: flex;
     align-items: center;
     height: 3rem;
-    border: 2px solid gray;
+    border: none;
     border-radius: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
@@ -84,7 +92,13 @@ export const ToggleButton = styled.div`
     path{
       stroke: #00A3FF;
     }  
-    box-shadow: 0px 1px 0px 0px #000000;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+`;
+
+export const RoadToggleButton = styled(ToggleButton)<{active: boolean}>`
+  background-color: ${(props) => props.active ? "#367BF6" : "white"};
+  color: ${(props) => props.active ? "white" : "black"};
+  
 `;
 
 export const ToggleMenuDiv = styled.div`
@@ -102,7 +116,7 @@ export const InfoDiv = styled.div`
   z-index: 2;
   background-color: white;
   border-radius: 1rem;
-  box-shadow: 2px 2px 1px 1px #666666;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   overflow: auto;
 `;
 
@@ -200,6 +214,7 @@ export const StoreName = styled.div`
   display: flex;
   width: 70%;
   justify-content: center;
+  font-family: 'GmarketSansBD';
 `;
 
 export const DecisionDiv = styled.div`

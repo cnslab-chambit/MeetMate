@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { Map, MapMarker, Polygon, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { selectType } from "@/mobile-hook/select-color";
 import { callApi, callMapObjApiAJAX, drawPolyLine, findPlaceRoute, setMarkerUrl } from "@/mobile-content/fx";
-import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
+import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, RoadToggleButton, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleButtonDiv, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
 import Shopping from "../../../public/images/shoppingbag.svg";
 import Food from "../../../public/images/food.svg";
 import Mug from "../../../public/images/mug.svg";
@@ -51,16 +51,23 @@ function PromiseMap() {
     };
 
     const setBound = (center:any) => {
-      if(map && !toggle){      
+      if(map && !toggle && clickedRoad){      
       let bounds = new kakao.maps.LatLngBounds();
       for(let i = 0; i < promiseLocation.length; i++){
         bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
       }
       map?.setBounds(bounds)
       }      
-      else if(map && toggle){
+      else if(map && toggle && !clickedRoad){
         let bounds = new kakao.maps.LatLngBounds();
         bounds?.extend(new kakao.maps.LatLng(parseFloat(center.y), parseFloat(center.x)));
+        map?.setBounds(bounds);
+      }
+      else if(map && !toggle){
+        let bounds = new kakao.maps.LatLngBounds();
+        for(let i = 0; i < promiseLocation.length; i++){
+          bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
+        } 
         map?.setBounds(bounds);
       }
     };
@@ -92,22 +99,19 @@ function PromiseMap() {
     };
 
     const toggleClick = () => {
-      if(toggle === true){
-        setClickedRoad(true);
-      }
-      else{
-        setClickedRoad(false);
-      }
       setToggle((prev) => !prev);
       setInfo("");
     }
 
+    const roadToggleClick = () => {
+      setClickedRoad((prev: boolean) => !prev);
+    }
+
     const clickFindRoad = async(store: any) => {
-      setClickedRoad((prev: boolean) => false);
       setPlaceRoute([]);
       const promises = promiseLocation.map(async (location) => {
       const result = await findPlaceRoute([location], store, setPlaceRoute);
-      console.log(result);
+      setClickedRoad((prev: boolean) => true);
       return result;
   });
 
@@ -142,6 +146,8 @@ function PromiseMap() {
       const center = getCenterPosition();
       setBound(center);
     },[toggle]);
+
+    console.log(clickedRoad);
 
     return (
     <div>
@@ -253,19 +259,6 @@ function PromiseMap() {
             zIndex={2}
             />
 
-          {/* {promiseLocation ?
-          <Polygon
-          path={startPoint}
-          fillColor={"#f87b87"}
-          strokeWeight={3}
-          strokeColor={"#FF4154"} 
-          strokeOpacity={0.8}
-          fillOpacity={0.15}
-          />
-          :
-          null
-          } */}
-
           {center ?
             startPoint.slice(0,startPoint.length -1).map((point: any, index: number) => (
               <Polygon 
@@ -330,21 +323,38 @@ function PromiseMap() {
       </ButtonContainer>
       
       <ToggleContainer visible={toggle}>
-        
-      
+        <ToggleButtonDiv>
           <ToggleButton onClick={toggleClick}>
             {toggle ? 
-            <ToggleMenuDiv>목록 접기</ToggleMenuDiv> :
+            <>
+            <ToggleMenuDiv>목록 접기</ToggleMenuDiv> 
+            </>
+            :
             <ToggleMenuDiv>
               <Menu/>
               목록
             </ToggleMenuDiv>
             }
           </ToggleButton>
-          {toggle ?
+            {toggle && placeRoute.length ? 
+            <RoadToggleButton onClick={roadToggleClick} active={clickedRoad}>
+              <ToggleMenuDiv>
+                길 찾기
+              </ToggleMenuDiv>
+            </RoadToggleButton>
+            :
+            <div style={{display:"none"}}></div>
+          }
+        </ToggleButtonDiv>
+
+          {toggle && !clickedRoad ? 
               <Info buttonIndex={buttonIndex} placeRoute={placeRoute} setInfo={setInfo} divSetBound={divSetBound} clickedRoad={clickedRoad}/>
             :
-            <Route placeRoute={placeRoute}/>
+            toggle && clickedRoad ?
+            <Route placeRoute={placeRoute} colorArr={color}/>
+            :
+            
+            <div style={{display:"none"}}></div>
           }
       </ToggleContainer>
     </MapConatiner>

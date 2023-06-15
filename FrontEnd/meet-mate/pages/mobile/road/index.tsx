@@ -1,6 +1,6 @@
 import { Boldpg, FlexBox, FlexBoxCol, TimeBox, TransferBox } from "@/m-styled-component/content-component/styled_find_bus";
 import { BaseBar, WayBar } from "@/m-styled-component/road-compontnt/road_styled";
-import { PromiseDiv} from "@/m-styled-component/search-component/serch_styled";
+import { LogoMent, PromiseDiv} from "@/m-styled-component/search-component/serch_styled";
 import Gauge from "@/mobile-content/Gauge";
 import Way from "@/mobile-content/Way";
 import { IMarkers, divNumAtom, loadAtom, trafficState } from "@/mobile-content/atom";
@@ -12,7 +12,7 @@ import styled from "styled-components";
 
 const CrossIconDiv = styled.div`
    position: relative;
-    left: 47rem;
+    left: 28rem;
     bottom: 6.6rem;
 `;
 
@@ -73,7 +73,8 @@ function Input() {
     },[loadRecoil.length === 2 && loadRecoil[0]?.place_name !== "장소를 입력해주세요",swapClick]);
 3
     return (
-        <div style={{display:"flex", flexDirection:"column",alignItems:"center"}}>
+        <div style={{display:"flex", flexDirection:"column",alignItems:"center",paddingTop:"5rem"}}>
+            <LogoMent>출발지와 도착지를 <br/>입력해주세요!</LogoMent>
             <ContentSearchDiv>
                 <PromiseDiv onClick={()=> movePage("/mobile/road/search","start")}>
                     {loadRecoil[0] ? loadRecoil[0].place_name : "장소를 입력해주세요"}

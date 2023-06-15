@@ -4,18 +4,21 @@ import { BaseBar, WayBar } from "@/m-styled-component/road-compontnt/road_styled
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Gauge from "./Gauge";
 import Way from "./Way";
+import { subwayPathState } from "./atom";
 
 function SubWay() {
     const [roadData, setRoadData] = useRecoilState(subwayDataState);
     const [roadSearchResult, setRoadSearchResult] = useRecoilState(roadSearchResultState);
+    const setSubwayState = useSetRecoilState(subwayPathState);
     const setSubPath = useSetRecoilState(subPathState)
     const onWay = (path: any) => {
 
         setSubPath(path.subPath.filter((e: any) => e.trafficType === 1))
         // setRoadSearchResult(true)
-
+        setSubwayState(true);
     }
     console.log(roadData);
+    
     return (
         <TransferBox>
             {roadData.path.length > 0 ? roadData?.path.map((path: any, index: number) => {

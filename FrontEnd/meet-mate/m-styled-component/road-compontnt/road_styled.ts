@@ -72,6 +72,5 @@ export const RoadInfoDiv = styled.div`
   z-index: 2;
   background-color: white;
   border-radius: 1rem;
-  box-shadow: 2px 2px 1px 1px #666666;
   overflow: auto;
 `;

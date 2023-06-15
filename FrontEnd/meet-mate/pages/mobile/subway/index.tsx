@@ -3,13 +3,20 @@ import SubwayCard from "@/desktop-search-list/SubwayCard";
 import SubwaySearchList from "@/desktop-search-list/SubwaySearchList";
 import { IMarkers } from "@/interface/desktop_intergace";
 import SubWay from "@/mobile-content/SubWay";
+import SubwayDot from "@/mobile-content/SubwayDot";
+import { subwayPathState } from "@/mobile-content/atom";
 import { roadSearchApi } from "@/mobile-content/fx";
-import { ContentInput, ContentInputButton, ContentInputDiv } from "@/styled-component/content-component/styled_content";
-import { CrossIconDiv, CrossInputDiv, RoadButtonDiv, RoadDiv, RoadForm } from "@/styled-component/content-component/styled_road";
+import { ContentInput, ContentInputButton, ContentInputDiv } from "@/m-styled-component/index-component/styled_index"
+import { CrossIconDiv, CrossInputDiv, RoadButtonDiv, RoadDiv, RoadForm } from "@/m-styled-component/subway-component/subway_styled";
 import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import SubWayList from "@/mobile-content/SubWayList";
+import { LogoMent, PromiseButton, PromiseButton2 } from "@/m-styled-component/search-component/serch_styled";
+import SubwayLogo from "../../../public/images/subwayLogo.svg";
+import Image from "next/image";
 
 function SubwayPage() {
+    const [pathClick, setPathClick] = useRecoilState(subwayPathState);
     const [subway, setSubway] = useRecoilState(subwayState)
     const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(subwayMarkerState);
     const [subwayList, setSubwayList] = useRecoilState(subwayListState)
@@ -88,8 +95,13 @@ function SubwayPage() {
         end: ''
       })
     }
+    
     return (
       <RoadDiv>
+        <div style={{display:"flex",width: "100%", justifyContent:"center",marginBottom:"2rem"}}>
+          <SubwayLogo/>
+        </div>
+        <LogoMent>지하철역 입력</LogoMent>
         <CrossInputDiv>
           <ContentInputDiv active={false}>
             <RoadForm name='start' onSubmit={(e) => { handleSubmit(e, start); }}>
@@ -104,10 +116,11 @@ function SubwayPage() {
           </CrossIconDiv>
         </CrossInputDiv>
         <RoadButtonDiv>
-          <ContentInputButton type='button' onClick={onReset} value='다시 입력' _width='80px' _heigth='45px' />
-          <ContentInputButton type='button' onClick={onSearch} value='전철 검색' _width='80px' _heigth='45px' />
+          <PromiseButton type='button' onClick={onReset} value='다시 입력'>다시 입력</PromiseButton>
+          <PromiseButton2 type='button' onClick={onSearch} value='전철 검색'>전철 검색</PromiseButton2>
         </RoadButtonDiv>
-        {subwayList ? (<SubWay />) : (<SubwaySearchList />)}
+
+        { pathClick? (<SubwayDot/> ) : subwayList ? <SubWay/> : (<SubWayList/>)}
       </RoadDiv>
     )
   }
