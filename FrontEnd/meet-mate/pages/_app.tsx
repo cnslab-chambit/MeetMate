@@ -18,29 +18,30 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   const [open, setOpen] = useState<boolean>(true)
   const mediaCheck = useMediaHook()
-  const router = useRouter(); 
+  const router = useRouter();
+  const queryClient = new QueryClient();
   return (
     <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} >
         {mediaCheck ? (
           <GlobalContainer>
           {router.asPath==="/mobile/search" || router.asPath === "/mobile/road/search" || router.asPath === "/mobile/promise/search" || router.asPath === "/mobile/subway/search" ? <SearchNav/> : <MobileNav />}
           <Component {...pageProps}/>
           </GlobalContainer>
         ) :
-        router.asPath==="/"
-        ?
-          (
-            <>
-              <NavButton open={open} setOpen={setOpen} />
-              <GlobalDiv>
-                {open ? (<DesktopMainPage />) : (null)}
-                <Component {...pageProps} />
-              </GlobalDiv>
-            </>
-          ):null}
-        <ReactQueryDevtools initialIsOpen={false} />
+          router.asPath === "/"
+            ?
+            (
+              <>
+                <NavButton open={open} setOpen={setOpen} />
+                <GlobalDiv>
+                  {open ? (<DesktopMainPage />) : (null)}
+                  <Component {...pageProps} />
+                </GlobalDiv>
+              </>
+            ) : null}
+        {/* <ReactQueryDevtools initialIsOpen={} /> */}
       </QueryClientProvider>
-    </RecoilRoot>
+    </RecoilRoot >
   )
 }

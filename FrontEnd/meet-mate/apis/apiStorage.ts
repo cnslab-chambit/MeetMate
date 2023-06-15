@@ -23,3 +23,7 @@ export const roadLineApi = async (mapObj: string) => {
         .get(`loadLane?mapObject=0:0@${mapObj}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_API_KEY}`)
         .then((res) => res.data.result.lane)
 }
+export const placeCoordinateList = async (lng: number, lat: number) => {
+    return await axios.get(`/find?longitude=${lng}&latitude=${lat}`)
+        .then((res) => res.data)
+}

@@ -9,9 +9,9 @@ export const TransportTypeDiv = styled.div`
 `
 export const TransportTypeTextDiv = styled.div<{ active: boolean }>`
     display: flex;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     transition: 0.3s ease;
     border-radius: 5px;
@@ -22,4 +22,5 @@ export const TransportTypeTextDiv = styled.div<{ active: boolean }>`
         transition: 0.3s ease;
         color: white;
     }
+    text-align: center;
 `

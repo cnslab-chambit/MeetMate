@@ -14,7 +14,6 @@ function SubwayPage() {
   const [subway, setSubway] = useRecoilState(subwayState)
   const [markerRecoil, setMarkerRecoil] = useRecoilState<IMarkers[]>(subwayMarkerState);
   const [subwayList, setSubwayList] = useRecoilState(subwayListState)
-  const [markers, setMarkers] = useState<any>();
   const setSubwayInputCheck = useSetRecoilState(subwayInputState)
   const [subwaySearch, setSubwaySearch] = useRecoilState(subwaySearchState)
   const setSubwayData = useSetRecoilState(subwayDataState)
@@ -65,7 +64,6 @@ function SubwayPage() {
               y: e.y
             })
           })
-        setMarkers(markers);
         setMarkerRecoil(markers);
       }
     })
