@@ -57,6 +57,10 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    <img src="https://user-images.githubusercontent.com/91197026/224541331-923e58c5-2d70-41c9-9dc7-b0de151a35bb.png" width="600" height="400"/>  
    <img src="https://user-images.githubusercontent.com/91197026/224541315-2035dc61-031d-4a9e-99e4-2125fad53af5.png" width="600" height="400"/>
    <img src="https://user-images.githubusercontent.com/91197026/224541298-860c826b-4cf5-4225-99aa-0f8d0ba8e8b2.png" width="600" height="400"/>
+
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/e59c258e-b6f4-425d-a733-495482bc013d
+
+
    
    - 길찾기
    <img src="https://user-images.githubusercontent.com/91197026/224541286-b5d3fb40-8eae-4cf5-bc67-5c548d5249ca.png" width="600" height="400"/>
