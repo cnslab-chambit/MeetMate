@@ -1,3 +1,7 @@
+
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/91e67159-2bbd-4e69-a0d4-678f7aca41bb
+
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/b49df02b-adc4-4baf-b4e1-f6420203fa64
 # MeetMate: 유저간 위치기반 약속장소 선정 도움 서비스
 
 <img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
@@ -58,7 +62,6 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    <img src="https://user-images.githubusercontent.com/91197026/224541315-2035dc61-031d-4a9e-99e4-2125fad53af5.png" width="600" height="400"/>
    <img src="https://user-images.githubusercontent.com/91197026/224541298-860c826b-4cf5-4225-99aa-0f8d0ba8e8b2.png" width="600" height="400"/>
 
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/e59c258e-b6f4-425d-a733-495482bc013d
 
 
    
@@ -76,25 +79,28 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    
 
  ### App
-   <img src="https://user-images.githubusercontent.com/91197026/222876592-955eb8aa-c797-49ac-991d-b4eff8a2508f.png" width="200" height="400"/>
+
+   - 메인화면
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/217c7322-f3c4-462a-bf36-bd6458f3ce3f
    
+   - 
    - 약속잡기
-   <img src="https://user-images.githubusercontent.com/55770796/233769722-32b0dba7-18e1-4eff-9db2-90cdcdfd9653.png" width="200" height="400">
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/e59c258e-b6f4-425d-a733-495482bc013d
 
    
    - 길찾기
-   <img src="https://user-images.githubusercontent.com/55770796/233769730-ea795a19-29cf-4a22-9343-e801214fcbe9.png" width="200" height="400">
-   <img src="https://user-images.githubusercontent.com/55770796/233769768-1c82abc2-4204-4c06-824e-ba5912f868ee.png" width="200" height="400">
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/4e41e02f-102b-4837-b4a3-0a310797abfe
 
-   
+
    - 버스
-   <img src="https://user-images.githubusercontent.com/55770796/233769755-a3c983a0-27c2-4202-a1ae-338357d631d4.png" width="200" height="400">
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/fb0d7c8f-f576-448a-b7a6-c23b1a39f4b7
+
 
    - 지하철
-   <img src="https://user-images.githubusercontent.com/55770796/233769397-72a5a4c7-06b4-4627-9af8-1a763d1a9708.png" width="200" height="400">
-   
-   <img src="https://user-images.githubusercontent.com/55770796/233769399-5987b4fa-136a-4e8a-a86f-ebf4edcfdfe6.png" width="200" height="400">
+   https://github.com/cnslab-chambit/MeetMate/assets/55770796/871fb3e3-e799-4467-90a6-41349c74dac8
 
+
+   
 
 ## 팀원
 - [최원석](https://github.com/c0c0pang)
