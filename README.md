@@ -1,7 +1,4 @@
 
-https://github.com/cnslab-chambit/MeetMate/assets/55770796/91e67159-2bbd-4e69-a0d4-678f7aca41bb
-
-https://github.com/cnslab-chambit/MeetMate/assets/55770796/b49df02b-adc4-4baf-b4e1-f6420203fa64
 # MeetMate: 유저간 위치기반 약속장소 선정 도움 서비스
 
 <img src="https://user-images.githubusercontent.com/91197026/221325291-56096cd9-a768-4ad0-9447-7fcbebc9052f.png" width="200" height="200"/>
