@@ -79,7 +79,7 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
 
    - 메인화면
 <img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/5b04d2f0-85ad-4492-a43e-c9daff54f6cb0" height="800" width="400"/>
-   - 
+
    - 약속잡기
 <img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5" height="800" width="400"/>
 
