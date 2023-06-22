@@ -78,23 +78,23 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
  ### App
 
    - 메인화면
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/217c7322-f3c4-462a-bf36-bd6458f3ce3f
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/217c7322-f3c4-462a-bf36-bd6458f3ce3f
    
    - 
    - 약속잡기
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/e59c258e-b6f4-425d-a733-495482bc013d
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/e59c258e-b6f4-425d-a733-495482bc013d
 
    
    - 길찾기
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/4e41e02f-102b-4837-b4a3-0a310797abfe
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/4e41e02f-102b-4837-b4a3-0a310797abfe
 
 
    - 버스
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/fb0d7c8f-f576-448a-b7a6-c23b1a39f4b7
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/fb0d7c8f-f576-448a-b7a6-c23b1a39f4b7
 
 
    - 지하철
-   https://github.com/cnslab-chambit/MeetMate/assets/55770796/871fb3e3-e799-4467-90a6-41349c74dac8
+https://github.com/cnslab-chambit/MeetMate/assets/55770796/871fb3e3-e799-4467-90a6-41349c74dac8
 
 
    
