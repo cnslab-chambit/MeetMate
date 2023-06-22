@@ -3,14 +3,15 @@ import styled from "styled-components";
 export const PromiseContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    min-height: 79vh;
 `;
 
 export const LogoMent = styled.h2`
     font-family: 'GmarketSansBD';
-    font-size: 3rem;
+    font-size: 22px;
     text-align: center;
+    
 `;
 
 export const LogoDiv = styled.div`
@@ -40,6 +41,7 @@ export const PromiseButton = styled.button`
     font-size: 2rem;
     width: 10rem;
     height: 5rem;
+    color: black;
     font-family: 'GmarketSansBD';
     cursor: pointer;
     &:hover{
@@ -67,7 +69,7 @@ export const PromiseDiv = styled.div`
     font-family: 'GmarketSansBD';
     font-size: 1.5rem;
     height: 4rem;
-    width: 50rem;
+    width: 30rem;
     color: #666666;
     border-radius: 1rem;
     padding-left: 1rem;
@@ -84,12 +86,11 @@ export const LocationContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: scroll;
 `;
 
 export const LocationDiv = styled.div`
     display:flex;
-    flex-direction: column;
+    align-items: center;
     font-size: 3rem;
     padding: 1rem;
     border-bottom: 2px solid #9e9d9d;
@@ -108,3 +109,11 @@ export const LocationDiv = styled.div`
 export const LocationName = styled.div`
     font-size: 2rem;
 `;
+
+export const SearchSVG = styled.div`
+    padding-top: 1rem;
+    svg{
+        transform: scale(0.5);
+    }
+`;
+

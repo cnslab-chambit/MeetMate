@@ -87,3 +87,9 @@ export const FlexBoxCol = styled.div`
     font-size: 1.5rem;
     font-weight: 400;
 `;
+
+export const ShadowBox = styled.div`
+    display: flex;
+    width: 100%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+`;

@@ -168,7 +168,22 @@ export interface IMarkers{
     default: -1,
   });
 
-  export const promiseRoute = atom<any>({
-    key: 'prmoiseRoute',
+  export const pathDataState = atom<any | null> ({
+    key: "pathDataState",
     default: []
+  });
+
+  export const subwayPathState = atom<boolean>({
+    key: "subwayPathState",
+    default: false
+  });
+
+  export const busInfoState = atom<any>({
+    key: "busInfoState",
+    default: {}
+  });
+
+  export const subwayDivNum = atom<number>({
+    key: 'subwayDivNum',
+    default: -1
   })

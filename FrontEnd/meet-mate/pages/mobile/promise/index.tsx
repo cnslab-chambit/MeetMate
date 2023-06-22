@@ -1,6 +1,6 @@
 import PlaceDialog from "@/mobile-content/Dialog";
 import { ButtonDiv, LogoDiv, LogoMent, PromiseButton, PromiseButton2, PromiseContainer, PromiseDiv, PromiseInput } from "@/m-styled-component/search-component/serch_styled";
-import { countState, placeState, promiseIndex, promiseRoute, promiseState } from "@/mobile-content/atom";
+import { countState, placeState, promiseIndex, promiseState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Logo from "../../../public/images/Logo.svg";

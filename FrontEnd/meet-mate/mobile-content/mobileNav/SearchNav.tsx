@@ -82,7 +82,7 @@ function SearchNav() {
         <Navigation>
           <NavDiv>
             <NavLogo onClick={() => moveOtherPage("/mobile")}>Meet Mate</NavLogo>
-            <NavMenu><Menu/></NavMenu>
+            <NavMenu></NavMenu>
           </NavDiv>
           <NavBasicDiv>
             <NavColDiv onClick={() => moveOtherPage("/mobile")}>

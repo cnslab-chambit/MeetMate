@@ -1,32 +1,36 @@
-import { IMarkers, IStore, loadAtom, mapAtom, promiseRoute, promiseState, storeState, trafficState } from "@/mobile-content/atom";
+import { IMarkers, IStore, loadAtom, mapAtom, promiseState, storeState, trafficState } from "@/mobile-content/atom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
-import { Map, MapMarker, Polygon, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polygon, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { selectType } from "@/mobile-hook/select-color";
-import { callApi, findPlaceRoute } from "@/mobile-content/fx";
-import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
+import { callApi, callMapObjApiAJAX, drawPolyLine, findPlaceRoute, setMarkerUrl } from "@/mobile-content/fx";
+import { BackButton, ButtonContainer, DecisionDiv, InfoDiv, MapConatiner, RoadToggleButton, SelectButton, StoreInfoDiv, StoreName, ToggleButton, ToggleButtonDiv, ToggleContainer, ToggleMenuDiv } from "@/m-styled-component/promise-component/promise_styled";
 import Shopping from "../../../public/images/shoppingbag.svg";
 import Food from "../../../public/images/food.svg";
 import Mug from "../../../public/images/mug.svg";
 import Camera from "../../../public/images/camera.svg";
 import Bike from "../../../public/images/bike.svg";
 import Menu from "../../../public/images/menu.svg";
-import Info from "@/mobile-content/Info";
+import Info from "@/mobile-content/promise/Info";
 import Start from "../../../public/images/start.svg";
+import Route from "@/mobile-content/Route";
 
 function PromiseMap() {
     const [map, setMap] = useState<any>()
-    const [placeRoute, setPlaceRoute] = useRecoilState(promiseRoute);
+    const [placeRoute, setPlaceRoute] = useState<any>([]);
     const [storeRecoil, setStoreRecoil] = useRecoilState<IStore[]>(storeState);
     const [buttonIndex, setButtonIndex] = useState(-1);
     const [startPoint, setStartPoint] = useState<any>([]);
     const [toggle, setToggle] = useState(false);
     const [center, setCetner] = useState<any>([]);
     const [info, setInfo] = useState<any>();
+    const [clickedRoad, setClickedRoad] = useState(false);
+    const [polyline,setPolyLine] = useState<any>([]);
     const promiseLocation = useRecoilValue<IMarkers[]>(promiseState);
-    
+    const color = ["#a5e495", "#95b3e7","#eb9191","#bc83fd","#A9E1ED","#d6f3ad"];
+    let linArr: any = [];
     const getCenterPosition = () => {
-      let x = 0;
+      let x = 0;  
       let y = 0;
       for(let i = 0; i < promiseLocation.length; i++){
         x += parseFloat(promiseLocation[i].x);
@@ -47,18 +51,36 @@ function PromiseMap() {
     };
 
     const setBound = (center:any) => {
-      if(map && !toggle){      
+      if(map && !toggle && clickedRoad){      
       let bounds = new kakao.maps.LatLngBounds();
       for(let i = 0; i < promiseLocation.length; i++){
         bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
       }
       map?.setBounds(bounds)
       }      
-      else if(map && toggle){
+      else if(map && toggle && !clickedRoad){
         let bounds = new kakao.maps.LatLngBounds();
         bounds?.extend(new kakao.maps.LatLng(parseFloat(center.y), parseFloat(center.x)));
         map?.setBounds(bounds);
       }
+      else if(map && !toggle){
+        let bounds = new kakao.maps.LatLngBounds();
+        for(let i = 0; i < promiseLocation.length; i++){
+          bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
+        } 
+        map?.setBounds(bounds);
+      }
+    };
+
+    const setRoadBound = (center:any) => {
+      if(map){      
+      let bounds = new kakao.maps.LatLngBounds();
+      for(let i = 0; i < promiseLocation.length; i++){
+        bounds?.extend(new kakao.maps.LatLng(parseFloat(promiseLocation[i]?.y),parseFloat(promiseLocation[i]?.x)))
+      }
+      map?.setBounds(bounds)
+      setToggle((prev: boolean) => !prev);
+    }
     };
 
     const divSetBound = (store :any) => {
@@ -81,14 +103,31 @@ function PromiseMap() {
       setInfo("");
     }
 
-    const setMarkerUrl = (category: any) => {
-      if(category === "대형마트") return "/images/shopping.svg";
-      else if(category === "문화시설") return "/images/activity.svg";
-      else if(category === "관광명소") return "/images/travel.svg";
-      else if(category === "음식점") return "/images/foodPlace.svg";
-      else if(category === "카페") return "/images/cafe.svg";
-      return "";
+    const roadToggleClick = () => {
+      setClickedRoad((prev: boolean) => !prev);
     }
+
+    const clickFindRoad = async(store: any) => {
+      setPlaceRoute([]);
+      const promises = promiseLocation.map(async (location) => {
+      const result = await findPlaceRoute([location], store, setPlaceRoute);
+      setClickedRoad((prev: boolean) => true);
+      return result;
+  });
+
+      const placeRoutes = await Promise.all(promises);
+
+      for (let i = 0; i < promiseLocation.length; i++) {
+        const response = await callMapObjApiAJAX(placeRoutes[i]?.result.path[0].info.mapObj);
+        if (response) {
+          const arr = await drawPolyLine(response.result.lane);
+          setPolyLine((prev: any[]) => [...prev, arr]);
+        }
+    }
+
+  const center = getCenterPosition();
+  setRoadBound(center);
+  };
 
     useEffect(() => {
       if(map){
@@ -107,8 +146,8 @@ function PromiseMap() {
       const center = getCenterPosition();
       setBound(center);
     },[toggle]);
-    
-    
+
+    console.log(clickedRoad);
 
     return (
     <div>
@@ -149,7 +188,7 @@ function PromiseMap() {
                       <StoreName>
                         {store.place_name}
                       </StoreName>
-                      <DecisionDiv onClick={() => findPlaceRoute(promiseLocation, store, setPlaceRoute)}>
+                      <DecisionDiv onClick={() => clickFindRoad(store)}>
                         길 찾기
                       </DecisionDiv>
                       <BackButton onClick={() => setInfo("")}>x</BackButton>
@@ -220,19 +259,6 @@ function PromiseMap() {
             zIndex={2}
             />
 
-          {/* {promiseLocation ?
-          <Polygon
-          path={startPoint}
-          fillColor={"#f87b87"}
-          strokeWeight={3}
-          strokeColor={"#FF4154"} 
-          strokeOpacity={0.8}
-          fillOpacity={0.15}
-          />
-          :
-          null
-          } */}
-
           {center ?
             startPoint.slice(0,startPoint.length -1).map((point: any, index: number) => (
               <Polygon 
@@ -247,6 +273,29 @@ function PromiseMap() {
             null
           }
 
+          
+          {polyline.length > 0 ? 
+          polyline.map((line: any,index: number) => (
+            <div key={index+40}>
+            <Polyline
+            key={index + 10}
+            path={line}
+            strokeColor={color[index % 6]}
+            strokeWeight={8}
+            strokeOpacity={1}
+            />
+            <Polyline
+            key={index + 0}
+            path={line}
+            strokeColor="white"
+            strokeStyle="dash"
+            strokeWeight={2}
+            strokeOpacity={1}
+            />
+            </div>
+          ))
+            :
+            null}
           
       </Map>
 
@@ -274,24 +323,40 @@ function PromiseMap() {
       </ButtonContainer>
       
       <ToggleContainer visible={toggle}>
+        <ToggleButtonDiv>
           <ToggleButton onClick={toggleClick}>
             {toggle ? 
-            <ToggleMenuDiv>목록 접기</ToggleMenuDiv> :
+            <>
+            <ToggleMenuDiv>목록 접기</ToggleMenuDiv> 
+            </>
+            :
             <ToggleMenuDiv>
               <Menu/>
               목록
             </ToggleMenuDiv>
             }
           </ToggleButton>
-          {toggle ?
-              <Info buttonIndex={buttonIndex} setInfo={setInfo} divSetBound={divSetBound}/>
+            {toggle && placeRoute.length ? 
+            <RoadToggleButton onClick={roadToggleClick} active={clickedRoad}>
+              <ToggleMenuDiv>
+                길 찾기
+              </ToggleMenuDiv>
+            </RoadToggleButton>
             :
-            null
-        }
+            <div style={{display:"none"}}></div>
+          }
+        </ToggleButtonDiv>
+
+          {toggle && !clickedRoad ? 
+              <Info buttonIndex={buttonIndex} placeRoute={placeRoute} setInfo={setInfo} divSetBound={divSetBound} clickedRoad={clickedRoad}/>
+            :
+            toggle && clickedRoad ?
+            <Route placeRoute={placeRoute} colorArr={color}/>
+            :
+            
+            <div style={{display:"none"}}></div>
+          }
       </ToggleContainer>
-
-
-
     </MapConatiner>
   </div>
     )

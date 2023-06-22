@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Map,MapMarker,Polyline} from 'react-kakao-maps-sdk'
 import { useRecoilState, useRecoilValue } from "recoil";
 import start from "../../../public/images/start.svg";
+import { InfoDiv } from "@/m-styled-component/promise-component/promise_styled";
+import { RoadInfoContainer } from "@/m-styled-component/road-compontnt/road_styled";
+import RoadInfo from "@/mobile-content/RoadInfo";
 
 function Road() {
     const loadRecoil = useRecoilValue<IMarkers[]>(loadAtom);
@@ -11,15 +14,16 @@ function Road() {
     const [map, setMap] = useState<any>()
     const mapRecoil = useRecoilValue(mapAtom);
     const pathRecoil = useRecoilValue(trafficState);
+    
     let lineArr = new Array();
     let bounds;
 
     const setBound = () => {
       if(map){      
       bounds = new kakao.maps.LatLngBounds();
-      for(let i   = 0; i < 2; i++){
-        bounds?.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[i]?.y),parseFloat(loadRecoil[i]?.x)))
-      }
+        bounds?.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[0]?.y)+ 0.005,parseFloat(loadRecoil[0]?.x)))  
+        bounds?.extend(new kakao.maps.LatLng(parseFloat(loadRecoil[1]?.y)- 0.16,parseFloat(loadRecoil[1]?.x)))
+      
       map?.setBounds(bounds)
     };      
     }
@@ -79,13 +83,30 @@ const drawPolyLine = (lane: any) => {
     :
     null  
     }
-    {loadRecoil.map((load:IMarkers,index:number) => 
-      <MapMarker key={index}
-      position={{lat: parseFloat(load.y), lng: parseFloat(load.x)}}
-      />
-    )}
+        <>
+          <MapMarker position={{ lat: parseFloat(loadRecoil[0].y), lng: parseFloat(loadRecoil[0].x)}}
+            image={{
+              src: "/images/start.svg",
+              size: {
+                width: 55,
+                height: 55,
+              },
+            }} >
+          </MapMarker>
+          <MapMarker position={{ lat: parseFloat(loadRecoil[1].y), lng: parseFloat(loadRecoil[1].x)}}
+            image={{
+              src: "/images/end.svg",
+              size: {
+                width: 55,
+                height: 55,
+              },
+            }} >
+          </MapMarker>
+        </>
     </Map>
-
+    <RoadInfoContainer>
+      <RoadInfo pathRecoil={pathRecoil}/>
+    </RoadInfoContainer>
     </>
     )
 }

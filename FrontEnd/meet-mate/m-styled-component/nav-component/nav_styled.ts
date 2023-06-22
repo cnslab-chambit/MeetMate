@@ -55,7 +55,7 @@ export const IconTextDiv = styled.div<{isActive:boolean}>`
 export const Navigation = styled.div`
 display:flex;
 flex-direction: column;
-width:100%;
+width: 100%;
 background-color: #367BF6;
 height:100%;
 justify-content: center;
