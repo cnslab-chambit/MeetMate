@@ -78,10 +78,10 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
  ### App
 
    - 메인화면
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/5b04d2f0-85ad-4492-a43e-c9daff54f6cb0" height="800" width="400"/>
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/5b04d2f0-85ad-4492-a43e-c9daff54f6cb0" height="650" width="400"/>
 
    - 약속잡기
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5" height="800" width="400"/>
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5" height="650" width="400"/>
 
    
    - 길찾기
@@ -89,11 +89,11 @@ https://github.com/cnslab-chambit/MeetMate/assets/55770796/4e41e02f-102b-4837-b4
 
 
    - 버스
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6e12abf-aed8-4e1e-bd97-073a9cb1c419" height="800" width="400"/>
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6e12abf-aed8-4e1e-bd97-073a9cb1c419" height="650" width="400"/>
 
 
    - 지하철
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/c4542498-7a34-4d54-a73f-b7851c1b484c" height="800" width="400"/>
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/c4542498-7a34-4d54-a73f-b7851c1b484c" height="650" width="400"/>
 
    
 
