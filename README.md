@@ -85,7 +85,7 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
 
    
    - 길찾기
-https://github.com/cnslab-chambit/MeetMate/assets/55770796/4e41e02f-102b-4837-b4a3-0a310797abfe
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/16916672-71bd-4522-809d-c0ae47b2cfe5" height="650" width="400"/>
 
 
    - 버스
