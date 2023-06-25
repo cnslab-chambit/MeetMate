@@ -83,10 +83,8 @@ api 공개 내부를 들여다 보며 이를 재가공하는 과정들을 통해
    - 약속잡기
 <img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5" height="650" width="400"/>
 
-   
    - 길찾기
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/16916672-71bd-4522-809d-c0ae47b2cfe5" height="650" width="400"/>
-
+<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6067c86-d538-4b3b-9e2e-efbc26294cfa" height="650" width="400"/>
 
    - 버스
 <img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6e12abf-aed8-4e1e-bd97-073a9cb1c419" height="650" width="400"/>
