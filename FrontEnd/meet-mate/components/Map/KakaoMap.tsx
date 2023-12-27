@@ -3,7 +3,7 @@ import { Map } from "react-kakao-maps-sdk";
 interface MapProps {
   x: string;
   y: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 function KakaoMap(props: MapProps) {
