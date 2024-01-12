@@ -6,9 +6,17 @@ interface MarkerProps {
   src?: string;
   width?: number;
   height?: number;
+  onClick?: () => void;
 }
 
-function KakaoMarker({ x, y, src, width = 60, height = 60 }: MarkerProps) {
+function KakaoMarker({
+  x,
+  y,
+  src,
+  width = 60,
+  height = 60,
+  onClick,
+}: MarkerProps) {
   const markerImage = src
     ? {
         src: src,
@@ -26,6 +34,7 @@ function KakaoMarker({ x, y, src, width = 60, height = 60 }: MarkerProps) {
         lng: parseFloat(x),
       }}
       image={markerImage}
+      onClick={onClick}
     />
   );
 }
