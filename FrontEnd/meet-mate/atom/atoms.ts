@@ -230,6 +230,10 @@ export const roadSearchResultState = atom<boolean>({
   key: 'roadSearchresultState',
   default: false
 })
+export const placeSearchResultState = atom<boolean>({
+  key: 'placeSearchResultState',
+  default: false
+})
 export const roadSearchTypeState = atom<string>({
   key: 'roadSearchTypeState',
   default: ''
@@ -241,6 +245,10 @@ export const roadSearchOnWayState = atom<boolean>({
 export const roadResultDataState = atom<any>({
   key: 'roadResultDataState',
   default: {}
+})
+export const placeResultDataState = atom<any>({
+  key: 'placeResultDataState',
+  default: []
 })
 export const transportState = atom<transport>({
   key: 'transportState',
