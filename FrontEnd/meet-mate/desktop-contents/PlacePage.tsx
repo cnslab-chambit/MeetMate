@@ -15,7 +15,7 @@ import PlaceDialog from '@/dialog/PlaceDialog';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { coordinateDataState, countState, placeCoordinateState, placeIdState, placeMarkerState, placeState, roadPlaceState } from '@/atom/atoms';
 import CancelIcon from '../public/images/cancel.svg'
-import { placeCoordinateList } from '@/apis/apiStorage';
+import { placeCoordinateListApi } from '@/apis/apiStorage';
 import { IMarkers } from '@/interface/desktop_intergace';
 import PlaceSearchList from '@/desktop-search-list/PlaceSearchList';
 import CoordinateCategory from '@/desktop-search-list/CoordinateCategory';
@@ -99,7 +99,7 @@ function PlacePage() {
       newLng += (+obj?.lng)
       cnt += 1
     }
-    const data = await placeCoordinateList(newLng / cnt, newLat / cnt)
+    const data = await placeCoordinateListApi(newLng / cnt, newLat / cnt)
     setCoordinateData(data)
     setPlaceList(true)
     setLoding(false)
