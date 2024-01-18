@@ -36,3 +36,38 @@ export const CoordinateRateText = styled.div`
 export const CoordinateLinkText = styled.div`
     font-size: 13px;
 `
+export const MarkerDiv = styled.div`
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 160px;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.25);
+    
+`
+export const MarkerText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+`
+export const MarKerLink = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 0px 10px 10px 0px;
+    transition:  0.3s ease;
+    :hover{
+        background-color: #F03A79;
+        color: white;
+        transition:  0.3s ease;
+    }
+`
