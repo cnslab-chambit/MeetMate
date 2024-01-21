@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import SwapIcon from "../../../public/images/cross.svg";
 import styled from "styled-components";
+import RoadIcon from "../../../public/images/roadIcon.svg";
 
 const CrossIconDiv = styled.div`
    position: relative;
@@ -71,9 +72,12 @@ function Input() {
         setSwapClick(false);
     }
     },[loadRecoil.length === 2 && loadRecoil[0]?.place_name !== "장소를 입력해주세요",swapClick]);
-3
+
     return (
-        <div style={{display:"flex", flexDirection:"column",alignItems:"center",paddingTop:"5rem"}}>
+        <div style={{display:"flex", flexDirection:"column",alignItems:"center",paddingTop:"5rem"}}>    
+            <div style={{display:"flex",width: "100%", justifyContent:"center",marginBottom:"2rem"}}>
+            <RoadIcon/>
+            </div>
             <LogoMent>출발지와 도착지를 <br/>입력해주세요!</LogoMent>
             <ContentSearchDiv>
                 <PromiseDiv onClick={()=> movePage("/mobile/road/search","start")}>

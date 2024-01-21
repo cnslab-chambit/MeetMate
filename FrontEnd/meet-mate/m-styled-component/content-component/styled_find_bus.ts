@@ -90,6 +90,5 @@ export const FlexBoxCol = styled.div`
 
 export const ShadowBox = styled.div`
     display: flex;
-    width: 100%;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 `;
