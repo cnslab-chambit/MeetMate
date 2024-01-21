@@ -41,7 +41,6 @@ function CoordinateCard() {
                 break;
         }
     }, [coordinate])
-    console.log(type)
     return (
         <>
             {coordinateData.length > 0 ? coordinateData?.map((info: any, index: number) => {
