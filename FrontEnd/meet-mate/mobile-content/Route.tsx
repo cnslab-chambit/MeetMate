@@ -45,15 +45,22 @@ const SliderButtonDiv = styled.div`
   gap: 10rem;
 `;
 
-const LocalColorDiv = styled.div<{color:string}>`
+const LocalColorDiv = styled.div<{ color: string }>`
   font-size: 2.5rem;
   font-weight: 700;
   color: ${(props) => props.color};
-`
+`;
 
 const Route = (placeRoute: any, color: any) => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const colorArr = ["#a5e495", "#95b3e7","#eb9191","#bc83fd","#A9E1ED","#d6f3ad"];
+  const colorArr = [
+    "#a5e495",
+    "#95b3e7",
+    "#eb9191",
+    "#bc83fd",
+    "#A9E1ED",
+    "#d6f3ad",
+  ];
   const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
   console.log(color);
 
@@ -83,19 +90,28 @@ const Route = (placeRoute: any, color: any) => {
       <SlideContainer id="slideContainer">
         {placeRoute?.placeRoute?.map((location: any, index: number) => (
           <SlideItem key={index}>
-            <div style={{display:"flex",paddingLeft:"1rem",alignItems:"center"}}>
-            {index + 1}번 &nbsp;
-            <LocalColorDiv color={colorArr[index % 6]}> {placeAdd[index].current} </LocalColorDiv>
-            &nbsp; 출발
+            <div
+              style={{
+                display: "flex",
+                paddingLeft: "1rem",
+                alignItems: "center",
+              }}
+            >
+              {index + 1}번 &nbsp;
+              <LocalColorDiv color={colorArr[index % 6]}>
+                {" "}
+                {placeAdd[index].current}{" "}
+              </LocalColorDiv>
+              &nbsp; 출발
             </div>
-            <RoadInfo pathRecoil={location.result.path[0]}/>  
+            <RoadInfo pathRecoil={location.result.path[0]} />
           </SlideItem>
         ))}
-        
-      <SliderButtonDiv>
-        <SliderButton onClick={scrollToLeft}>&lt;</SliderButton>
-        <SliderButton onClick={scrollToRight}>&gt;</SliderButton>
-      </SliderButtonDiv>
+
+        <SliderButtonDiv>
+          <SliderButton onClick={scrollToLeft}>&lt;</SliderButton>
+          <SliderButton onClick={scrollToRight}>&gt;</SliderButton>
+        </SliderButtonDiv>
       </SlideContainer>
     </>
   );
