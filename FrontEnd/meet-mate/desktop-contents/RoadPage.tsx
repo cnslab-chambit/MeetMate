@@ -103,7 +103,7 @@ function MapPage() {
   return (
     <RoadDiv>
       <CrossInputDiv>
-        <ContentInputDiv active={false}>
+        <ContentInputDiv>
           <RoadForm name='start' onSubmit={(e) => { handleSubmit(e, start); }}>
             <ContentInput active={false} name='start' value={start} onChange={onChange} placeholder='출발 장소' />
           </RoadForm>

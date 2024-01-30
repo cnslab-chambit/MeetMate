@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 export const NavDiv = styled.div`
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #FFD1E1 0%, rgba(240, 58, 121, 0) 100%);
+    /* background: linear-gradient(180deg, #FFD1E1 0%, rgba(240, 58, 121, 0) 100%); */
     gap: 10px;
 `
 export const NavTitle = styled.h1`
