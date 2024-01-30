@@ -1,11 +1,11 @@
 import React from 'react'
 import { ContentDiv } from '../styled-component/index-component/styled_index'
 import Contents from '@/desktop-contents/Contents';
-import Nav from '@/desktopNav/Nav';
+import Navigation from '@/components/Layout/Navigation/Navigation';
 function DesktopMainPage() {
   return (
     <ContentDiv>
-      <Nav />
+      <Navigation />
       <Contents />
     </ContentDiv>
   )
