@@ -26,6 +26,9 @@ export const roadLineApi = async (mapObj: string) => {
 export const placeCoordinateListApi = async (lng: number, lat: number) => {
     return await axios.get(`/find?longitude=${lng}&latitude=${lat}`)
         .then((res) => res.data)
+        .catch(() => {
+            alert('장소를 확인해주세요')
+        })
 }
 export const multiroadSearchApi = async (result: any) => {
     const box: any = [];
