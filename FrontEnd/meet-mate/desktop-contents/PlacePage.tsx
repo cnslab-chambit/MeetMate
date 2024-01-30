@@ -100,9 +100,15 @@ function PlacePage() {
       cnt += 1
     }
     const data = await placeCoordinateListApi(newLng / cnt, newLat / cnt)
-    setCoordinateData(data)
-    setPlaceList(true)
-    setLoding(false)
+    if (data) {
+      setCoordinateData(data)
+      setPlaceList(true)
+      setLoding(false)
+    }
+    else {
+      setLoding(false)
+    }
+
   }
   return (
     <>
@@ -114,7 +120,7 @@ function PlacePage() {
       <ContentPlaceDiv>
         <ContentDiv>
           {open ? (<PlaceDialog setOpen={setOpen} setCount={setCount}></PlaceDialog>) : (null)}
-          <ContentInputDiv active={true}>
+          <ContentInputDiv >
             {placeAdd.map((element, index: any) => {
               return index > 1 ? (
                 <ContentInputIconDiv onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
