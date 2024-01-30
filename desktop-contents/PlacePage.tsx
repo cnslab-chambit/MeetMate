@@ -123,12 +123,16 @@ function PlacePage() {
           <ContentInputDiv >
             {placeAdd.map((element, index: any) => {
               return index > 1 ? (
-                <ContentInputIconDiv onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
+                <ContentInputIconDiv onSubmit={(e) => {
+                  handleSubmit(e, placeCoordinate[element.id.toString()]?.name, element.id.toString());
+                }}>
                   <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={true} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
                   <CancelIcon onClick={() => onDelete(element.id)} />
                 </ContentInputIconDiv>
               ) : (
-                <ContentInputForm onSubmit={(e) => { handleSubmit(e, placeCoordinate[element.id.toString()].name, element.id.toString()); }}>
+                <ContentInputForm onSubmit={(e) => {
+                  handleSubmit(e, placeCoordinate[element.id.toString()]?.name, element.id.toString());
+                }}>
                   <ContentInput name={element.id.toString()} value={placeCoordinate[element.id.toString()]?.name} active={false} placeholder={element.current} key={element.id} onChange={onChange}></ContentInput>
                 </ContentInputForm>
               );
