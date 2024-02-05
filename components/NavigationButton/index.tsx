@@ -1,9 +1,9 @@
 import React from 'react'
 import {
   NavButtonDiv
-} from '@/styled-component/nav-component/styled_desktop_nav_button'
+} from '@/components/NavigationButton/NavigationButton.styles'
 import ArrowIcon from '@/public/images/arrow.svg'
-function NavButton({ open, setOpen }: any) {
+function NavigationButton({ open, setOpen }: any) {
   const onNavTogle = () => {
     open ? setOpen(false) : setOpen(true)
   }
@@ -14,4 +14,4 @@ function NavButton({ open, setOpen }: any) {
   )
 }
 
-export default NavButton
+export default NavigationButton
