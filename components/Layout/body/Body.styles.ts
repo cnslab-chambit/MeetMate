@@ -4,11 +4,11 @@ export const ContentPageDiv = styled.div`
     overflow: scroll;
     max-height: 100vh;
 `
-export const ContentInputDiv = styled.div<{ active: boolean }>`
+export const ContentInputDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:  ${(props) => props.active ? '10px' : '2px'} ;
+    gap:  2px;
 `
 export const ContentInput = styled.input<{ active: boolean }>`
     width: 345px;

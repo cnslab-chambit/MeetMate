@@ -1,12 +1,12 @@
-import { ContentPageDiv } from '@/styled-component/content-component/styled_content'
+import { ContentPageDiv } from '@/components/Layout/body/Body.styles'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { pageState } from '../atom/atoms'
-import BusPage from './BusPage'
-import RoadPage from './RoadPage'
-import PlacePage from './PlacePage'
-import SubwayPage from './Subway'
-function Contents() {
+import { pageState } from '@/atom/atoms'
+import BusPage from '@/desktop-contents/BusPage'
+import RoadPage from '@/desktop-contents/RoadPage'
+import PlacePage from '@/desktop-contents/PlacePage'
+import SubwayPage from '@/desktop-contents/Subway'
+export const Body = () => {
   const [page] = useRecoilState(pageState)
   const pageRender = () => {
     if (page.place) {
@@ -29,4 +29,3 @@ function Contents() {
   )
 }
 
-export default Contents
