@@ -1,6 +1,6 @@
 import React from 'react';
 import DesktopMainPage from '@/desktopMain/DesktopMainPage';
-import NavButton from '@/components/Layout/Navigation/NavigationButton';
+import NavigationButton from '@/components/NavigationButton/index';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
             ?
             (
               <>
-                <NavButton open={open} setOpen={setOpen} />
+                <NavigationButton open={open} setOpen={setOpen} />
                 <GlobalDiv>
                   {open ? (<DesktopMainPage />) : (null)}
                   <Component {...pageProps} />
