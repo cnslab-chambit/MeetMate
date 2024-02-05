@@ -1,12 +1,12 @@
 import React from 'react'
-import { NavIconDiv, NavIconText, IconTextDiv, NavDiv, NavTitle } from '@/styled-component/nav-component/styled_desktop_nav';
+import { NavIconDiv, NavIconText, IconTextDiv, NavDiv, NavTitle } from '@/components/Layout/Navigation/Navigation.styles';
 import PlaceIcon from '@/public/images/place.svg';
 import MapIcon from '@/public/images/map.svg';
 import BusIcon from '@/public/images/bus.svg';
 import SubwayIcon from '@/public/images/subway.svg'
 import { pageState } from '@/atom/atoms'
 import { useRecoilState } from 'recoil';
-function Navigation() {
+export const Navigation = () => {
   const [inputs, setInputs] = useRecoilState(pageState);
   const { place, map, bus, subway } = inputs
   const onTogle = (name: string) => {
@@ -41,5 +41,3 @@ function Navigation() {
     </NavDiv>
   )
 }
-
-export default Navigation
