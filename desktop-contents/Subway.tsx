@@ -1,4 +1,4 @@
-import { ContentInput, ContentInputButton, ContentInputDiv } from '@/styled-component/content-component/styled_content';
+import { ContentInput, ContentInputButton, ContentInputDiv } from '@/components/Layout/body/Body.styles';
 import { CrossIconDiv, CrossInputDiv, RoadButtonDiv, RoadDiv, RoadForm } from '@/styled-component/content-component/styled_road';
 import CrossIcon from '../public/images/cross.svg'
 import React, { useState } from 'react'

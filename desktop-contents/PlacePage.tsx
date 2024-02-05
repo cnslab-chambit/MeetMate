@@ -10,7 +10,7 @@ import {
   ContentInputButtonDiv,
   ContentDiv,
   LodingDiv,
-} from '@/styled-component/content-component/styled_content'
+} from '@/components/Layout/body/Body.styles'
 import PlaceDialog from '@/dialog/PlaceDialog';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { coordinateDataState, countState, placeCoordinateState, placeIdState, placeMarkerState, placeState, roadPlaceState } from '@/atom/atoms';

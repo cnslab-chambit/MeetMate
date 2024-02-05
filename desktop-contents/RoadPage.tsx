@@ -3,7 +3,7 @@ import {
   ContentInputDiv,
   ContentInput,
   ContentInputButton,
-} from '@/styled-component/content-component/styled_content'
+} from '@/components/Layout/body/Body.styles'
 import {
   RoadDiv,
   CrossInputDiv,
