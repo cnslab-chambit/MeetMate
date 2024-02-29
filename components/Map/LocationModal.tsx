@@ -20,8 +20,7 @@ const S = {
   IndexInfoDiv: styled.div<{ color: string }>`
     ${FlexBetweenCSS}
     font-size: 1.5rem;
-    width: 20rem;
-    height: 8rem;
+    padding: 30px;
     overflow: hidden;
     background: linear-gradient(#ffd94c, #fff4cc);
     border: none;
@@ -50,6 +49,7 @@ const S = {
     border: none;
     color: white;
     padding-bottom: 2px;
+    cursor: pointer;
   `,
 };
 
