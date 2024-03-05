@@ -36,22 +36,22 @@ export const MapConatiner = styled.div`
   max-height: 100vh;
 `;
 
-export const SelectButton = styled.div<{active:boolean}>`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 10rem;
-    height: 3rem;
-    border: none;
-    border-radius: 2rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background-color: ${(props) => props.active ? "#C7D6FF" : "white"};
-    color: ${(props) => props.active ? "white" : "black"};
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+export const SelectButton = styled.div<{ active: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-color: ${(props) => (props.active ? "#C7D6FF" : "white")};
+  color: ${(props) => (props.active ? "white" : "black")};
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export const ToggleContainer = styled.div<{visible:boolean}>`
+export const ToggleContainer = styled.div<{ $visible: boolean }>`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -59,18 +59,17 @@ export const ToggleContainer = styled.div<{visible:boolean}>`
   z-index: 2;
   padding: 0 2rem;
   cursor: pointer;
-  bottom : 10rem;
+  bottom: 10rem;
   justify-content: center;
   align-items: center;
-  animation: ${({ visible }) =>
-    visible
+  animation: ${({ $visible }) =>
+    $visible
       ? css`
           ${slideIn} 0.5s forwards
         `
       : css`
           ${slideOut} 0.5s forwards
         `};
-        
 `;
 
 export const ToggleButtonDiv = styled.div`
@@ -80,25 +79,24 @@ export const ToggleButtonDiv = styled.div`
 `;
 
 export const ToggleButton = styled.div`
-    display: flex;
-    align-items: center;
-    height: 3rem;
-    border: none;
-    border-radius: 2rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    width: 15rem;
-    background-color: white;
-    path{
-      stroke: #00A3FF;
-    }  
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 15rem;
+  background-color: white;
+  path {
+    stroke: #00a3ff;
+  }
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export const RoadToggleButton = styled(ToggleButton)<{active: boolean}>`
-  background-color: ${(props) => props.active ? "#367BF6" : "white"};
-  color: ${(props) => props.active ? "white" : "black"};
-  
+export const RoadToggleButton = styled(ToggleButton)<{ active: boolean }>`
+  background-color: ${(props) => (props.active ? "#367BF6" : "white")};
+  color: ${(props) => (props.active ? "white" : "black")};
 `;
 
 export const ToggleMenuDiv = styled.div`
@@ -131,17 +129,17 @@ export const DetailDiv = styled.div`
 `;
 
 export const PlaceInfoDiv = styled.div`
-    display: flex;
-    gap: 2rem;
-`
+  display: flex;
+  gap: 2rem;
+`;
 
 export const PlaceName = styled.div`
   display: flex;
   align-items: center;
   font-size: 2.5rem;
   font-weight: 700;
-  path{
-    fill: #FFC910;
+  path {
+    fill: #ffc910;
   }
 `;
 
@@ -179,27 +177,27 @@ export const CategotyDiv = styled.div`
 `;
 
 export const RoadButton = styled.div`
-    display: flex;
-    align-items: center;
-    height: 3rem;
-    border: 2px solid gray;
-    border-radius: 2rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    width: 10rem;
-    background-color: white;
-    margin-top: 1rem;
-    path{
-      fill: #00A3FF;
-    }  
-    box-shadow: 0px 1px 0px 0px #000000;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  border: 2px solid gray;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 10rem;
+  background-color: white;
+  margin-top: 1rem;
+  path {
+    fill: #00a3ff;
+  }
+  box-shadow: 0px 1px 0px 0px #000000;
 `;
 
 export const StoreInfoDiv = styled.div`
   display: flex;
   font-size: 1.5rem;
   width: 20rem;
-  height:8rem;
+  height: 8rem;
   overflow: hidden;
   background-color: white;
   justify-content: space-between;
@@ -214,7 +212,7 @@ export const StoreName = styled.div`
   display: flex;
   width: 70%;
   justify-content: center;
-  font-family: 'GmarketSansBD';
+  font-family: "GmarketSansBD";
 `;
 
 export const DecisionDiv = styled.div`
@@ -224,7 +222,7 @@ export const DecisionDiv = styled.div`
   justify-content: center;
   width: 30%;
   height: 100%;
-  background-color: #D95050;
+  background-color: #d95050;
   color: white;
   border-radius: 0 1rem 1rem 0;
   border: none;

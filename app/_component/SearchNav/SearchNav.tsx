@@ -1,81 +1,100 @@
 "use client";
+import styles from "./searchNav.module.css";
 import { Inter } from "next/font/google";
 import PlaceIcon from "@/public/images/place.svg";
 import MapIcon from "@/public/images/map.svg";
 import BusIcon from "@/public/images/bus.svg";
 import SubwayIcon from "@/public/images/subway.svg";
 import SearchIcon from "@/public/images/search.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSelectedLayoutSegments } from "next/navigation";
 import { IMarkers, mapAtom, pageState } from "../../atom/atom";
 import { useRecoilState } from "recoil";
-import { PromiseDiv } from "@/m-styled-component/search-component/serch_styled";
-import * as S from "./SearchNav.styles";
+import cx from "classnames";
+import { useEffect, useState } from "react";
+import { judgeActivation } from "@/app/utils/navigationUtils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter();
-  const [inputs, setInputs] = useRecoilState(pageState);
-  const { place, map, bus, subway } = inputs;
+  const layoutSegments = useSelectedLayoutSegments();
+  const [active, setActive] = useState({
+    place: false,
+    map: false,
+    bus: false,
+    subway: false,
+  });
+
   const [mapRecoil, setMapRecoil] = useRecoilState<IMarkers>(mapAtom);
 
-  const onTogle = (path: string, name: string) => {
-    setInputs({
-      place: name === "place" ? true : false,
-      map: name === "map" ? true : false,
-      bus: name === "bus" ? true : false,
-      subway: name === "subway" ? true : false,
+  const onToggle = (path: string, name: string) => {
+    setActive({
+      place: false,
+      map: false,
+      bus: false,
+      subway: false,
     });
+
+    setActive((prev) => ({ ...prev, [name]: true }));
     router.push(path);
   };
 
+  useEffect(() => {
+    const categories = Object.keys(active);
+    const activatedCategory = judgeActivation(categories, layoutSegments);
+    setActive((prev) => ({ ...prev, [activatedCategory]: true }));
+    console.log("hi");
+  }, []);
+
   return (
-    <S.Navigation>
-      <S.NavDiv>
-        <S.NavLogo onClick={() => router.push("/mobile")}>Meet Mate</S.NavLogo>
-      </S.NavDiv>
+    <div className={styles.container}>
+      <div className={styles.navLogoWrapper}>
+        <span className={styles.logo} onClick={() => onToggle("/", "")}>
+          Meet Mate
+        </span>
+      </div>
 
-      <S.NavSearchDiv2>
-        <PromiseDiv onClick={() => router.push("/mobile/search")}>
+      <div className={styles.searchWrapper}>
+        <div className={styles.inputDiv} onClick={() => router.push("/search")}>
           {mapRecoil.place_name}
-        </PromiseDiv>
-        <S.NavButton>
+        </div>
+        <button className={styles.navButton}>
           <SearchIcon />
-        </S.NavButton>
-      </S.NavSearchDiv2>
+        </button>
+      </div>
 
-      <S.NavIconContainer>
-        <S.NavIconDiv>
-          <S.IconTextDiv
-            isActive={place}
-            onClick={() => onTogle("/mobile/promise", "place")}
+      <div className={styles.navContentWrapper}>
+        <div className={styles.iconWrapper}>
+          <div
+            className={cx(styles.iconDiv, active.place && styles.clickedIcon)}
+            onClick={() => onToggle("/promise", "place")}
           >
             <PlaceIcon fill="black" />
-            <S.NavIconText>약속 잡기</S.NavIconText>
-          </S.IconTextDiv>
-          <S.IconTextDiv
-            isActive={map}
-            onClick={() => onTogle("/mobile/road", "map")}
+            <span>약속 잡기</span>
+          </div>
+          <div
+            className={cx(styles.iconDiv, active.map && styles.clickedIcon)}
+            onClick={() => onToggle("/road", "map")}
           >
             <MapIcon fill="black" />
-            <S.NavIconText>길 찾기</S.NavIconText>
-          </S.IconTextDiv>
-          <S.IconTextDiv
-            isActive={bus}
-            onClick={() => onTogle("/mobile/bus", "bus")}
+            <span>길 찾기</span>
+          </div>
+          <div
+            className={cx(styles.iconDiv, active.bus && styles.clickedIcon)}
+            onClick={() => onToggle("/bus", "bus")}
           >
             <BusIcon fill="black" />
-            <S.NavIconText>버스</S.NavIconText>
-          </S.IconTextDiv>
-          <S.IconTextDiv
-            isActive={subway}
-            onClick={() => onTogle("/mobile/subway", "subway")}
+            <span>버스</span>
+          </div>
+          <div
+            className={cx(styles.iconDiv, active.subway && styles.clickedIcon)}
+            onClick={() => onToggle("/subway", "subway")}
           >
             <SubwayIcon fill="black" />
-            <S.NavIconText>전철</S.NavIconText>
-          </S.IconTextDiv>
-        </S.NavIconDiv>
-      </S.NavIconContainer>
-    </S.Navigation>
+            <span>전철</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
