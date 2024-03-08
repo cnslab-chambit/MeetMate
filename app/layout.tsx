@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import LayoutWrapper from "./_component/LayoutWrapper";
+import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
@@ -8,9 +9,9 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
+    <html>
       <body className={inter.className}>
-        <LayoutWrapper>{children}</LayoutWrapper>;
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

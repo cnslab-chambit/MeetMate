@@ -1,10 +1,10 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
-import SearchNav from "../_component/SearchNav/SearchNav";
-import styles from "./_component/homeLayout.module.css";
+import styles from "@/app/(beforeLogin)/_component/homeLayout.module.css";
 import { usePathname } from "next/navigation";
 import { isMapPage } from "../_utils/navigationUtils";
 import cx from "classnames";
+import LocationNav from "./_component/LocationNav/LocationNav";
 
 type Props = { children: ReactNode; map: ReactNode };
 
@@ -12,14 +12,10 @@ export default function Layout({ children, map }: Props) {
   const path = usePathname();
   const [mapState, setMapState] = useState(false);
 
-  useEffect(() => {
-    setMapState(isMapPage(path));
-  }, [path]);
-
   return (
     <div className={styles.container}>
       <div className={styles.navContainer}>
-        <SearchNav />
+        <LocationNav />
         <div
           className={cx(
             styles.navConetentContainer,

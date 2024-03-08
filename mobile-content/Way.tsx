@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const WayContainer = styled.div`
   display: flex;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1rem;
 `;
 
 const IconDiv = styled.div<{ color: string }>`

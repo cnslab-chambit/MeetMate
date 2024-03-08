@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+}
+
+.iconWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.transferBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.timeBox {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  font-weight: 550;
+  background-color: white;
+  color: black;
+  width: 100%;
+  border-bottom: 0.1px solid gray;
+}
+
+.boldPg {
+  font-family: "GmarketSansBD";
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.flexBox {
+  align-items: center;
+  display: flex;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.flexBoxCol {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.wayBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.baseBar {
+  display: flex;
+  height: 20px;
+  width: 100%;
+  border-radius: 10rem;
+  background-color: #dad7d7;
+  margin-right: 15%;
+  margin-left: 15%;
+}
+
+.logoMent {
+  font-family: "GmarketSansBD";
+  font-size: 22px;
+  text-align: center;
+}
+
+.promiseDiv {
+  display: flex;
+  align-items: center;
+  font-family: "GmarketSansBD";
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 300px;
+  color: #666666;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  border: 0.15rem solid;
+  background-color: white;
+}
+
+.promiseDiv:focus {
+  color: black;
+}

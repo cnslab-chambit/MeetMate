@@ -87,7 +87,7 @@ function Gauge(props: any) {
         setColor("#9F7E20");
       }
     }
-  }, []);
+  }, [props]);
 
   return (
     <RangeContainer ratio={section === 0 ? 0 : ratio < 12 ? 12 : ratio}>
@@ -109,7 +109,7 @@ function Gauge(props: any) {
                 )}
               </svg>
             </SvgConatiner>
-            <RangeText>{section !== 0 ? `${section}분` : null}</RangeText>
+            <RangeText>{section !== 0 && `${section}분`}</RangeText>
           </div>
         </Range>
       ) : null}

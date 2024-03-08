@@ -1,6 +1,5 @@
 "use client";
 
-import GlobalStyle from "@/styles/global";
 import Script from "next/script";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
@@ -20,7 +19,6 @@ export default function LayoutWrapper({ children }: Props) {
       />
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <GlobalStyle />
           <RecoilRoot>{children}</RecoilRoot>
         </QueryClientProvider>
       </RecoilRoot>

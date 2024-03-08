@@ -7,11 +7,11 @@ import BusIcon from "@/public/images/bus.svg";
 import SubwayIcon from "@/public/images/subway.svg";
 import SearchIcon from "@/public/images/search.svg";
 import { useRouter, useSelectedLayoutSegments } from "next/navigation";
-import { IMarkers, mapAtom, pageState } from "../../atom/atom";
+import { IMarkers, mapAtom, pageState } from "../../_atom/atom";
 import { useRecoilState } from "recoil";
 import cx from "classnames";
 import { useEffect, useState } from "react";
-import { judgeActivation } from "@/app/utils/navigationUtils";
+import { judgeActivation } from "@/app/_utils/navigationUtils";
 
 const inter = Inter({ subsets: ["latin"] });
 

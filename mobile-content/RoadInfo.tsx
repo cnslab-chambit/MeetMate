@@ -12,7 +12,6 @@ import {
   WayBar,
 } from "@/m-styled-component/road-compontnt/road_styled";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 import { trafficState } from "./atom";
 import Gauge from "./Gauge";
 import Way from "./Way";
