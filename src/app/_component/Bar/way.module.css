@@ -1,0 +1,15 @@
+.wayContainer {
+  display: flex;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.iconDiv {
+  display: flex;
+  width: 20%;
+}
+
+.iconDiv svg {
+  width: 30px;
+  height: 30px;
+}

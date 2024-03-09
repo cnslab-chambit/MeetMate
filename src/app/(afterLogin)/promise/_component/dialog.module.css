@@ -1,0 +1,69 @@
+.addingDialog {
+  display: flex;
+  position: absolute;
+  left: 80px;
+  z-index: 90;
+  top: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  border-radius: 1rem;
+  gap: 20px;
+  font-family: "GmarketSansBD";
+  border: 2px solid black;
+  background-color: white;
+}
+
+.textDialog {
+  text-align: center;
+  padding: 10px;
+}
+
+.inputDialog {
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 2px;
+}
+
+.inputDialog::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.inputDialog::placeholder {
+  font-size: 10px;
+}
+
+.handleButtonDiv {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.handleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 45px;
+  background-color: #e1e1e1;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s ease;
+  border: none;
+  font-family: "GmarketSansBD";
+}
+
+.handleButton:hover {
+  background-color: #00a3ff;
+  color: white;
+  transition: 0.3s ease;
+}
