@@ -1,0 +1,163 @@
+.promiseContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 79vh;
+}
+
+.logoMent {
+  font-family: "GmarketSansBD";
+  font-size: 22px;
+  text-align: center;
+}
+
+.logoDiv {
+  font-family: "GmarketSansBD";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  font-size: 1rem;
+}
+
+.promiseInput {
+  font-family: "GmarketSansBD";
+  font-size: 2rem;
+  height: 4rem;
+  width: 30rem;
+  color: #666666;
+  margin-top: 2rem;
+}
+
+.promiseInput:focus {
+  color: black;
+}
+
+.promiseButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 70px;
+  background-color: white;
+  border: 0.15rem solid;
+  border-radius: 1rem;
+  font-size: 1rem;
+  color: black;
+  font-family: "GmarketSansBD";
+  cursor: pointer;
+}
+
+.promiseButton:hover {
+  background-color: #9a9999;
+}
+
+.promiseButton2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 70px;
+  background-color: #3880ff;
+  border: 0.15rem solid;
+  border-radius: 1rem;
+  font-size: 1rem;
+
+  color: black;
+  font-family: "GmarketSansBD";
+  cursor: pointer;
+}
+.promiseButton2:hover {
+  background-color: #0381ca;
+}
+
+.buttonDiv {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.promiseDiv {
+  display: flex;
+  align-items: center;
+  font-family: "GmarketSansBD";
+  font-size: 1.5rem;
+  height: 2.5rem;
+  width: 80%;
+  color: #666666;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  margin-top: 2rem;
+  border: 0.15rem solid;
+  background-color: white;
+}
+
+.prmoiseDiv:focus {
+  color: black;
+}
+
+.locationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.locationDiv {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  padding: 1rem;
+  border-bottom: 2px solid #9e9d9d;
+  cursor: pointer;
+}
+
+.locationDiv:hover {
+  background-color: #367bf6;
+  transition: 0.3s ease;
+  color: white;
+}
+
+.locationDiv path {
+  transition: 0.3s ease;
+  fill: white;
+}
+
+.locationName {
+  font-size: 2rem;
+}
+
+.searchSvg {
+  padding-top: 1rem;
+}
+
+.searchSvg svg {
+  transform: scale(0.5);
+}
+
+.navSearchDiv {
+  display: flex;
+  position: relative;
+}
+
+.navSearchDiv svg {
+  position: absolute;
+  top: 30px;
+  right: -30px;
+  pointer: cursor;
+}
+
+.promise {
+  display: flex;
+  align-items: center;
+  font-family: "GmarketSansBD";
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 300px;
+  color: #666666;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  border: 0.15rem solid;
+  background-color: white;
+  margin-top: 20px;
+}

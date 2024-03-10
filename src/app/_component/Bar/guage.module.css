@@ -1,0 +1,31 @@
+.rangeText {
+  transform: translateX(-0.7rem);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 8px;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.svgContainer {
+  width: 20px;
+  height: 20px;
+  border-radius: 10rem;
+  border: 1px solid #605a5a;
+  transform: translateX(-0.7rem);
+}
+
+.range {
+  text-align: center;
+  font-size: 0.8rem;
+  color: white;
+  height: 20px;
+  border-radius: 10rem;
+}
+
+.range svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}

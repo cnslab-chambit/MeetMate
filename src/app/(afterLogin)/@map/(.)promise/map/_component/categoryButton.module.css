@@ -1,0 +1,19 @@
+.button {
+  display: flex;
+  justify-content: space-evenly;
+  align-center: center;
+  width: 100px;
+  height: 2rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: white;
+  color: black;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.activedButton {
+  background-color: #c7d6ff;
+  color: white;
+}

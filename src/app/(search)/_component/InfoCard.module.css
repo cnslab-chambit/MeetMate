@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  padding: 1rem 0;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: #367bf6;
+  transition: 0.3s ease;
+  color: white;
+}
+
+.container path:hover {
+  transition: 0.3s ease;
+  fill: white;
+}
+
+.roughInfo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.locationContainer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 140px);
+  overflow-y: scroll;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  padding-left: 10px;
+  font-weight: 700;
+  color: #9e9d9d;
+  min-width: 70px;
+}
+
+.addressName {
+  font-size: 1rem;
+}
+
+.iconDiv {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.iconDiv svg {
+  transform: scale(0.5);
+}
