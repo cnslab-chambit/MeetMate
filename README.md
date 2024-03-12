@@ -73,21 +73,14 @@ https://github.com/cnslab-chambit/MeetMate/assets/55770796/f9e943bf-ff36-4528-af
    
 ## 시연영상 Mobile버전
 
-### 메인화면
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/5b04d2f0-85ad-4492-a43e-c9daff54f6cb0" height="650" width="400"/>
+### 1) 홈
+| 지도 검색 | 약속 잡기|
+| ------ | ------ | 
+| ![지도 검색](https://github.com/cnslab-chambit/MeetMate/assets/55770796/5b04d2f0-85ad-4492-a43e-c9daff54f6cb0) | ![약속 잡기](https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5) |
 
-### 약속잡기
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/2075b0e6-0c8c-4e1c-8cc9-cc3eb86da0c5" height="650" width="400"/>
-
-### 길찾기
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6067c86-d538-4b3b-9e2e-efbc26294cfa" height="650" width="400"/>
-
-### 버스
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6e12abf-aed8-4e1e-bd97-073a9cb1c419" height="650" width="400"/>
-
-
-### 지하철
-<img src="https://github.com/cnslab-chambit/MeetMate/assets/55770796/c4542498-7a34-4d54-a73f-b7851c1b484c" height="650" width="400"/>
+| 길 찾기 | 버스 | 지하철 |
+|-------|------|---------|
+| ![길 찾기](https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6067c86-d538-4b3b-9e2e-efbc26294cfa) | ![버스](https://github.com/cnslab-chambit/MeetMate/assets/55770796/e6e12abf-aed8-4e1e-bd97-073a9cb1c419) | ![지하철](https://github.com/cnslab-chambit/MeetMate/assets/55770796/c4542498-7a34-4d54-a73f-b7851c1b484c) |
 
    
 
