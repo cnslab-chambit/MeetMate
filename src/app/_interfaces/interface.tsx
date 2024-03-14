@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IMarkers {
     address_name: string;
     category_group_code: string;
@@ -48,11 +50,10 @@ export interface IStoreInfo {
     y: string;
 }
 export interface IBoundary {
-    coordinates: { x: string; y: string }[];
-    top: string;
-    left: string;
-    bottom: string;
-    right: string;
+    y_1: number;
+    x_1: number;
+    y_2: number;
+    x_2: number;
 }
 export interface IMap {
     setBounds: (bounds: unknown) => undefined
@@ -61,4 +62,11 @@ export interface ICodeType {
     trafficType: number;
     subwayCode: number;
     buswayCode: number
+}
+
+export interface ILatLngType {
+    y_1: string,
+    x_1: string,
+    y_2: string,
+    x_2: string,
 }
