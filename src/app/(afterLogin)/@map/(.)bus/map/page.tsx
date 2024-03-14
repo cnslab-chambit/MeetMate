@@ -7,32 +7,27 @@ import { useEffect, useState } from "react";
 import { MapMarker, Polyline } from "react-kakao-maps-sdk";
 import BusIcon from "@/public/images/bus.svg";
 import { setBoundary } from "@/src/app/_utils/navigationUtils";
+import { useDrawBusPolyLine } from "@/src/app/_utils/mapBaseHook";
 
 export default function Search() {
   const busRecoil = useRecoilValue(busState);
   const busInfo = useRecoilValue(busInfoState);
   const [map, setMap] = useState<any>();
   const [graphPos, setGraphPos] = useState<any>([]);
-
-  const drawPolyLine = (lane: any) => {
-    for (let i = 0; i < lane?.length; i++) {
-      const lat = lane[i].y;
-      const lng = lane[i].x;
-      if (lat && lng) {
-        setGraphPos((prev: any) => [...prev, { lat: lat, lng: lng }]);
-      }
-    }
-  };
-
-  const setBound = (boundary: any) => {
-    setBoundary(boundary, map);
-  };
-
+  const latLngVar = {
+    y_1: parseFloat(busRecoil?.data?.result.boundary.bottom) - 0.15,
+    x_1: parseFloat(busRecoil?.data?.result.boundary.left),
+    y_2: parseFloat(busRecoil?.data?.result.boundary.top),
+    x_2: parseFloat(busRecoil?.data?.result.boundary.right),
+  }
+  useEffect(() => {
+    console.log('bus: ', busRecoil)
+  }, [])
   useEffect(() => {
     if (busRecoil) {
-      setBound(busRecoil?.data?.result.boundary);
+      setBoundary(latLngVar, map);
     }
-    drawPolyLine(busRecoil?.data?.result.lane[0].section[0].graphPos);
+    useDrawBusPolyLine(busRecoil?.data?.result.lane[0].section[0].graphPos, setGraphPos);
   }, [map]);
 
   return (
