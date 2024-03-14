@@ -6,8 +6,9 @@ import { useState } from "react";
 import styles from "./locationNav.module.css";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import axios from "axios";
-import { IMarkers, markerAtom, searchAtom } from "@/src/app/_atom/atom";
+import { markerAtom, searchAtom } from "@/src/app/_atom/atom";
 import { useRouter } from "next/navigation";
+import { IMarkers } from "@/src/app/_interfaces/interface";
 
 function LocationNav() {
   const [keyword, setKeyword] = useState("");
