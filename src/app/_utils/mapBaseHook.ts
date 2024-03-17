@@ -3,19 +3,36 @@ export const useDrawPolyLine = (lane: any) => {
     const lineArr = [];
     for (let j = 0; j < lane?.section?.length; j++) {
         for (let k = 0; k < lane.section[j].graphPos.length; k++) {
-            lineArr.push({ lat: lane.section[j].graphPos[k].y, lng: lane.section[j].graphPos[k].x });
+            lineArr.push({
+                lat: lane.section[j].graphPos[k].y,
+                lng: lane.section[j].graphPos[k].x
+            });
         }
     }
     // mapRef.current.setBounds(bounds);
     return lineArr;
 }
+
+export const useDrawBusPolyLine = (lane: any, graph: any) => {
+    for (let i = 0; i < lane?.length; i++) {
+        const lat = lane[i].y;
+        const lng = lane[i].x;
+        if (lat && lng) {
+            graph((prev: any) => [...prev, { lat: lat, lng: lng }]);
+        }
+    }
+};
+
 export const useMultiDrawPolyLine = (box: any) => {
     console.log(box)
     const lineArr: any = [];
     box.map((e: any) => {
         for (let j = 0; j < e?.lane?.section?.length; j++) {
             for (let k = 0; k < e?.lane.section[j].graphPos.length; k++) {
-                lineArr.push({ lat: e?.lane.section[j].graphPos[k].y, lng: e?.lane.section[j].graphPos[k].x });
+                lineArr.push({
+                    lat: e?.lane.section[j].graphPos[k].y,
+                    lng: e?.lane.section[j].graphPos[k].x
+                });
             }
         }
     })
