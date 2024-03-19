@@ -1,19 +1,11 @@
 "use client";
 import { useRecoilState } from "recoil";
-import { storeState } from "../../../../../../mobile-content/atom";
-import {
-  CategotyDiv,
-  DetailDiv,
-  ImageBox,
-  InfoDiv,
-  NonStoreDiv,
-  PlaceAddress,
-  PlaceName,
-  RoadButton,
-  StarSpan,
-} from "@/m-styled-component/promise-component/promise_styled";
+import { storeState } from "@/src/app/_atom/atom";
+
+import styles from "./info.module.css";
 import Star from "@/public/images/star.svg";
 import RoadArrow from "@/public/images/roadArrow.svg";
+import Sad from "@/public/images/sad.svg";
 
 type Props = {
   buttonIndex: number;
@@ -30,45 +22,55 @@ function Info({ buttonIndex, setInfo, divSetBound }: Props) {
   };
 
   return (
-    <InfoDiv>
+    <div className={styles.infoDiv}>
       {buttonIndex === -1 ? (
         storeRecoil?.map((element: any) =>
           element.searchList.map((store: any) => (
-            <DetailDiv key={store.id} onClick={() => divClick(store)}>
-              <PlaceName>
+            <div
+              className={styles.detailDiv}
+              key={store.id}
+              onClick={() => divClick(store)}
+            >
+              <div className={styles.placeName}>
                 {store.place_name}
                 <Star />
-                <StarSpan>{store.star_rate}</StarSpan>
-                <CategotyDiv>{element.category_name}</CategotyDiv>
-              </PlaceName>
-              <PlaceAddress>{store.address}</PlaceAddress>
-              <RoadButton>
+                <div className={styles.starSpan}>{store.star_rate}</div>
+                <div className={styles.categoryDiv}>
+                  {element.category_name}
+                </div>
+              </div>
+              <div className={styles.placeAddress}>{store.address}</div>
+              <div className={styles.roadButton}>
                 <RoadArrow />길 찾기
-              </RoadButton>
-            </DetailDiv>
+              </div>
+            </div>
           ))
         )
       ) : storeRecoil[buttonIndex]?.searchList.length ? (
         storeRecoil[buttonIndex]?.searchList.map((store) => (
-          <DetailDiv key={store.id} onClick={() => divClick(store)}>
-            <PlaceName>
+          <div
+            className={styles.detailDiv}
+            key={store.id}
+            onClick={() => divClick(store)}
+          >
+            <div className={styles.placeName}>
               {store.place_name}
               <Star />
-              <StarSpan>{store.star_rate}</StarSpan>
-            </PlaceName>
-            <PlaceAddress>{store.address}</PlaceAddress>
-            <RoadButton>
+              <div>{store.star_rate}</div>
+            </div>
+            <div className={styles.placeAddress}>{store.address}</div>
+            <div className={styles.roadButton}>
               <RoadArrow />길 찾기
-            </RoadButton>
-          </DetailDiv>
+            </div>
+          </div>
         ))
       ) : (
-        <NonStoreDiv>
+        <div className={styles.nonStoreDiv}>
           마땅한 장소가 없네요!
-          <ImageBox />
-        </NonStoreDiv>
+          <Sad />
+        </div>
       )}
-    </InfoDiv>
+    </div>
   );
 }
 

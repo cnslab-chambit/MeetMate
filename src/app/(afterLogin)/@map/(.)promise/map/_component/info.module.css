@@ -1,24 +1,24 @@
-/* import styled, { css, keyframes } from "styled-components";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+  overflow-y: auto;
+}
 
-export const slideIn = keyframes`
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
+.container::-webkit-scrollbar {
+  width: 0.7rem;
+}
 
-const slideOut = keyframes`
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
-`; */
+.conatainer::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: gray;
+}
+.conatainer::-webkit-scrollbar-thumb:hover {
+  background-color: gray;
+}
 
-/* export const ButtonContainer = styled.div`
+.buttonContainer {
   display: flex;
   position: absolute;
   width: 100%;
@@ -27,16 +27,16 @@ const slideOut = keyframes`
   padding: 0 2rem;
   justify-content: space-between;
   cursor: pointer;
-`;
+}
 
-export const MapConatiner = styled.div`
+.mapContainer {
   position: relative;
   width: 100%;
   height: 85vh;
   max-height: 100vh;
-`;
+}
 
-export const SelectButton = styled.div<{ active: boolean }>`
+.selectButton {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -46,12 +46,17 @@ export const SelectButton = styled.div<{ active: boolean }>`
   border-radius: 2rem;
   font-size: 1.5rem;
   font-weight: 700;
-  background-color: ${(props) => (props.active ? "#C7D6FF" : "white")};
-  color: ${(props) => (props.active ? "white" : "black")};
+  background-color: white;
+  color: black;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-`;
+}
 
-export const ToggleContainer = styled.div<{ $visible: boolean }>`
+.selectButton active {
+  background-color: #c7d6ff;
+  color: white;
+}
+
+.toggleContainer {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -62,23 +67,16 @@ export const ToggleContainer = styled.div<{ $visible: boolean }>`
   bottom: 10rem;
   justify-content: center;
   align-items: center;
-  animation: ${({ $visible }) =>
-    $visible
-      ? css`
-          ${slideIn} 0.5s forwards
-        `
-      : css`
-          ${slideOut} 0.5s forwards
-        `};
-`;
+}
 
-export const ToggleButtonDiv = styled.div`
+.toggleButtonDiv {
   display: flex;
   gap: 2rem;
   justify-content: space-between;
-`;
+}
 
-export const ToggleButton = styled.div`
+.toggleButton,
+.roadToggleButton {
   display: flex;
   align-items: center;
   height: 3rem;
@@ -88,37 +86,43 @@ export const ToggleButton = styled.div`
   font-weight: 700;
   width: 15rem;
   background-color: white;
-  path {
-    stroke: #00a3ff;
-  }
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-`;
+}
+.roadToggleButton active {
+  background-color: #367bf6;
+  color: white;
+}
 
-export const RoadToggleButton = styled(ToggleButton)<{ active: boolean }>`
-  background-color: ${(props) => (props.active ? "#367BF6" : "white")};
-  color: ${(props) => (props.active ? "white" : "black")};
-`;
+.roadToggleButton path {
+  stroke: #00a3ff;
+}
 
-export const ToggleMenuDiv = styled.div`
+.toggleMenuDiv {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
-`;
+}
 
-export const InfoDiv = styled.div`
+.infoDiv {
   display: flex;
   flex-direction: column;
-  width: 370px;
-  height: 200px;
+  width: 600px;
+  height: 300px;
   margin-top: 1rem;
   z-index: 2;
+  bottom: 0;
   background-color: white;
   border-radius: 1rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   overflow: auto;
-`;
 
-export const DetailDiv = styled.div`
+  @media (max-width: 456px) {
+    width: 360px;
+    height: 200px;
+  }
+}
+
+.detailDiv {
   display: flex;
   flex-direction: column;
   color: black;
@@ -126,75 +130,81 @@ export const DetailDiv = styled.div`
   padding: 1rem;
   justify-content: space-evenly;
   border-bottom: 1px solid gray;
-`;
+}
 
-export const PlaceInfoDiv = styled.div`
+.placeInfoDiv {
   display: flex;
   gap: 2rem;
-`;
+}
 
-export const PlaceName = styled.div`
+.placeName {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
-  path {
-    fill: #ffc910;
-  }
-`;
+}
 
-export const NonStoreDiv = styled.div`
+.placeName path {
+  fill: #ffc910;
+}
+
+.nonStoreDiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  font-weight: 800;
-  width: 100%;
+  padding: 20px;
   height: 100%;
-`;
+  font-size: 1rem;
+  font-weight: 800;
+}
 
-export const ImageBox = styled.div`
+.nonStoreDiv svg {
+  width: 80px;
+}
+
+.imageBox {
   width: 7rem;
   height: 7rem;
   background-image: url("/images/sad.svg");
-`;
+}
 
-export const PlaceAddress = styled.div`
+.placeAddress {
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
   font-weight: 600;
   color: #666666;
-`;
+}
 
-export const StarSpan = styled.div`
+.starSpan {
   font-size: 1.5rem;
-`;
+}
 
-export const CategotyDiv = styled.div`
+.categoryDiv {
   margin-left: 2rem;
-  font-size: 1.5rem;
+  font-size: 15px;
   color: #666666;
-`;
+}
 
-export const RoadButton = styled.div`
+.roadButton {
   display: flex;
   align-items: center;
-  height: 3rem;
+  height: 30px;
   border: 2px solid gray;
   border-radius: 2rem;
-  font-size: 1.5rem;
+  font-size: 12px;
   font-weight: 700;
-  width: 10rem;
+  width: 80px;
   background-color: white;
   margin-top: 1rem;
-  path {
-    fill: #00a3ff;
-  }
-  box-shadow: 0px 1px 0px 0px #000000;
-`;
 
-export const StoreInfoDiv = styled.div`
+  box-shadow: 0px 1px 0px 0px #666666;
+}
+.roadButton path {
+  fill: #00a3ff;
+}
+
+.storeInfoDiv {
   display: flex;
   font-size: 1.5rem;
   width: 20rem;
@@ -207,16 +217,16 @@ export const StoreInfoDiv = styled.div`
   border-radius: 1rem;
   font-weight: 700;
   box-shadow: 2px 2px 1px 0px gray;
-`;
+}
 
-export const StoreName = styled.div`
+.storeName {
   display: flex;
   width: 70%;
   justify-content: center;
   font-family: "GmarketSansBD";
-`;
+}
 
-export const DecisionDiv = styled.div`
+.decisionDiv {
   display: flex;
   align-items: center;
   position: relative;
@@ -227,9 +237,9 @@ export const DecisionDiv = styled.div`
   color: white;
   border-radius: 0 1rem 1rem 0;
   border: none;
-`;
+}
 
-export const BackButton = styled.div`
+.backButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,4 +251,4 @@ export const BackButton = styled.div`
   border: 2px solid black;
   background-color: white;
   border-radius: 1rem;
-`; */
+}

@@ -1,4 +1,4 @@
-import { IMarkers } from "./atom";
+import { IMarkers } from "@/src/app/_atom/atom";
 import axios from "axios";
 const odsay = axios.create({
   baseURL: "https://api.odsay.com/v1/api/",
@@ -59,12 +59,13 @@ const setWayColor = (
 };
 
 export const callApi = async (center: any) => {
+  console.log(center);
   const response = await fetch(
     `/search?longitude=${center.x}&latitude=${center.y}`,
     {
       method: "GET",
       headers: {
-        "Content-type": "application/json;",
+        "Content-Type": "application/json",
       },
     }
   ).then((response) => response.json());
@@ -117,7 +118,7 @@ export const setMarkerUrl = (category: any) => {
   return "";
 };
 
-export const drawPolyLine = async (response: any) => {
+export const drawPolyLine = (response: any) => {
   let lineArr = [];
   for (let i = 0; i < response?.length; i++) {
     let subLineArr = [];

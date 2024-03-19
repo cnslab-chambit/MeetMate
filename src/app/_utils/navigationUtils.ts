@@ -2,10 +2,11 @@ export const judgeActivation = (
   categories: string[],
   layoutSegments: string[]
 ) => {
+  console.log(layoutSegments);
   const activatedCategory = categories.find((category) =>
     layoutSegments.includes(category)
   );
-  return activatedCategory || "";
+  return activatedCategory;
 };
 
 export const isMapPage = (path: string) => {

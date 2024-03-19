@@ -13,7 +13,7 @@ function Home() {
   const mapRecoil = useSetRecoilState<IMarkers>(mapAtom);
   const onDivClicked = (data: IMarkers) => {
     mapRecoil(data);
-    router.push("/");
+    router.back();
   };
 
   return (
