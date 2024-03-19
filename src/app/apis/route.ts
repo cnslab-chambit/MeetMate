@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Dispatch, SetStateAction } from "react";
 const odsay = axios.create({
   baseURL: "https://api.odsay.com/v1/api/",
 });
@@ -46,4 +47,28 @@ export const multiroadSearchApi = async (result: any) => {
     })
   );
   return box;
+};
+
+
+export const findBusInfoApi = async (busId: string, busInfo: Dispatch<SetStateAction<string>>) => {
+  try {
+    const response = await axios.get(
+      `https://api.odsay.com/v1/api/loadLane?lang=0&mapObject=0:0@${busId}:1:-1:-1&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`
+    );
+    busInfo(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const callMapObjRoadApiAJAX = (mapObj: string, setLaneData: Dispatch<SetStateAction<any>>) => {
+  const url = `https://api.odsay.com/v1/api/loadLane?mapObject=0:0@${mapObj}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`;
+  (async () => {
+    const data = await (await fetch(url)).json();
+    if (data) {
+      for (let i = 0; i < data?.result?.lane.length; i++) {
+        setLaneData((prev: any) => [...prev, data.result?.lane[i]]);
+      }
+    }
+  })();
 };

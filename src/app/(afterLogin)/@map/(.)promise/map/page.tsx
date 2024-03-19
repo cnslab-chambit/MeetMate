@@ -1,10 +1,5 @@
 "use client";
-import {
-  IMarkers,
-  IStore,
-  promiseState,
-  storeState,
-} from "@/src/app/_atom/atom";
+import { promiseState, storeState } from "@/src/app/_atom/atom";
 import cx from "classnames";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -28,7 +23,7 @@ import CategoryButton from "./_component/CategoryButton";
 import KakaoMap from "@/src/app/_component/Map/KakaoMap";
 import KakaoMarker from "@/src/app/_component/Map/KakaoMarker";
 import Button from "@/src/app/_component/Map/Button/Button";
-import Info from "./_component/Info";
+import { IMarkers, IStore } from "@/src/app/_interfaces/interface";
 
 function PromiseMap() {
   const [map, setMap] = useState<any>();
@@ -50,7 +45,7 @@ function PromiseMap() {
     "#A9E1ED",
     "#d6f3ad",
   ];
-  let linArr: any = [];
+
   const getCenterPosition = () => {
     let x = 0;
     let y = 0;
@@ -141,11 +136,11 @@ function PromiseMap() {
   };
 
   const buttonClick = (num: number) => {
-    console.log("hi");
     if (num === buttonIndex) {
       setButtonIndex((prev) => -1);
     } else {
-      setButtonIndex((prev) => num);
+      console.log(num);
+      setButtonIndex(num);
     }
   };
 
@@ -200,19 +195,61 @@ function PromiseMap() {
     setBound(center);
   }, [toggle]);
 
-  console.log(clickedRoad);
-
+  console.log(buttonIndex);
+  console.log(storeRecoil);
   return (
-    <div className={styles.mapContainer}>
-      <KakaoMap y="37.617136272655" x="127.048656761384" onCreate={setMap}>
-        {buttonIndex === -1
-          ? storeRecoil?.map((element: any) =>
-              element.searchList.map((store: any) => (
+    <>
+      <div className={styles.mapContainer}>
+        <KakaoMap y="37.617136272655" x="127.048656761384" onCreate={setMap}>
+          {buttonIndex === -1
+            ? storeRecoil?.map((element: any) =>
+                element.searchList.map((store: any) => (
+                  <div key={store.id}>
+                    <KakaoMarker
+                      x={store.x}
+                      y={store.y}
+                      src={setMarkerUrl(element.category_name)}
+                      width={42}
+                      height={45}
+                      onClick={() => setInfo(store.place_name)}
+                    />
+                    {info && info === store.place_name && (
+                      <CustomOverlayMap
+                        position={{
+                          lat: parseFloat(store.y),
+                          lng: parseFloat(store.x),
+                        }}
+                        yAnchor={1.8}
+                        zIndex={3}
+                      >
+                        <div className={styles.storeInfoDiv}>
+                          <div className={styles.storeName}>
+                            {store.place_name}
+                          </div>
+                          <div
+                            className={styles.decisionDiv}
+                            onClick={() => clickFindRoad(store)}
+                          >
+                            길 찾기
+                          </div>
+                          <div
+                            className={styles.backButton}
+                            onClick={() => setInfo("")}
+                          >
+                            x
+                          </div>
+                        </div>
+                      </CustomOverlayMap>
+                    )}
+                  </div>
+                ))
+              )
+            : storeRecoil[buttonIndex]?.searchList.map((store) => (
                 <div key={store.id}>
                   <KakaoMarker
                     x={store.x}
                     y={store.y}
-                    src={setMarkerUrl(element.category_name)}
+                    src={setMarkerUrl(storeRecoil[buttonIndex].category_name)}
                     width={42}
                     height={45}
                     onClick={() => setInfo(store.place_name)}
@@ -230,12 +267,7 @@ function PromiseMap() {
                         <div className={styles.storeName}>
                           {store.place_name}
                         </div>
-                        <div
-                          className={styles.decisionDiv}
-                          onClick={() => clickFindRoad(store)}
-                        >
-                          루트 찾기
-                        </div>
+                        <div className={styles.decisionDiv}>길 찾기</div>
                         <div
                           className={styles.backButton}
                           onClick={() => setInfo("")}
@@ -246,172 +278,145 @@ function PromiseMap() {
                     </CustomOverlayMap>
                   )}
                 </div>
-              ))
-            )
-          : storeRecoil[buttonIndex]?.searchList.map((store) => (
-              <div key={store.id}>
-                <KakaoMarker
-                  x={store.x}
-                  y={store.y}
-                  src={setMarkerUrl(storeRecoil[buttonIndex].category_name)}
-                  width={42}
-                  height={45}
-                  onClick={() => setInfo(store.place_name)}
-                />
-                {info && info === store.place_name && (
-                  <CustomOverlayMap
-                    position={{
-                      lat: parseFloat(store.y),
-                      lng: parseFloat(store.x),
-                    }}
-                    yAnchor={1.8}
-                    zIndex={3}
-                  >
-                    <div className={styles.storeInfoDiv}>
-                      <div className={styles.storeName}>{store.place_name}</div>
-                      <div className={styles.decisionDiv}>길 찾기</div>
-                      <div
-                        className={styles.backButton}
-                        onClick={() => setInfo("")}
-                      >
-                        x
-                      </div>
-                    </div>
-                  </CustomOverlayMap>
-                )}
-              </div>
-            ))}
+              ))}
 
-        {promiseLocation?.map((location: any) => (
+          {promiseLocation?.map((location: any) => (
+            <KakaoMarker
+              key={location.id}
+              x={location.x}
+              y={location.y}
+              width={64}
+              height={64}
+              src="/images/start.svg"
+            />
+          ))}
+
           <KakaoMarker
-            key={location.id}
-            x={location.x}
-            y={location.y}
+            x={center.x}
+            y={center.y}
             width={64}
-            height={64}
-            src="/images/start.svg"
+            height={69}
+            src="/images/end.svg"
           />
-        ))}
 
-        <KakaoMarker
-          x={center.x}
-          y={center.y}
-          width={64}
-          height={69}
-          src="/images/end.svg"
-        />
+          {center
+            ? startPoint
+                .slice(0, startPoint.length - 1)
+                .map((point: any, index: number) => (
+                  <Polygon
+                    key={index}
+                    path={[center, startPoint[index], startPoint[index + 1]]}
+                    fillColor={"#f87b87"}
+                    fillOpacity={0.2}
+                    strokeOpacity={0}
+                  />
+                ))
+            : null}
 
-        {center
-          ? startPoint
-              .slice(0, startPoint.length - 1)
-              .map((point: any, index: number) => (
-                <Polygon
-                  key={index}
-                  path={[center, startPoint[index], startPoint[index + 1]]}
-                  fillColor={"#f87b87"}
-                  fillOpacity={0.2}
-                  strokeOpacity={0}
-                />
+          {polyline.length > 0
+            ? polyline.map((line: any, index: number) => (
+                <div key={index + 40}>
+                  <Polyline
+                    key={index + 10}
+                    path={line}
+                    strokeColor={color[index % 6]}
+                    strokeWeight={8}
+                    strokeOpacity={1}
+                  />
+                  <Polyline
+                    key={index + 0}
+                    path={line}
+                    strokeColor="white"
+                    strokeStyle="dash"
+                    strokeWeight={2}
+                    strokeOpacity={1}
+                  />
+                </div>
               ))
-          : null}
+            : null}
+        </KakaoMap>
 
-        {polyline.length > 0
-          ? polyline.map((line: any, index: number) => (
-              <div key={index + 40}>
-                <Polyline
-                  key={index + 10}
-                  path={line}
-                  strokeColor={color[index % 6]}
-                  strokeWeight={8}
-                  strokeOpacity={1}
-                />
-                <Polyline
-                  key={index + 0}
-                  path={line}
-                  strokeColor="white"
-                  strokeStyle="dash"
-                  strokeWeight={2}
-                  strokeOpacity={1}
-                />
-              </div>
-            ))
-          : null}
-      </KakaoMap>
+        <div className={styles.buttonContainer}>
+          <CategoryButton
+            onClick={() => buttonClick(0)}
+            isActive={buttonIndex === 0}
+          >
+            <Shopping />
+            대형마트
+          </CategoryButton>
+          <CategoryButton
+            onClick={() => buttonClick(1)}
+            isActive={buttonIndex === 1}
+          >
+            <Bike />
+            문화시설
+          </CategoryButton>
+          <CategoryButton
+            onClick={() => buttonClick(2)}
+            isActive={buttonIndex === 2}
+          >
+            <Camera />
+            관광명소
+          </CategoryButton>
+          <CategoryButton
+            onClick={() => buttonClick(3)}
+            isActive={buttonIndex === 3}
+          >
+            <Food />
+            음식점
+          </CategoryButton>
+          <CategoryButton
+            onClick={() => buttonClick(4)}
+            isActive={buttonIndex === 4}
+          >
+            <Mug />카 페
+          </CategoryButton>
+        </div>
 
-      <div className={styles.buttonContainer}>
         <div
-          onClick={() => buttonClick(0)}
-          className={cx(styles.nonActived, buttonIndex === 0 && styles.clicked)}
+          className={cx(styles.toggleContainer, toggle && styles.visibleToggle)}
         >
-          <Shopping />
-          대형마트
-        </div>
-        <div
-          onClick={() => buttonClick(1)}
-          className={cx(styles.nonActived, buttonIndex === 1 && styles.clicked)}
-        >
-          <Bike />
-          문화시설
-        </div>
-        <div
-          onClick={() => buttonClick(2)}
-          className={cx(styles.nonActived, buttonIndex === 2 && styles.clicked)}
-        >
-          <Camera />
-          관광명소
-        </div>
-        <div
-          onClick={() => buttonClick(3)}
-          className={cx(styles.nonActived, buttonIndex === 3 && styles.clicked)}
-        >
-          <Food />
-          음식점
-        </div>
-        <div
-          onClick={() => buttonClick(4)}
-          className={cx(styles.nonActived, buttonIndex === 4 && styles.clicked)}
-        >
-          <Mug />카 페
-        </div>
-      </div>
-
-      <div
-        className={cx(styles.toggleContainer, toggle && styles.visibleToggle)}
-      >
-        <div className={styles.toggleButtonDiv}>
-          <div onClick={toggleClick} className={styles.toggleButton}>
-            {toggle ? (
-              <div className={styles.toggleMenuDiv}>목록 접기</div>
-            ) : (
-              <div className={styles.toggleMenuDiv}>
-                <Menu />
-                목록
+          <Button onClick={toggleClick}>
+            <div className={styles.toggleButton}>
+              {toggle ? (
+                <>
+                  <div className={styles.toggleMenuDiv}>목록 접기</div>
+                </>
+              ) : (
+                <div className={styles.toggleMenuDiv}>
+                  <Menu />
+                  목록
+                </div>
+              )}
+            </div>
+            {toggle && placeRoute.length && (
+              <div
+                className={cx(
+                  styles.roadToggleContainer,
+                  clickedRoad && styles.activeRoadButton
+                )}
+                onClick={roadToggleClick}
+              >
+                <div className={styles.toggleMenuDiv}>길 찾기</div>
               </div>
             )}
-          </div>
-          {toggle && placeRoute.length && (
-            <div
-              className={cx(clickedRoad ? styles.actived : styles.toggleButton)}
-              onClick={roadToggleClick}
-            >
-              길 찾기
-            </div>
+          </Button>
+
+          {toggle && !clickedRoad ? (
+            <Info
+              buttonIndex={buttonIndex}
+              placeRoute={placeRoute}
+              setInfo={setInfo}
+              divSetBound={divSetBound}
+              clickedRoad={clickedRoad}
+            />
+          ) : (
+            toggle &&
+            clickedRoad && <Route placeRoute={placeRoute} colorArr={color} />
           )}
         </div>
-        {toggle && !clickedRoad ? (
-          <Info
-            buttonIndex={buttonIndex}
-            placeRoute={placeRoute}
-            setInfo={setInfo}
-            divSetBound={divSetBound}
-            clickedRoad={clickedRoad}
-          />
-        ) : (
-          toggle &&
-          clickedRoad && <Route placeRoute={placeRoute} colorArr={color} />
-        )}
       </div>
-    </div>
+    </>
   );
 }
 

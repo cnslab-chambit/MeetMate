@@ -11,25 +11,14 @@ import { ToggleContainer } from "@/m-styled-component/promise-component/promise_
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MapMarker, Polyline } from "react-kakao-maps-sdk";
+import { setBoundary } from "@/src/app/_utils/navigationUtils";
+import { , findBusInfoApi } from "@/src/app/apis/route";
 
 export default function BusMap({ id }: { id: string }) {
   const [busInfo, setBusInfo] = useState<any>();
   const [map, setMap] = useState<any>();
   const [graphPos, setGraphPos] = useState<any>([]);
-  let bounds;
-
-  const findBusInfo = async (busId: any) => {
-    try {
-      const response = await axios.get(
-        `https://api.odsay.com/v1/api/loadLane?lang=0&mapObject=0:0@${busId}:1:-1:-1&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY}`
-      );
-      console.log("우마이", response);
-      setBusInfo(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  console.log('asdasd:', busInfo)
   const drawPolyLine = (lane: any) => {
     for (let i = 0; i < lane?.length; i++) {
       const lat = lane[i].y;
@@ -39,38 +28,18 @@ export default function BusMap({ id }: { id: string }) {
       }
     }
   };
-
-  const setBound = (boundary: any) => {
-    if (map) {
-      bounds = new kakao.maps.LatLngBounds();
-      bounds.extend(
-        new kakao.maps.LatLng(
-          parseFloat(boundary?.bottom) - 0.15,
-          parseFloat(boundary?.left)
-        )
-      );
-      bounds.extend(
-        new kakao.maps.LatLng(
-          parseFloat(boundary?.top),
-          parseFloat(boundary?.right)
-        )
-      );
-      map?.setBounds(bounds);
-    }
-  };
-
   useEffect(() => {
     if (busInfo && id) {
-      setBound(busInfo?.result.boundary);
+      setBoundary(busInfo?.result.boundary, map);
     }
     drawPolyLine(busInfo?.result.lane[0].section[0].graphPos);
   }, [map]);
 
   useEffect(() => {
     if (id) {
-      findBusInfo(id);
+      findBusInfoApi(id, setBusInfo);
     }
-  }, []);
+  }, [id]);
 
   return (
     <>

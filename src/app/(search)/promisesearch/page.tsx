@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  IMarkers,
   markerAtom,
   placeState,
   promiseIndex,
@@ -11,6 +10,7 @@ import styles from "../_component/InfoCard.module.css";
 import { useRouter } from "next/navigation";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import InfoCard from "../_component/InfoCard";
+import { IMarkers } from "../../_interfaces/interface";
 
 function SearchList() {
   const router = useRouter();

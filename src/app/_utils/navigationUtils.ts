@@ -1,3 +1,5 @@
+import { IBoundary, IMap } from "../_interfaces/interface";
+
 export const judgeActivation = (
   categories: string[],
   layoutSegments: string[]
@@ -16,19 +18,19 @@ export const isMapPage = (path: string) => {
   return false;
 };
 
-export const setBoundary = (boundary: any, map: any) => {
+export const setBoundary = (boundary: IBoundary, map: IMap) => {
   if (map) {
     const bounds = new kakao.maps.LatLngBounds();
     bounds.extend(
       new kakao.maps.LatLng(
-        parseFloat(boundary?.bottom) - 0.15,
-        parseFloat(boundary?.left)
+        boundary?.y_1,
+        boundary?.x_1
       )
     );
     bounds.extend(
       new kakao.maps.LatLng(
-        parseFloat(boundary?.top),
-        parseFloat(boundary?.right)
+        boundary?.y_2,
+        boundary?.x_2
       )
     );
     map?.setBounds(bounds);
