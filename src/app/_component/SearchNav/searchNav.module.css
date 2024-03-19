@@ -76,18 +76,32 @@
 
 .iconDiv:hover path {
   transition: 0.3s ease;
+  fill: #00a3ff;
+}
+
+.iconDiv path {
+  transition: 0.3s ease;
   fill: white;
+}
+
+.iconDiv span {
+  color: white;
+  font-family: GmarketSansBD;
 }
 
 .clickedIcon {
   background-color: #00a3ff;
   transition: 0.3s ease;
   color: #666666;
+  background-color: white;
 }
 
 .clickedIcon path {
-  fill: white;
+  fill: #367bf6;
   transition: 0.3s ease;
+}
+
+.clickedIcon span {
   color: #666666;
 }
 

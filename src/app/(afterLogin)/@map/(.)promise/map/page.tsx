@@ -1,8 +1,5 @@
 "use client";
-import {
-  promiseState,
-  storeState,
-} from "@/src/app/_atom/atom";
+import { promiseState, storeState } from "@/src/app/_atom/atom";
 import cx from "classnames";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -97,10 +94,7 @@ function PromiseMap() {
     } else if (map && toggle && !clickedRoad) {
       let bounds = new kakao.maps.LatLngBounds();
       bounds?.extend(
-        new kakao.maps.LatLng(
-          parseFloat(center.y),
-          parseFloat(center.x)
-        )
+        new kakao.maps.LatLng(parseFloat(center.y), parseFloat(center.x))
       );
       map?.setBounds(bounds);
     } else if (map && !toggle) {
@@ -209,12 +203,53 @@ function PromiseMap() {
         <KakaoMap y="37.617136272655" x="127.048656761384" onCreate={setMap}>
           {buttonIndex === -1
             ? storeRecoil?.map((element: any) =>
-              element.searchList.map((store: any) => (
+                element.searchList.map((store: any) => (
+                  <div key={store.id}>
+                    <KakaoMarker
+                      x={store.x}
+                      y={store.y}
+                      src={setMarkerUrl(element.category_name)}
+                      width={42}
+                      height={45}
+                      onClick={() => setInfo(store.place_name)}
+                    />
+                    {info && info === store.place_name && (
+                      <CustomOverlayMap
+                        position={{
+                          lat: parseFloat(store.y),
+                          lng: parseFloat(store.x),
+                        }}
+                        yAnchor={1.8}
+                        zIndex={3}
+                      >
+                        <div className={styles.storeInfoDiv}>
+                          <div className={styles.storeName}>
+                            {store.place_name}
+                          </div>
+                          <div
+                            className={styles.decisionDiv}
+                            onClick={() => clickFindRoad(store)}
+                          >
+                            길 찾기
+                          </div>
+                          <div
+                            className={styles.backButton}
+                            onClick={() => setInfo("")}
+                          >
+                            x
+                          </div>
+                        </div>
+                      </CustomOverlayMap>
+                    )}
+                  </div>
+                ))
+              )
+            : storeRecoil[buttonIndex]?.searchList.map((store) => (
                 <div key={store.id}>
                   <KakaoMarker
                     x={store.x}
                     y={store.y}
-                    src={setMarkerUrl(element.category_name)}
+                    src={setMarkerUrl(storeRecoil[buttonIndex].category_name)}
                     width={42}
                     height={45}
                     onClick={() => setInfo(store.place_name)}
@@ -232,12 +267,7 @@ function PromiseMap() {
                         <div className={styles.storeName}>
                           {store.place_name}
                         </div>
-                        <div
-                          className={styles.decisionDiv}
-                          onClick={() => clickFindRoad(store)}
-                        >
-                          길 찾기
-                        </div>
+                        <div className={styles.decisionDiv}>길 찾기</div>
                         <div
                           className={styles.backButton}
                           onClick={() => setInfo("")}
@@ -248,43 +278,7 @@ function PromiseMap() {
                     </CustomOverlayMap>
                   )}
                 </div>
-              ))
-            )
-            : storeRecoil[buttonIndex]?.searchList.map((store) => (
-              <div key={store.id}>
-                <KakaoMarker
-                  x={store.x}
-                  y={store.y}
-                  src={setMarkerUrl(storeRecoil[buttonIndex].category_name)}
-                  width={42}
-                  height={45}
-                  onClick={() => setInfo(store.place_name)}
-                />
-                {info && info === store.place_name && (
-                  <CustomOverlayMap
-                    position={{
-                      lat: parseFloat(store.y),
-                      lng: parseFloat(store.x),
-                    }}
-                    yAnchor={1.8}
-                    zIndex={3}
-                  >
-                    <div className={styles.storeInfoDiv}>
-                      <div className={styles.storeName}>
-                        {store.place_name}
-                      </div>
-                      <div className={styles.decisionDiv}>길 찾기</div>
-                      <div
-                        className={styles.backButton}
-                        onClick={() => setInfo("")}
-                      >
-                        x
-                      </div>
-                    </div>
-                  </CustomOverlayMap>
-                )}
-              </div>
-            ))}
+              ))}
 
           {promiseLocation?.map((location: any) => (
             <KakaoMarker
@@ -307,38 +301,38 @@ function PromiseMap() {
 
           {center
             ? startPoint
-              .slice(0, startPoint.length - 1)
-              .map((point: any, index: number) => (
-                <Polygon
-                  key={index}
-                  path={[center, startPoint[index], startPoint[index + 1]]}
-                  fillColor={"#f87b87"}
-                  fillOpacity={0.2}
-                  strokeOpacity={0}
-                />
-              ))
+                .slice(0, startPoint.length - 1)
+                .map((point: any, index: number) => (
+                  <Polygon
+                    key={index}
+                    path={[center, startPoint[index], startPoint[index + 1]]}
+                    fillColor={"#f87b87"}
+                    fillOpacity={0.2}
+                    strokeOpacity={0}
+                  />
+                ))
             : null}
 
           {polyline.length > 0
             ? polyline.map((line: any, index: number) => (
-              <div key={index + 40}>
-                <Polyline
-                  key={index + 10}
-                  path={line}
-                  strokeColor={color[index % 6]}
-                  strokeWeight={8}
-                  strokeOpacity={1}
-                />
-                <Polyline
-                  key={index + 0}
-                  path={line}
-                  strokeColor="white"
-                  strokeStyle="dash"
-                  strokeWeight={2}
-                  strokeOpacity={1}
-                />
-              </div>
-            ))
+                <div key={index + 40}>
+                  <Polyline
+                    key={index + 10}
+                    path={line}
+                    strokeColor={color[index % 6]}
+                    strokeWeight={8}
+                    strokeOpacity={1}
+                  />
+                  <Polyline
+                    key={index + 0}
+                    path={line}
+                    strokeColor="white"
+                    strokeStyle="dash"
+                    strokeWeight={2}
+                    strokeOpacity={1}
+                  />
+                </div>
+              ))
             : null}
         </KakaoMap>
 

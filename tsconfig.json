@@ -35,7 +35,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "apis/apiStorage.js",
+    "src/app/apis/apiStorage.jsorage.js",
     "m-styled-component/search-component",
     ".next/types/**/*.ts"
   ],

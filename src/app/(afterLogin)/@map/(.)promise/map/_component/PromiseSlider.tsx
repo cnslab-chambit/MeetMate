@@ -3,14 +3,16 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import RoadInfo from "../../../../road/_component/RoadInfo";
 import { placeState } from "../../../../../_atom/atom";
+import PromiseInfo from "./PromiseInfo";
 
 const SlideContainer = styled.div`
   overflow-x: scroll;
+  padding: 10px;
   scroll-behavior: smooth;
   display: flex;
   flex-wrap: nowrap; /* 슬라이드 아이템을 한 줄에 배치합니다. */
-  width: 100%;
-  height: 30rem;
+  width: 600px;
+  height: 300px;
   margin-top: 1rem;
   z-index: 2;
   background-color: white;
@@ -22,6 +24,7 @@ const SlideContainer = styled.div`
 const SlideItem = styled.div`
   flex-shrink: 0;
   width: 100%;
+
   font-size: 2rem;
   font-weight: 700;
 `;
@@ -40,9 +43,9 @@ const SliderButton = styled.button`
 const SliderButtonDiv = styled.div`
   display: flex;
   position: absolute;
-  bottom: 3rem;
-  left: 20rem;
-  gap: 10rem;
+  gap: 100px;
+  left: 20%;
+  bottom: -60px;
 `;
 
 const LocalColorDiv = styled.div<{ color: string }>`
@@ -62,7 +65,6 @@ const Route = (placeRoute: any, color: any) => {
     "#d6f3ad",
   ];
   const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
-  console.log(color);
 
   const scrollToLeft = () => {
     const container = document.getElementById("slideContainer");
@@ -104,7 +106,7 @@ const Route = (placeRoute: any, color: any) => {
               </LocalColorDiv>
               &nbsp; 출발
             </div>
-            <RoadInfo pathRecoil={location.result.path[0]} />
+            <PromiseInfo pathRecoil={location.result.path[0]} />
           </SlideItem>
         ))}
 
