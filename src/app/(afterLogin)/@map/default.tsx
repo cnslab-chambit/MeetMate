@@ -1,12 +1,13 @@
 "use client";
 import { Inter } from "next/font/google";
 import { CustomOverlayMap } from "react-kakao-maps-sdk";
-import { IMarkers, mapAtom } from "@/src/app/_atom/atom";
+import { mapAtom } from "@/src/app/_atom/atom";
 import { useRecoilValue } from "recoil";
 import { useState } from "react";
 import KakaoMap from "@/src/app/_component/Map/KakaoMap";
 import KakaoMarker from "@/src/app/_component/Map/KakaoMarker";
 import LocationModal from "@/src/app/_component/Map/LocationModal";
+import { IMarkers } from "../../_interfaces/interface";
 
 const inter = Inter({ subsets: ["latin"] });
 

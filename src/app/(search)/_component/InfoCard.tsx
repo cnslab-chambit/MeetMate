@@ -1,4 +1,4 @@
-import { IMarkers, divNumAtom, loadAtom } from "@/mobile-content/atom";
+import { IMarkers } from "../../_interfaces/interface";
 import styles from "./InfoCard.module.css";
 import Pin from "@/public/images/pin.svg";
 

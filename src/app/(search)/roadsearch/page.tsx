@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  IMarkers,
   divNumAtom,
   loadAtom,
   markerAtom,
@@ -10,6 +9,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styles from "../_component/InfoCard.module.css";
 import InfoCard from "../_component/InfoCard";
 import { useRouter } from "next/navigation";
+import { IMarkers } from "../../_interfaces/interface";
 
 function Search() {
   const markerRecoil = useRecoilValue<IMarkers[]>(markerAtom);

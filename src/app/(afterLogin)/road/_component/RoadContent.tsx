@@ -2,14 +2,13 @@
 import Way from "@/src/app/_component/Bar/Way";
 import Gauge from "@/src/app/_component/Bar/Gauge";
 import {
-  IMarkers,
   divNumAtom,
   loadAtom,
   trafficState,
 } from "@/src/app/_atom/atom";
 import styles from "./road.module.css";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import SwapIcon from "@/public/images/cross.svg";
 import RoadIcon from "@/public/images/roadIcon.svg";
 import { useRouter } from "next/navigation";
@@ -57,7 +56,7 @@ function RoadContent() {
     }
   }, [
     loadRecoil.length === 2 &&
-      loadRecoil[0]?.place_name !== "장소를 입력해주세요",
+    loadRecoil[0]?.place_name !== "장소를 입력해주세요",
     swapClick,
   ]);
 
@@ -110,20 +109,20 @@ function RoadContent() {
                 <div className={styles.baseBar}>
                   {pathData.length > 0
                     ? path?.subPath.map((subPath: any, index: number) => (
-                        <Gauge
-                          key={index}
-                          sectionWidth={subPath.sectionTime}
-                          totalWidth={path.info.totalTime}
-                          trafficType={subPath.trafficType}
-                          lane={subPath?.lane ? subPath.lane[0].name : "도보"}
-                          subwayCode={
-                            subPath?.lane ? subPath?.lane[0].subwayCode : "none"
-                          }
-                          buswayCode={
-                            subPath?.lane ? subPath?.lane[0].type : "none"
-                          }
-                        />
-                      ))
+                      <Gauge
+                        key={index}
+                        sectionWidth={subPath.sectionTime}
+                        totalWidth={path.info.totalTime}
+                        trafficType={subPath.trafficType}
+                        lane={subPath?.lane ? subPath.lane[0].name : "도보"}
+                        subwayCode={
+                          subPath?.lane ? subPath?.lane[0].subwayCode : "none"
+                        }
+                        buswayCode={
+                          subPath?.lane ? subPath?.lane[0].type : "none"
+                        }
+                      />
+                    ))
                     : null}
                 </div>
               </div>

@@ -8,17 +8,16 @@ import {
 } from "@/src/app/_atom/atom";
 import styles from "../_component/InfoCard.module.css";
 import { useRouter } from "next/navigation";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import InfoCard from "../_component/InfoCard";
 import { IMarkers } from "../../_interfaces/interface";
 
 function SearchList() {
   const router = useRouter();
   const id = useRecoilValue(promiseIndex);
-  const [markerRecoil, setMarkerRecoil] =
-    useRecoilState<IMarkers[]>(markerAtom);
+  const markerRecoil = useRecoilValue<IMarkers[]>(markerAtom);
   const setPromiseState = useSetRecoilState(promiseState);
-  const [placeAdd, setPlaceAdd] = useRecoilState(placeState);
+  const setPlaceAdd = useSetRecoilState(placeState);
 
   const onDivClicked = (data: IMarkers) => {
     setPromiseState((prev) => {
