@@ -20,8 +20,8 @@ export default function Home() {
   const router = useRouter();
   const layoutSegments = useSelectedLayoutSegments();
   const [active, setActive] = useState({
-    place: false,
-    map: false,
+    promise: false,
+    road: false,
     bus: false,
     subway: false,
   });
@@ -30,8 +30,8 @@ export default function Home() {
 
   const onToggle = (path: string, name: string) => {
     setActive({
-      place: false,
-      map: false,
+      promise: false,
+      road: false,
       bus: false,
       subway: false,
     });
@@ -39,12 +39,13 @@ export default function Home() {
     setActive((prev) => ({ ...prev, [name]: true }));
     router.push(path);
   };
-
+  console.log(active);
   useEffect(() => {
     const categories = Object.keys(active);
     const activatedCategory = judgeActivation(categories, layoutSegments);
-    setActive((prev) => ({ ...prev, [activatedCategory]: true }));
-    console.log("hi");
+    if (activatedCategory) {
+      setActive((prev) => ({ ...prev, [activatedCategory]: true }));
+    }
   }, []);
 
   return (
@@ -56,7 +57,10 @@ export default function Home() {
       </div>
 
       <div className={styles.searchWrapper}>
-        <div className={styles.inputDiv} onClick={() => router.push("/search")}>
+        <div
+          className={styles.inputDiv}
+          onClick={() => router.push("/locsearch")}
+        >
           {mapRecoil.place_name}
         </div>
         <button className={styles.navButton}>
@@ -67,31 +71,31 @@ export default function Home() {
       <div className={styles.navContentWrapper}>
         <div className={styles.iconWrapper}>
           <div
-            className={cx(styles.iconDiv, active.place && styles.clickedIcon)}
-            onClick={() => onToggle("/promise", "place")}
+            className={cx(styles.iconDiv, active.promise && styles.clickedIcon)}
+            onClick={() => onToggle("/promise", "promise")}
           >
-            <PlaceIcon fill="black" />
+            <PlaceIcon />
             <span>약속 잡기</span>
           </div>
           <div
-            className={cx(styles.iconDiv, active.map && styles.clickedIcon)}
-            onClick={() => onToggle("/road", "map")}
+            className={cx(styles.iconDiv, active.road && styles.clickedIcon)}
+            onClick={() => onToggle("/road", "road")}
           >
-            <MapIcon fill="black" />
+            <MapIcon />
             <span>길 찾기</span>
           </div>
           <div
             className={cx(styles.iconDiv, active.bus && styles.clickedIcon)}
             onClick={() => onToggle("/bus", "bus")}
           >
-            <BusIcon fill="black" />
+            <BusIcon />
             <span>버스</span>
           </div>
           <div
             className={cx(styles.iconDiv, active.subway && styles.clickedIcon)}
             onClick={() => onToggle("/subway", "subway")}
           >
-            <SubwayIcon fill="black" />
+            <SubwayIcon />
             <span>전철</span>
           </div>
         </div>

@@ -5,12 +5,13 @@ const odsay = axios.create({
 });
 
 export const callApi = async (center: any) => {
+  console.log(center);
   const response = await fetch(
     `/search?longitude=${center.x}&latitude=${center.y}`,
     {
       method: "GET",
       headers: {
-        "Content-type": "application/json;",
+        "Content-Type": "application/json",
       },
     }
   ).then((response) => response.json());
@@ -26,8 +27,9 @@ export const findPlaceRoute = async (
     for (let i = 0; i < startPoint.length; i++) {
       let baseUrl = `https://api.odsay.com/v1/api/searchPubTransPathT?SX=${parseFloat(
         startPoint[i].x
-      )}&SY=${parseFloat(startPoint[i].y)}&EX=${store.x}&EY=${store.y}&apiKey=${process.env.NEXT_PUBLIC_ODSAY_KEY
-        }`;
+      )}&SY=${parseFloat(startPoint[i].y)}&EX=${store.x}&EY=${store.y}&apiKey=${
+        process.env.NEXT_PUBLIC_ODSAY_KEY
+      }`;
       const data = await fetch(baseUrl);
       const jsonData = await data.json();
       setPlaceRoute((prev: any) => [...prev, jsonData]);
@@ -62,7 +64,7 @@ export const setMarkerUrl = (category: any) => {
   return "";
 };
 
-export const drawPolyLine = async (response: any) => {
+export const drawPolyLine = (response: any) => {
   let lineArr = [];
   for (let i = 0; i < response?.length; i++) {
     let subLineArr = [];

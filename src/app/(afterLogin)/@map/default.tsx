@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home(props: any) {
   const mapRecoil = useRecoilValue<IMarkers>(mapAtom);
   const [visible, setVisible] = useState(true);
+  
   const Greet = "Your MeetMate!";
 
   return (

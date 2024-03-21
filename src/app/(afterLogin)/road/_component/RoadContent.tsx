@@ -10,27 +10,9 @@ import styles from "./road.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import SwapIcon from "@/public/images/cross.svg";
-import styled from "styled-components";
 import RoadIcon from "@/public/images/roadIcon.svg";
 import { useRouter } from "next/navigation";
-import { IMarkers } from "@/src/app/_interfaces/interface";
-
-const CrossIconDiv = styled.div`
-  position: absolute;
-  right: 0;
-  top: 65px;
-`;
-
-const ContentSearchDiv = styled.div`
-  display: flex;
-  position: relative;
-  padding: 2rem 0;
-  gap: 20px;
-  flex-direction: column;
-  svg {
-    cursor: pointer;
-  }
-`;
+import cx from "classnames";
 
 function RoadContent() {
   const [divNum, setDivNum] = useRecoilState(divNumAtom);
@@ -87,7 +69,7 @@ function RoadContent() {
         출발지와 도착지를 <br />
         입력해주세요!
       </div>
-      <ContentSearchDiv>
+      <div className={styles.contentSearchDiv}>
         <div
           className={styles.promiseDiv}
           onClick={() => movePage("/roadsearch", "start")}
@@ -100,15 +82,15 @@ function RoadContent() {
         >
           {loadRecoil[1] ? loadRecoil[1].place_name : "장소를 입력해주세요"}
         </div>
-        <CrossIconDiv onClick={swapRoad}>
+        <div className={styles.crossIconDiv} onClick={swapRoad}>
           <SwapIcon />
-        </CrossIconDiv>
-      </ContentSearchDiv>
-      <div className={styles.transferBox}>
-        {pathData?.length > 0
-          ? pathData?.map((path: any, index: number) => (
+        </div>
+      </div>
+      <div className={styles.scrollBox}>
+        {pathData?.length > 0 &&
+          pathData?.map((path: any, index: number) => (
             <div
-              className={styles.timeBox}
+              className={cx(styles.timeBox, styles.border)}
               key={index}
               onClick={() => setWay(path)}
             >
@@ -134,9 +116,7 @@ function RoadContent() {
                         trafficType={subPath.trafficType}
                         lane={subPath?.lane ? subPath.lane[0].name : "도보"}
                         subwayCode={
-                          subPath?.lane
-                            ? subPath?.lane[0].subwayCode
-                            : "none"
+                          subPath?.lane ? subPath?.lane[0].subwayCode : "none"
                         }
                         buswayCode={
                           subPath?.lane ? subPath?.lane[0].type : "none"
@@ -147,16 +127,14 @@ function RoadContent() {
                 </div>
               </div>
               <div className={styles.wayBar}>
-                {pathData.length > 0
-                  ? path?.subPath.map((subPath: any, index: number) => (
+                {pathData.length > 0 &&
+                  path?.subPath.map((subPath: any, index: number) => (
                     <Way
                       key={index}
                       subwayName={
                         subPath?.lane ? subPath?.lane[0].name : "none"
                       }
-                      busNo={
-                        subPath?.lane ? subPath?.lane[0].busNo : "none"
-                      }
+                      busNo={subPath?.lane ? subPath?.lane[0].busNo : "none"}
                       trafficType={subPath?.trafficType}
                       subwayCode={
                         subPath?.lane ? subPath?.lane[0].subwayCode : "none"
@@ -165,12 +143,10 @@ function RoadContent() {
                         subPath?.lane ? subPath?.lane[0].type : "none"
                       }
                     />
-                  ))
-                  : null}
+                  ))}
               </div>
             </div>
-          ))
-          : null}
+          ))}
       </div>
     </div>
   );
