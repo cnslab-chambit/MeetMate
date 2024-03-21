@@ -2,18 +2,18 @@
 import Way from "@/src/app/_component/Bar/Way";
 import Gauge from "@/src/app/_component/Bar/Gauge";
 import {
-  IMarkers,
   divNumAtom,
   loadAtom,
   trafficState,
 } from "@/src/app/_atom/atom";
 import styles from "./road.module.css";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import SwapIcon from "@/public/images/cross.svg";
 import styled from "styled-components";
 import RoadIcon from "@/public/images/roadIcon.svg";
 import { useRouter } from "next/navigation";
+import { IMarkers } from "@/src/app/_interfaces/interface";
 
 const CrossIconDiv = styled.div`
   position: absolute;
@@ -74,7 +74,7 @@ function RoadContent() {
     }
   }, [
     loadRecoil.length === 2 &&
-      loadRecoil[0]?.place_name !== "장소를 입력해주세요",
+    loadRecoil[0]?.place_name !== "장소를 입력해주세요",
     swapClick,
   ]);
 
@@ -107,69 +107,69 @@ function RoadContent() {
       <div className={styles.transferBox}>
         {pathData?.length > 0
           ? pathData?.map((path: any, index: number) => (
-              <div
-                className={styles.timeBox}
-                key={index}
-                onClick={() => setWay(path)}
-              >
-                <div className={styles.flexBox}>
-                  <div className={styles.boldPg}>
-                    {Math.floor(path.info.totalTime / 60)}
-                  </div>
-                  시간
-                  <div className={styles.boldPg}>
-                    {path.info.totalTime % 60}분
-                  </div>
-                  <div className={styles.flexBox}>| {path.info.payment}원</div>
+            <div
+              className={styles.timeBox}
+              key={index}
+              onClick={() => setWay(path)}
+            >
+              <div className={styles.flexBox}>
+                <div className={styles.boldPg}>
+                  {Math.floor(path.info.totalTime / 60)}
                 </div>
+                시간
+                <div className={styles.boldPg}>
+                  {path.info.totalTime % 60}분
+                </div>
+                <div className={styles.flexBox}>| {path.info.payment}원</div>
+              </div>
 
-                <div className={styles.flexBoxCol}>
-                  <div className={styles.baseBar}>
-                    {pathData.length > 0
-                      ? path?.subPath.map((subPath: any, index: number) => (
-                          <Gauge
-                            key={index}
-                            sectionWidth={subPath.sectionTime}
-                            totalWidth={path.info.totalTime}
-                            trafficType={subPath.trafficType}
-                            lane={subPath?.lane ? subPath.lane[0].name : "도보"}
-                            subwayCode={
-                              subPath?.lane
-                                ? subPath?.lane[0].subwayCode
-                                : "none"
-                            }
-                            buswayCode={
-                              subPath?.lane ? subPath?.lane[0].type : "none"
-                            }
-                          />
-                        ))
-                      : null}
-                  </div>
-                </div>
-                <div className={styles.wayBar}>
+              <div className={styles.flexBoxCol}>
+                <div className={styles.baseBar}>
                   {pathData.length > 0
                     ? path?.subPath.map((subPath: any, index: number) => (
-                        <Way
-                          key={index}
-                          subwayName={
-                            subPath?.lane ? subPath?.lane[0].name : "none"
-                          }
-                          busNo={
-                            subPath?.lane ? subPath?.lane[0].busNo : "none"
-                          }
-                          trafficType={subPath?.trafficType}
-                          subwayCode={
-                            subPath?.lane ? subPath?.lane[0].subwayCode : "none"
-                          }
-                          buswayCode={
-                            subPath?.lane ? subPath?.lane[0].type : "none"
-                          }
-                        />
-                      ))
+                      <Gauge
+                        key={index}
+                        sectionWidth={subPath.sectionTime}
+                        totalWidth={path.info.totalTime}
+                        trafficType={subPath.trafficType}
+                        lane={subPath?.lane ? subPath.lane[0].name : "도보"}
+                        subwayCode={
+                          subPath?.lane
+                            ? subPath?.lane[0].subwayCode
+                            : "none"
+                        }
+                        buswayCode={
+                          subPath?.lane ? subPath?.lane[0].type : "none"
+                        }
+                      />
+                    ))
                     : null}
                 </div>
               </div>
-            ))
+              <div className={styles.wayBar}>
+                {pathData.length > 0
+                  ? path?.subPath.map((subPath: any, index: number) => (
+                    <Way
+                      key={index}
+                      subwayName={
+                        subPath?.lane ? subPath?.lane[0].name : "none"
+                      }
+                      busNo={
+                        subPath?.lane ? subPath?.lane[0].busNo : "none"
+                      }
+                      trafficType={subPath?.trafficType}
+                      subwayCode={
+                        subPath?.lane ? subPath?.lane[0].subwayCode : "none"
+                      }
+                      buswayCode={
+                        subPath?.lane ? subPath?.lane[0].type : "none"
+                      }
+                    />
+                  ))
+                  : null}
+              </div>
+            </div>
+          ))
           : null}
       </div>
     </div>
